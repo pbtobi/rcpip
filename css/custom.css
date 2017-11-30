@@ -1,0 +1,102 @@
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+}
+input[type=submit] {
+  width: 38%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 28px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.error {color: #FF0000;}
+
+body {
+    background: rgba(0, 0, 0, 0) url("../imgs/fondo.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+#logo {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+#logo img {
+    max-width: 300px;
+    width: 100%;
+}
+/*.authenticated .footer {
+    position: relative;
+}*/
+.w3-content {
+    margin: auto;
+    max-width: 100%;
+}
+
+.tarjeta { display:none;}
+
+.w3-sidebar {
+    background-color: #fff;
+    height: 100%;
+    overflow: auto;
+    position: fixed !important;
+    width: 300px;
+    z-index: 3;
+}
+.tarjeta > div {
+    background: #fff none repeat scroll 0 0;
+}
+.w3-whitegray {
+	background: #e8eeee;
+}
+.tarjeta > div h4 {
+    color: #aaa;
+    padding: 14px 0 0 17px;
+}
+.lista {
+    padding: 20px;
+}
+.tarjeta .lista h4 {
+    padding: 14px 0;
+}
+header h1 {
+    background: rgba(255, 255, 255, 0.2) none repeat scroll 0 0;
+    color: #fff;
+    padding: 5px 23px;
+}
+
+.w3-main header .titulo {
+    margin: 0;
+    padding: 0;
+}
+
+.w3-main header .titulo {
+    background: rgba(255, 255, 255, 0.2) none repeat scroll 0 0;
+    color: #fff;
+    margin: 0;
+    padding: 5px 23px;
+}
