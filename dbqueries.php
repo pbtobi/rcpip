@@ -571,16 +571,20 @@ function processRequestData(\Delight\Auth\Auth $auth) {
 						$nombreErr = "El nombre es obligatorio";
 					}
 					
+					if (empty($_POST['Cel_medico'])) {
+						$celularErr = "El celular es obligatorio";
+					}
+
 					if (empty($_POST['Email_medico'])) {
 						$emailErr = "El correo electrónico es obligatorio";
 					}
 
-					if (!empty($_POST['Nombre_medico']) && !empty($_POST['Email_medico'])) {
+					if (!empty($_POST['Nombre_medico']) && !empty($_POST['Cel_medico']) && !empty($_POST['Email_medico'])) {
 						if (!filter_var($_POST['Email_medico'], FILTER_VALIDATE_EMAIL)) {
 							$emailErr = "El formato del correo es inválido";
 						} 
 						else {
-							addMedico('', $_POST['Nombre_medico'], $_POST['Especialidad'],$_POST['Cel_medico'], $_POST['Email_medico']);
+							addMedico($_POST['Nombre_medico'], $_POST['Especialidad'],$_POST['Cel_medico'], $_POST['Email_medico']);
 							echo "Ingreso satisfactorio";							
 						}
 					} 
@@ -672,9 +676,15 @@ function updateMedico($field1, $field2, $field3, $field4, $field5) {
 }
 
 function addMedico($field1,$field2,$field3,$field4) {
-	global $db;
-	$stmt = $db->prepare("INSERT INTO Medicos(Nombre_medico,Especialidad,Cel_medico,Email_medico) VALUES(:field1,:field2,:field3,:field4)");
-	$stmt->execute(array(':field1' => $field1, ':field2' => $field2, ':field3' => $field3, ':field4' => $field4));
+	global 	$emailErr, $db;
+	if (!filter_var($field4, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "El correo electrónico no es válido";
+      return $emailErr;
+    }
+    else {
+		$stmt = $db->prepare("INSERT INTO Medicos(Nombre_medico,Especialidad,Cel_medico,Email_medico) VALUES (:field1,:field2,:field3,:field4)");
+		$stmt->execute(array(':field1' => $field1, ':field2' => $field2, ':field3' => $field3, ':field4' => $field4));
+	}
 }
 
 

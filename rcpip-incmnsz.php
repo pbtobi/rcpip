@@ -7,17 +7,17 @@ $result = \processRequestData($auth);
 /* define variables and set to empty values
   Formularios (Medicos) para recuperar las variables (globales)
 ***************************************************************/
-$medicoID = $nameErr = $emailErr = $especialErr = $celularErr = "";
+$medicoID = $nombreErr = $emailErr = $especialErr = $celularErr = "";
 $doctorName = $doctorEmail = $especialidad = $celular = "";
 // Estrategia de prueba para pasar variables de los formularios
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["doctorName"])) {
-    $nameErr = "El nombre es obligatorio";
+    $nombreErr = "El nombre es obligatorio";
   } else {
     $doctorName = test_input($_POST["doctorName"]);
     // check if name only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z ]*$/",$doctorName)) {
-      $nameErr = "";
+      $nombreErr = "";
     }
   }
   

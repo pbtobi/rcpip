@@ -40,7 +40,7 @@ function menuNivel2() {
 * Incluye Registro de Médicos (Ingreso), Medicos Registrados (Listado) y Actualización (Update).
 */
 function tarjetaMedicos() {
-	global $nameErr;
+	global $emailErr, $nombreErr, $celularErr;
 	echo '
 		<div id="page1" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
 			<div id="tarjetaMedicos">
@@ -51,7 +51,8 @@ function tarjetaMedicos() {
 						<form action="" method="post" accept-charset="utf-8">
 							<div class="w3-third w3-margin-bottom">
 								<label for="doctorName">Nombre del médico</label>
-								<input type="text" id="dname" name="Nombre_medico" placeholder="Su nombre completo..">    
+								<input type="text" id="dname" name="Nombre_medico" placeholder="Su nombre completo..">
+								<span class="error">'.$nombreErr.'</span>
 							</div>
 							<div class="w3-third w3-margin-bottom">
 								<label for="especialidad">Especialidad</label>
@@ -60,14 +61,15 @@ function tarjetaMedicos() {
 							<div class="w3-third w3-margin-bottom">
 								<label for="celular">Celular</label>
 								<input type="text" id="dcel" name="Cel_medico" placeholder="Su teléfono de celular..">
+								<span class="error">'.$celularErr.'</span>
 							</div>
 							<div class="w3-third">
-								<label for="celular">Correo electrónico</label>
-								<input type="text" id="email" name="Email_medico" placeholder="Su correo electrónico..">
+								<label for="email">Correo electrónico</label>
+								<input type="text" id="demail" name="Email_medico" placeholder="Su correo electrónico..">
+								<span class="error">'.$emailErr.'</span>
 							</div>
 							<input type="hidden" name="action" value="addMedico" />
 							<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registro nuevo">
-							<span class="error">'.$nameErr.'</span>
 						</form>
 					</div>
 				</div>	
@@ -243,7 +245,7 @@ function medicosUpdateForm() {
 		<!--</div>-->';
 	}
 	else {
-		echo 'no update Form';
+		echo $emailErr;
 	}
 }
 
