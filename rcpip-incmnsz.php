@@ -7,7 +7,7 @@ $result = \processRequestData($auth);
 /* define variables and set to empty values
   Formularios (Medicos) para recuperar las variables (globales)
 ***************************************************************/
-$medicoID = $nombreErr = $emailErr = $especialErr = $celularErr = "";
+$usuarioID = $protocoloID = $medicoID = $nombreErr = $emailErr = $especialErr = $celularErr = "";
 $doctorName = $doctorEmail = $especialidad = $celular = "";
 // Estrategia de prueba para pasar variables de los formularios
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -50,6 +50,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   else {
     $medicoID = ($_POST["medicoID"]);
+  }
+  // elige un usuario en particular
+  if (empty($_POST["usuarioID"])) {
+    // echo 'do nothing';
+    // $usuarioID es vacía cuando no hay formulario que la genere (evita undefined error)
+    $usuarioID = "";
+  }
+  else {
+    $usuarioID = ($_POST["usuarioID"]);
+  }
+  // elige un protocolo en particular
+  if (empty($_POST["protocoloID"])) {
+    // echo 'do nothing';
+    // $protocoloID es vacía cuando no hay formulario que la genere (evita undefined error)
+    $protocoloID = "";
+  }
+  else {
+    $protocoloID = ($_POST["protocoloID"]);
   }
 }
 

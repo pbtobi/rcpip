@@ -47,31 +47,29 @@ function tarjetaMedicos() {
 				<h4>Registro de médicos</h4>
 				<div class="w3-container w3-whitegray">
 					<h2>Ingresar médico</h2>
-					<div class="w3-row-padding" style="margin:8 -16px">
-						<form action="" method="post" accept-charset="utf-8">
-							<div class="w3-third w3-margin-bottom">
-								<label for="doctorName">Nombre del médico</label>
-								<input type="text" id="dname" name="Nombre_medico" placeholder="Su nombre completo..">
-								<span class="error">'.$nombreErr.'</span>
-							</div>
-							<div class="w3-third w3-margin-bottom">
-								<label for="especialidad">Especialidad</label>
-								<input type="text" id="darea" name="Especialidad" placeholder="Su área de especialidad..">   
-							</div>
-							<div class="w3-third w3-margin-bottom">
-								<label for="celular">Celular</label>
-								<input type="text" id="dcel" name="Cel_medico" placeholder="Su teléfono de celular..">
-								<span class="error">'.$celularErr.'</span>
-							</div>
-							<div class="w3-third">
-								<label for="email">Correo electrónico</label>
-								<input type="text" id="demail" name="Email_medico" placeholder="Su correo electrónico..">
-								<span class="error">'.$emailErr.'</span>
-							</div>
-							<input type="hidden" name="action" value="addMedico" />
-							<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registro nuevo">
-						</form>
-					</div>
+					<form action="" method="post" accept-charset="utf-8">
+						<div class="w3-third w3-margin-bottom">
+							<label for="doctorName">Nombre del médico</label>
+							<input type="text" id="dname" name="Nombre_medico" placeholder="Su nombre completo..">
+							<span class="error">'.$nombreErr.'</span>
+						</div>
+						<div class="w3-third w3-margin-bottom">
+							<label for="especialidad">Especialidad</label>
+							<input type="text" id="darea" name="Especialidad" placeholder="Su área de especialidad..">   
+						</div>
+						<div class="w3-third w3-margin-bottom">
+							<label for="celular">Celular</label>
+							<input type="text" id="dcel" name="Cel_medico" placeholder="Su teléfono de celular..">
+							<span class="error">'.$celularErr.'</span>
+						</div>
+						<div class="w3-third">
+							<label for="email">Correo electrónico</label>
+							<input type="text" id="demail" name="Email_medico" placeholder="Su correo electrónico..">
+							<span class="error">'.$emailErr.'</span>
+						</div>
+						<input type="hidden" name="action" value="addMedico" />
+						<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registro nuevo">
+					</form>
 				</div>	
 				<div class="lista">		
 				<h4> Médicos registrados:</h4>	';
@@ -91,73 +89,82 @@ function tarjetaMedicos() {
 * Registra y modifica los Usuarios (Registro, Listado y Actualización).
 */
 function tarjetaUsuarios() {
+	global $emailErr, $nombreErr, $celularErr;
 	echo '
 		<div id="page2" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
 			<div id="tarjetaPacientes">	
 			  	<h4>Ingreso de pacientes</h4>
 				<div class="w3-container w3-whitegray">
 					<h2>Ingresar usuario</h2>
-					<form action="/action_page.php">
+					<form action="" method="post" accept-charset="utf-8">
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorNombre">Nombre del usuario</label>
-					  <input type="text" id="dname" name="doctorNombre" placeholder="Su nombre completo">
+							<label for="Nombre">Nombre del usuario</label>
+							<input type="text" id="uname" name="Nombre" placeholder="Su nombre completo">
+							<span class="error">'.$nombreErr.'</span>
 						</div>
 						<div class="w3-third w3-margin-bottom"> 
-					  <label for="doctorArea">Sexo</label>
-					  <input type="text" id="darea" name="doctorArea" placeholder="Sexo">
+							<label for="Sexo">Sexo</label>
+							<input type="text" id="Sexo" name="Sexo" placeholder="Sexo">
 						</div>
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorCel">Ocupacion</label>
-					  <input type="text" id="dcel" name="doctorCel" placeholder="Ocupacion">
+							<label for="Ocupacion">Ocupacion</label>
+							<input type="text" id="Ocupacion" name="Ocupacion" placeholder="Ocupacion">
 						</div>
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorNombre">Domicilio</label>
-					  <input type="text" id="dname" name="doctorNombre" placeholder="Domicilio completo">
+							<label for="Domicilio">Domicilio</label>
+							<input type="text" id="Domicilio" name="Domicilio" placeholder="Domicilio completo">
 						</div>
 						<div class="w3-third w3-margin-bottom">  
-					  <label for="doctorArea">Lugar de nacimiento</label>
-					  <input type="text" id="darea" name="doctorArea" placeholder="Estado y localidad">
+							<label for="Lugar_nacimiento">Lugar de nacimiento</label>
+							<input type="text" id="Lugar_nacimiento" name="Lugar_nacimiento" placeholder="Estado y localidad">
 						</div>
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorCel">Fecha de nacimiento</label>
-					  <input type="text" id="dcel" name="doctorCel" placeholder="Su fecha de nacimiento">
+							<label for="Fecha_nacimiento">Fecha de nacimiento</label>
+							<input type="text" id="Fecha_nacimiento" name="Fecha_nacimiento" placeholder="Su fecha de nacimiento">
 						</div>
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorNombre">Estado civil</label>
-					  <input type="text" id="dname" name="doctorNombre" placeholder="Su estado civil">
+							<label for="Estado_civil">Estado civil</label>
+							<input type="text" id="Estado_civil" name="Estado_civil" placeholder="Su estado civil">
 						</div>
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorArea">Escolaridad</label>
-					  <input type="text" id="darea" name="doctorArea" placeholder="Nivel terminado">
+							<label for="Escolaridad">Escolaridad</label>
+							<input type="text" id="Escolaridad" name="Escolaridad" placeholder="Nivel terminado">
 						</div>
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorCel">Edad</label>
-					  <input type="text" id="dcel" name="doctorCel" placeholder="Su edad en anos">
+							<label for="Edad">Edad</label>
+							<input type="text" id="Edad" name="Edad" placeholder="Su edad en anos">
 						</div>
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorNombre">Telefono de casa</label>
-					  <input type="text" id="dname" name="doctorNombre" placeholder="Incluyendo lada">
+							<label for="Tel_casa">Telefono de casa</label>
+							<input type="text" id="Tel_casa" name="Tel_casa" placeholder="Incluyendo lada">
 						</div>
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorArea">Celular</label>
-					  <input type="text" id="darea" name="doctorArea" placeholder="Su telefono de celular">
+							<label for="Celular">Celular</label>
+							<input type="text" id="Celular" name="Celular" placeholder="Su telefono de celular">
+							<span class="error">'.$celularErr.'</span>
 						</div>
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorCel">Telefono del trabajo</label>
-					  <input type="text" id="dcel" name="doctorCel" placeholder="Telefono del trabajo (extension)">
+							<label for="Tel_trabajo">Telefono del trabajo</label>
+							<input type="text" id="Tel_trabajo" name="Tel_trabajo" placeholder="Telefono del trabajo (extension)">
 						</div>
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorNombre">Correo electronico</label>
-					  <input type="text" id="dname" name="doctorNombre" placeholder="Su e-mail">
+							<label for="Email">Correo electronico</label>
+							<input type="text" id="Email" name="Email" placeholder="Su e-mail">
+							<span class="error">'.$emailErr.'</span>
 						</div>
 						<div class="w3-third w3-margin-bottom">
-					  <label for="doctorArea">FolioID</label>
-					  <input type="text" id="darea" name="doctorArea" placeholder="Folio ID">
+							<label for="rol">Tipo de usuario</label>
+							<input type="text" id="rol" name="rol" placeholder="Tipo de usuario">
+						</div>
+						<div class="w3-third w3-margin-bottom">
+							<label for="FolioID">FolioID</label>
+							<input type="text" id="FolioID" name="FolioID" placeholder="Folio ID">
 						</div>
 						<div class="w3-third">
-					  <label for="doctorCel">IDUIEM</label>
-					  <input type="text" id="dcel" name="doctorCel" placeholder="IDUIEM">
+							<label for="IDUIEM">IDUIEM</label>
+							<input type="text" id="IDUIEM" name="IDUIEM" placeholder="IDUIEM">
 						</div>
+						<input type="hidden" name="action" value="addUsuario" />
 						<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registro nuevo  ">
 					</form>
 				</div>
@@ -166,6 +173,10 @@ function tarjetaUsuarios() {
 				writePeopleTable();
 				echo '
 				</div>				
+				<div class="w3-container w3-whitegray">';
+				usuariosUpdateForm();
+				echo '
+				</div>
 			</div>	
 		</div>';
 }
@@ -175,29 +186,36 @@ function tarjetaUsuarios() {
 * Registra y modifica los Protocolos (Registro, Listado y Actualización).
 */
 function tarjetaProtocolos() {
+	global $nombreErr;
 	echo '
 		<div id="page3" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
 			<div id="tarjeta_protocolos">
 				<h4>Protocolos de investigacion</h4>
 				<div class="w3-container w3-whitegray">
 					<h2>Registro de protocolos</h2>
-					<div class="w3-row-padding" style="margin:8 -16px">
-						<form action="/action_page.php">
-							<div class="w3-third">
-								<label for="protocoloName">Nombre del protocolo</label>
-								<input type="text" id="fname" name="firstname" placeholder="Nombre del protocolo..">
-							</div>
-							<div class="w3-row-padding" style="margin:8 -16px">    
-								<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registrar protocolo">
-							</div>
-						</form>	
-					</div>
+					<!--<div class="w3-row-padding" style="margin:8 -16px">-->
+					<form action="" method="post" accept-charset="utf-8">
+						<div class="w3-third" w3-margin-bottom>
+							<label for="protocoloName">Nombre del protocolo</label>
+							<input type="text" id="Protocolo" name="Protocolo" placeholder="Nombre del protocolo..">
+							<span class="error">'.$nombreErr.'</span>
+						</div>
+						<div class="w3-third">
+							<input type="hidden" name="action" value="addProtocolo" />
+							<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registrar protocolo">
+						</div>
+					</form>	
+					<!--</div>-->
 				</div>
 				<div class="lista">	
 				<h4>Protocolos registrados:</h4>	';
 				writeProtocoloTable();
 				echo '
-				</div>			
+				</div>
+				<div class="w3-container w3-whitegray">';
+				protocolosUpdateForm();
+				echo '
+				</div>
 			</div>	
 		</div>';
 }
@@ -208,7 +226,7 @@ function tarjetaProtocolos() {
 * @ Recibe $medicoID a partir de writeMedicosTable().
 */
 function medicosUpdateForm() {
-	global $nameErr, $emailErr, $celularErr, $medicoID;
+	global $nombreErr, $emailErr, $celularErr, $medicoID;
 	$datos = getDataMedicos($medicoID);
 	$MedicosID = $Nombre_medico = $Especialidad = $Cel_medico = $Email_medico = "";
 	foreach($datos as $row) {
@@ -224,7 +242,7 @@ function medicosUpdateForm() {
 			<form id="update_medicos" action="" method="post" accept-charset="utf-8">
 				<div class="w3-third w3-margin-bottom">
 					<label for="doctorName">Nombre del médico</label>
-					<input type="text" id="dname" name="Nombre_medico" placeholder="Su nombre completo.." value="'.$Nombre_medico.'"><span class="error"> * '.$nameErr.'</span>
+					<input type="text" id="dname" name="Nombre_medico" placeholder="Su nombre completo.." value="'.$Nombre_medico.'"><span class="error"> * '.$nombreErr.'</span>
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="especialidad">Especialidad</label>
@@ -240,12 +258,152 @@ function medicosUpdateForm() {
 				</div>
 					<input type="hidden" name="MedicosID" value="'.$MedicosID.'" />
 					<input type="hidden" name="action" value="updateMedico" />
-					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Aceptar" name="submit">
+					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Aceptar">
 			</form>
 		<!--</div>-->';
 	}
 	else {
 		echo $emailErr;
+	}
+}
+
+/*
+* Formulario HTML para modificar los datos de los Usuarios.
+* Actualiza la información y sólo se construye si es seleccionado un usuario en particular.
+* @ Recibe $usuarioID a partir de writePeopleTable().
+*/
+function usuariosUpdateForm() {
+	// hace falta validar Nombre, Fecha_nacimiento, Edad, Celular, Email, rol, FolioID, IDUIEM
+	global $nombreErr, $emailErr, $celularErr, $usuarioID;
+	$datos = getDataPeople($usuarioID);
+	$PeopleID = $Nombre = $Sexo = $Ocupacion = $Domicilio = $Lugar_nacimiento = $Fecha_nacimiento = $Estado_civil = $Escolaridad = $Edad = $Tel_casa = $Celular = $Tel_trabajo = $Email = $rol = $FolioID = $IDUIEM = "";
+	foreach($datos as $row) {
+		$PeopleID = $row['PeopleID'];
+		$Nombre = $row['Nombre'];
+		$Sexo = $row['Sexo'];
+		$Ocupacion = $row['Ocupacion'];
+		$Domicilio = $row['Domicilio'];
+		$Lugar_nacimiento = $row['Lugar_nacimiento'];
+		$Fecha_nacimiento = $row['Fecha_nacimiento'];
+		$Estado_civil = $row['Estado_civil'];
+		$Escolaridad = $row['Escolaridad'];
+		$Edad = $row['Edad'];
+		$Tel_casa = $row['Tel_casa'];
+		$Celular = $row['Celular'];
+		$Tel_trabajo = $row['Tel_trabajo'];
+		$Email = $row['Email'];
+		$rol = $row['rol'];
+		$FolioID = $row['FolioID'];
+		$IDUIEM = $row['IDUIEM'];
+	}
+	if ($usuarioID) {
+			echo '
+		<!--<div class="w3-row-padding" style="margin:8 -16px">-->
+			<form id="update_usuarios" action="" method="post" accept-charset="utf-8">
+				<div class="w3-third w3-margin-bottom">
+					<label for="usuarioName">Nombre del usuario</label>
+					<input type="text" id="usuarioName" name="Nombre" placeholder="Su nombre completo.." value="'.$Nombre.'"><span class="error"> * '.$nombreErr.'</span>
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="Sexo">Sexo</label>
+					<input type="text" id="sexo" name="Sexo" placeholder="Sexo.." value="'.$Sexo.'">
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="Ocupacion">Ocupacion</label>
+					<input type="text" id="Ocupacion" name="Ocupacion" placeholder="Ocupacion.." value="'.$Ocupacion.'">
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="Domicilio">Domicilio</label>
+					<input type="text" id="Domicilio" name="Domicilio" placeholder="Domicilio.." value="'.$Domicilio.'">
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="Lugar_nacimiento">Lugar de nacimiento</label>
+					<input type="text" id="Lugar_nacimiento" name="Lugar_nacimiento" placeholder="Lugar de nacimiento.." value="'.$Lugar_nacimiento.'">
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="Fecha_nacimiento">Fecha de nacimiento</label>
+					<input type="text" id="Fecha_nacimiento" name="Fecha_nacimiento" placeholder="Fecha de nacimiento.." value="'.$Fecha_nacimiento.'">
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="Estado_civil">Estado civil</label>
+					<input type="text" id="Estado_civil" name="Estado_civil" placeholder="Estado_civil.." value="'.$Estado_civil.'">
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="Escolaridad">Escolaridad</label>
+					<input type="text" id="Escolaridad" name="Escolaridad" placeholder="Escolaridad.." value="'.$Escolaridad.'">
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="Edad">Edad</label>
+					<input type="text" id="Edad" name="Edad" placeholder="Edad.." value="'.$Edad.'">
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="Tel_casa">Teléfono de casa</label>
+					<input type="text" id="Tel_casa" name="Tel_casa" placeholder="Teléfono de casa.." value="'.$Tel_casa.'">
+				</div>
+				<div class="w3-third">
+					<label for="usuarioCel">Celular</label>
+					<input type="text" id="usuarioCel" name="Celular" placeholder="Su teléfono de celular.." value="'.$Celular.'"><span class="error"> * '.$celularErr.'</span>
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="Tel_trabajo">Teléfono del trabajo</label>
+					<input type="text" id="Tel_trabajo" name="Tel_trabajo" placeholder="Teléfono del trabajo.." value="'.$Tel_trabajo.'">
+				</div>
+				<div class="w3-third">
+					<label for="usuarioEmail">Correo electrónico</label>
+					<input type="text" id="usuarioEmail" name="Email" placeholder="Su correo electrónico.." value="'.$Email.'"><span class="error"> * '.$emailErr.'</span>
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="rol">Tipo de usuario</label>
+					<input type="text" id="rol" name="rol" placeholder="Tipo de usuario.." value="'.$rol.'">
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="FolioID">FolioID</label>
+					<input type="text" id="FolioID" name="FolioID" placeholder="FolioID.." value="'.$FolioID.'">
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="IDUIEM">IDUIEM</label>
+					<input type="text" id="IDUIEM" name="IDUIEM" placeholder="IDUIEM.." value="'.$IDUIEM.'">
+				</div>
+					<input type="hidden" name="PeopleID" value="'.$PeopleID.'" />
+					<input type="hidden" name="action" value="updateUsuario" />
+					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Aceptar">
+			</form>
+		<!--</div>-->';
+	}
+	else {
+		echo $emailErr;
+	}
+}
+
+/*
+* Formulario HTML para modificar los datos de los Protocolos.
+* Actualiza la información y sólo se construye si es seleccionado un protocolo en particular.
+* @ Recibe $protocoloID a partir de writeProtocoloTable().
+*/
+function protocolosUpdateForm() {
+	global $nombreErr, $protocoloID;
+	$datos = getDataProtocolo($protocoloID);
+	$ProtocoloID = $Protocolo = "";
+	foreach($datos as $row) {
+		$ProtocoloID = $row['ProtocoloID'];
+		$Protocolo = $row['Protocolo'];
+	}
+	if ($protocoloID) {
+			echo '
+		<!--<div class="w3-row-padding" style="margin:8 -16px">-->
+			<form id="update_protocolos" action="" method="post" accept-charset="utf-8">
+				<div class="w3-third w3-margin-bottom">
+					<label for="protocoloName">Nombre del protocolo</label>
+					<input type="text" id="protocoloName" name="Protocolo" placeholder="Protocolo.." value="'.$Protocolo.'"><span class="error"> * '.$nombreErr.'</span>
+				</div>
+					<input type="hidden" name="ProtocoloID" value="'.$ProtocoloID.'" />
+					<input type="hidden" name="action" value="updateProtocolo" />
+					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Aceptar">
+			</form>
+		<!--</div>-->';
+	}
+	else {
+		echo $nombreErr;
 	}
 }
 
@@ -259,8 +417,7 @@ function writeMedicosTable() {
 	global $medicoID;
 	$datos = getDataMedicos($medicoID);
 	echo '
-		<table id="Medicos">
-		';
+		<table id="Medicos">';
 	foreach($datos as $row) {
 		echo '
 		<form action="" method="post" accept-charset="utf-8">
@@ -273,14 +430,84 @@ function writeMedicosTable() {
 				<td>'.$row['Email_medico'].'</td>
 				<td>
 					<input type="hidden" name="medicoID" value="'.$row['MedicosID'].'">
-					<!--<input type="hidden" name="action" value="selectMedico" />-->
 					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Modificar">
 				</td>
 			</tr>
 		</form>';
   	}
 	echo '
-		
+		</table>';
+}
+
+/*
+* Tabla HTML de los Usuarios.
+* Genera la lista completa de los usuarios y permite seleccionar sólo un usuario ($usuarioID).
+* @ $usuarioID se define en el main (rcpip-incmnsz.php).
+*/
+function writePeopleTable() {
+	// Escribe la Tabla de Usuario
+	global $usuarioID;
+	$datos = getDataPeople($usuarioID);
+	echo '
+		<table id="People">';
+	foreach($datos as $row) {
+		echo '
+		<form action="" method="post" accept-charset="utf-8">
+			<tr>
+				<td><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
+				<td>'.$row['Nombre'].'</td>
+				<td>'.$row['Sexo'].'</td>
+				<td>'.$row['Ocupacion'].'</td>
+				<td>'.$row['Domicilio'].'</td>
+				<td>'.$row['Lugar_nacimiento'].'</td>
+				<td>'.$row['Fecha_nacimiento'].'</td>
+				<td>'.$row['Estado_civil'].'</td>
+				<td>'.$row['Escolaridad'].'</td>
+				<td>'.$row['Edad'].'</td>
+				<td>'.$row['Tel_casa'].'</td>
+				<td>'.$row['Celular'].'</td>
+				<td>'.$row['Tel_trabajo'].'</td>
+				<td>'.$row['Email'].'</td>
+				<td>'.$row['rol'].'</td>
+				<td>'.$row['FolioID'].'</td>
+				<td>'.$row['IDUIEM'].'</td>
+				<td>
+					<input type="hidden" name="usuarioID" value="'.$row['PeopleID'].'">
+					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Modificar">
+				</td>
+			</tr>
+		</form>';
+  	}
+	echo '
+		</table>';
+}
+
+/*
+* Tabla HTML de los Protocolos.
+* Genera la lista completa de los protocolos y permite seleccionar sólo un protocolo ($protocoloID).
+* @ $protocoloID se define en el main (rcpip-incmnsz.php).
+*/
+function writeProtocoloTable() {
+	// Escribe la Tabla de Protocolo
+	global $protocoloID;
+	$datos = getDataProtocolo($protocoloID);
+	echo '
+		<table id="Protocolo">';
+	foreach($datos as $row) {
+		echo '
+		<form action="" method="post" accept-charset="utf-8">
+			<tr>
+				<td><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
+				<td>'.$row['ProtocoloID'].'</td>
+				<td>'.$row['Protocolo'].'</td>
+				<td>
+					<input type="hidden" name="protocoloID" value="'.$row['ProtocoloID'].'">
+					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Modificar">
+				</td>
+			</tr>
+		</form>';
+  	}
+	echo '
 		</table>';
 }
 

@@ -584,8 +584,7 @@ function processRequestData(\Delight\Auth\Auth $auth) {
 							$emailErr = "El formato del correo es inválido";
 						} 
 						else {
-							addMedico($_POST['Nombre_medico'], $_POST['Especialidad'],$_POST['Cel_medico'], $_POST['Email_medico']);
-							echo "Ingreso satisfactorio";							
+							addMedico($_POST['Nombre_medico'], $_POST['Especialidad'],$_POST['Cel_medico'], $_POST['Email_medico']);						
 						}
 					} 
 				//}
@@ -595,9 +594,50 @@ function processRequestData(\Delight\Auth\Auth $auth) {
 				//	echo "error";
 				//}
 			}
+			else if ($_POST['action'] === 'addUsuario') {				
+				if (empty($_POST['Nombre'])) {
+					$nombreErr = "El nombre es obligatorio";
+				}
+				
+				if (empty($_POST['Celular'])) {
+					$celularErr = "El celular es obligatorio";
+				}
+
+				if (empty($_POST['Email'])) {
+					$emailErr = "El correo electrónico es obligatorio";
+				}
+
+				if (!empty($_POST['Nombre']) && !empty($_POST['Celular']) && !empty($_POST['Email'])) {
+					if (!filter_var($_POST['Email'], FILTER_VALIDATE_EMAIL)) {
+						$emailErr = "El formato del correo es inválido";
+					} 
+					else {
+						addUsuario($_POST['Nombre'], $_POST['Sexo'],$_POST['Ocupacion'], $_POST['Domicilio'], $_POST['Lugar_nacimiento'],
+							$_POST['Fecha_nacimiento'], $_POST['Estado_civil'],$_POST['Escolaridad'], $_POST['Edad'], $_POST['Tel_casa'],
+							$_POST['Celular'], $_POST['Tel_trabajo'],$_POST['Email'], $_POST['rol'], $_POST['FolioID'],
+							$_POST['IDUIEM']);					
+					}
+				} 
+			}
+			else if ($_POST['action'] === 'addProtocolo') {			
+				if (empty($_POST['Protocolo'])) {
+					$nombreErr = "El nombre del protocolo es obligatorio";
+				}
+				else {
+					addProtocolo($_POST['Protocolo']);						
+				} 
+			}
 			else if ($_POST['action'] === 'selectMedico') {
 				global $medicoID;
 				$medicoID = $_POST['MedicosID'];
+			}
+			else if ($_POST['action'] === 'selectUsuario') {
+				global $usuarioID;
+				$usuarioID = $_POST['PeopleID'];
+			}
+			else if ($_POST['action'] === 'selectProtocolo') {
+				global $protocoloID;
+				$protocoloID = $_POST['ProtocoloID'];
 			}
 			else if ($_POST['action'] === 'updateMedico') {
 				if (isset($_POST['MedicosID'])) {
@@ -621,6 +661,47 @@ function processRequestData(\Delight\Auth\Auth $auth) {
 					}
 				}
 			}
+			else if ($_POST['action'] === 'updateUsuario') {
+				if (isset($_POST['PeopleID'])) {
+					if (empty($_POST['Nombre'])) {
+						$nombreErr = "El nombre es obligatorio";
+					}
+					
+					if (empty($_POST['Celular'])) {
+						$celularErr = "El celular es obligatorio";
+					}
+
+					if (empty($_POST['Email'])) {
+						$emailErr = "El correo electrónico es obligatorio";
+					}
+
+					if (!empty($_POST['Nombre']) && !empty($_POST['Celular']) && !empty($_POST['Email'])) {
+						if (!filter_var($_POST['Email'], FILTER_VALIDATE_EMAIL)) {
+							$emailErr = "El formato del correo es inválido";
+						} 
+						else {
+							updateUsuario($_POST['PeopleID'], $_POST['Nombre'], $_POST['Sexo'],$_POST['Ocupacion'], $_POST['Domicilio'],
+								$_POST['Lugar_nacimiento'], $_POST['Fecha_nacimiento'], $_POST['Estado_civil'],$_POST['Escolaridad'], $_POST['Edad'],
+								$_POST['Tel_casa'], $_POST['Celular'], $_POST['Tel_trabajo'],$_POST['Email'], $_POST['rol'],
+								$_POST['FolioID'], $_POST['IDUIEM']);
+							// regresa al estado incial (sin usuario seleccionado)
+							$usuarioID = "";
+						}
+					}
+				}
+			}
+			else if ($_POST['action'] === 'updateProtocolo') {
+				if (isset($_POST['ProtocoloID'])) {
+					if (empty($_POST['Protocolo'])) {
+						$nombreErr = "El nombre del protocolo es obligatorio";
+					}
+					else {
+						updateProtocolo($_POST['ProtocoloID'], $_POST['Protocolo']);
+						// regresa al estado incial (sin protocolo seleccionado)
+						$protocoloID = "";
+					}
+				}
+			}
 			else {
 				throw new Exception('Unexpected action: ' . $_POST['action']);
 			}
@@ -629,7 +710,7 @@ function processRequestData(\Delight\Auth\Auth $auth) {
 	return null;
 }
 
-$datosProtocolo = getDataProtocolo();
+//	$datosProtocolo = getDataProtocolo($protocoloID);
 
 /*
  * Peticiones a la base de datos (SELECT, INSERT, UPDATE)
@@ -638,25 +719,33 @@ $datosProtocolo = getDataProtocolo();
  */
 /// Peticiones
 //
-function getDataProtocolo() {
+function getDataProtocolo($protocoloID) {
 	global $db;
-	$stmt = $db->query("SELECT * FROM Protocolo");
+	if ($protocoloID) {
+		$stmt = $db->query("SELECT * FROM Protocolo WHERE ProtocoloID='".$protocoloID."'");
+	} else {
+		$stmt = $db->query("SELECT * FROM Protocolo");
+	}
 	return $stmt;
 }
 
 function getDataMedicos($medicosID) {
 	global $db;
 	if ($medicosID) {
-		$stmt = $db->query("SELECT * FROM Medicos WHERE medicosID='".$medicosID."'");
+		$stmt = $db->query("SELECT * FROM Medicos WHERE MedicosID='".$medicosID."'");
 	} else {
 		$stmt = $db->query("SELECT * FROM Medicos");
 	}
 	return $stmt;
 }
 
-function getDataPeople() {
+function getDataPeople($usuarioID) {
 	global $db;
-	$stmt = $db->query("SELECT * FROM People");
+	if ($usuarioID) {
+		$stmt = $db->query("SELECT * FROM People WHERE PeopleID='".$usuarioID."'");
+	} else {
+		$stmt = $db->query("SELECT * FROM People");
+	}
 	return $stmt;
 }
 
@@ -675,7 +764,23 @@ function updateMedico($field1, $field2, $field3, $field4, $field5) {
 	$stmt->execute(array(':field1' => $field1, ':field2' => $field2, ':field3' => $field3, ':field4' => $field4, ':field5' => $field5));
 }
 
-function addMedico($field1,$field2,$field3,$field4) {
+function updateUsuario($field1, $field2, $field3, $field4, $field5, $field6, $field7, $field8, $field9, $field10, $field11, $field12, $field13, $field14, $field15, $field16, $field17) {
+	// falta validar Fecha_nacimiento, Sexo, Estado_civil, rol, FolioID, IDUIEM
+	global $db;
+	$stmt = $db->prepare("UPDATE People SET Nombre=:field2, Sexo=:field3, Ocupacion=:field4, Domicilio=:field5, Lugar_nacimiento=:field6, Fecha_nacimiento=:field7, Estado_civil=:field8, Escolaridad=:field9, Edad=:field10,
+		Tel_casa=:field11, Celular=:field12, Tel_trabajo=:field13, Email=:field14, rol=:field15, FolioID=:field16, IDUIEM=:field17 WHERE PeopleID=:field1");
+	$stmt->execute(array(':field1' => $field1, ':field2' => $field2, ':field3' => $field3, ':field4' => $field4, ':field5' => $field5, ':field6' => $field6, ':field7' => $field7,
+		 ':field8' => $field8, ':field9' => $field9, ':field10' => $field10, ':field11' => $field11, ':field12' => $field12, ':field13' => $field13, ':field14' => $field14, ':field15' => $field15,
+		 ':field16' => $field16, ':field17' => $field17));
+}
+
+function updateProtocolo($field1, $field2) {
+	global $db;
+	$stmt = $db->prepare("UPDATE Protocolo SET Protocolo=:field2 WHERE ProtocoloID=:field1");
+	$stmt->execute(array(':field1' => $field1, ':field2' => $field2));
+}
+
+function addMedico($field1, $field2, $field3, $field4) {
 	global 	$emailErr, $db;
 	if (!filter_var($field4, FILTER_VALIDATE_EMAIL)) {
       $emailErr = "El correo electrónico no es válido";
@@ -687,5 +792,30 @@ function addMedico($field1,$field2,$field3,$field4) {
 	}
 }
 
+function addUsuario($field1, $field2, $field3, $field4, $field5, $field6, $field7, $field8, $field9, $field10, $field11, $field12, $field13, $field14, $field15, $field16) {
+	global 	$emailErr, $db;
+	if (!filter_var($field13, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "El correo electrónico no es válido";
+      return $emailErr;
+    }
+    else {
+		$stmt = $db->prepare("INSERT INTO People(Nombre,Sexo,Ocupacion,Domicilio,Lugar_nacimiento,Fecha_nacimiento,Estado_civil,Escolaridad,Edad,Tel_casa,Celular,Tel_trabajo,Email,rol,FolioID,IDUIEM) 
+			VALUES (:field1,:field2,:field3,:field4,:field5,:field6,:field7,:field8,:field9,:field10,:field11,:field12,:field13,:field14,:field15,:field16)");
+		$stmt->execute(array(':field1' => $field1, ':field2' => $field2, ':field3' => $field3, ':field4' => $field4, ':field5' => $field5, ':field6' => $field6, ':field7' => $field7, ':field8' => $field8,
+			':field9' => $field9, ':field10' => $field10, ':field11' => $field11, ':field12' => $field12, ':field13' => $field13, ':field14' => $field14, ':field15' => $field15, ':field16' => $field16));
+	}
+}
+
+function addProtocolo($field1) {
+	global 	$nombreErr, $db;
+	if (!$field1) {
+      $nombreErr = "El nombre del protocolo es necesario";
+      return $nombreErr;
+    }
+    else {
+		$stmt = $db->prepare("INSERT INTO Protocolo (Protocolo) VALUES (:field1)");
+		$stmt->execute(array(':field1' => $field1));
+	}
+}
 
 ?>

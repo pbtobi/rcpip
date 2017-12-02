@@ -279,55 +279,6 @@ function writeProtocoloDatos() {
   	}
 }
 
-function writeProtocoloTable() {
-	// Escribe la Tabla de Protocolo
-	$datos = getDataProtocolo();
-	echo '
-		<table id="Protocolo">';
-	foreach($datos as $row) {
-		echo '
-			<tr>
-				<td>'.$row['ProtocoloID'].'</td>
-				<td>'.$row['Protocolo'].'</td>
-				<td><a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a></td>
-			</tr>';
-  	}
-	echo '
-		</table>';
-}
-
-function writePeopleTable() {
-	// Escribe la Tabla de Protocolo
-	$datos = getDataPeople();
-	echo '
-		<table id="People">';
-	foreach($datos as $row) {
-		echo '
-			<tr>
-				<td>'.$row['Nombre'].'</td>
-				<td>'.$row['Sexo'].'</td>
-				<td>'.$row['Ocupacion'].'</td>
-				<td>'.$row['Domicilio'].'</td>
-				<td>'.$row['Lugar_nacimiento'].'</td>
-				<td>'.$row['Fecha_nacimiento'].'</td>
-				<td>'.$row['Estado_civil'].'</td>
-				<td>'.$row['Escolaridad'].'</td>
-				<td>'.$row['Edad'].'</td>
-				<td>'.$row['Tel_casa'].'</td>
-				<td>'.$row['Celular'].'</td>
-				<td>'.$row['Tel_trabajo'].'</td>
-				<td>'.$row['Email'].'</td>
-				<td>'.$row['rol'].'</td>
-				<td>'.$row['FolioID'].'</td>
-				<td>'.$row['IDUIEM'].'</td>
-				<td><a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a></td>
-			</tr>';
-  	}
-	echo '
-		</table>
-		';
-}
-
 function writeProtocoloTotalRegistros() {
 	global $datosProtocolo;
 	echo $datosProtocolo->rowCount();
