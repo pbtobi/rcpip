@@ -14,13 +14,15 @@ final class Role {
 	const AUTHOR = 2;
 	const COLLABORATOR = 4;
 	const CONSULTANT = 8;
-	const CONSUMER = 16;
+	//const CONSUMER = 16;
+	const PACIENTE = 16;
 	const CONTRIBUTOR = 32;
 	const COORDINATOR = 64;
 	const CREATOR = 128;
 	const DEVELOPER = 256;
 	const DIRECTOR = 512;
-	const EDITOR = 1024;
+	//const EDITOR = 1024;
+	const DOCTOR = 1024;
 	const EMPLOYEE = 2048;
 	const MAINTAINER = 4096;
 	const MANAGER = 8192;

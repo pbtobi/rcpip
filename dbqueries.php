@@ -612,10 +612,24 @@ function processRequestData(\Delight\Auth\Auth $auth) {
 						$emailErr = "El formato del correo es inválido";
 					} 
 					else {
-						addUsuario($_POST['Nombre'], $_POST['Sexo'],$_POST['Ocupacion'], $_POST['Domicilio'], $_POST['Lugar_nacimiento'],
+						$roleUsuario = '';
+						if ($_POST['rol'] == '1') {
+							$roleUsuario = '';
+						}
+						if ($_POST['rol'] == '2') {
+							$roleUsuario = '';
+						}
+						if ($_POST['rol'] == '3') {
+							$roleUsuario = '8193';
+						}
+						if ($_POST['Sexo'] == 'Hombre' || $_POST['Sexo'] == 'Mujer') {
+							addUsuario($_POST['Nombre'], $_POST['Sexo'],$_POST['Ocupacion'], $_POST['Domicilio'], $_POST['Lugar_nacimiento'],
 							$_POST['Fecha_nacimiento'], $_POST['Estado_civil'],$_POST['Escolaridad'], $_POST['Edad'], $_POST['Tel_casa'],
-							$_POST['Celular'], $_POST['Tel_trabajo'],$_POST['Email'], $_POST['rol'], $_POST['FolioID'],
-							$_POST['IDUIEM']);					
+							$_POST['Celular'], $_POST['Tel_trabajo'],$_POST['Email'], $roleUsuario, $_POST['FolioID'],
+							$_POST['IDUIEM']);	
+						} else {
+							$nombreErr = "Datos incorrectos";
+						}
 					}
 				} 
 			}
@@ -682,7 +696,7 @@ function processRequestData(\Delight\Auth\Auth $auth) {
 						else {
 							updateUsuario($_POST['PeopleID'], $_POST['Nombre'], $_POST['Sexo'],$_POST['Ocupacion'], $_POST['Domicilio'],
 								$_POST['Lugar_nacimiento'], $_POST['Fecha_nacimiento'], $_POST['Estado_civil'],$_POST['Escolaridad'], $_POST['Edad'],
-								$_POST['Tel_casa'], $_POST['Celular'], $_POST['Tel_trabajo'],$_POST['Email'], $_POST['rol'],
+								$_POST['Tel_casa'], $_POST['Celular'], $_POST['Tel_trabajo'],$_POST['Email'], $_POST['role'],
 								$_POST['FolioID'], $_POST['IDUIEM']);
 							// regresa al estado incial (sin usuario seleccionado)
 							$usuarioID = "";
@@ -739,6 +753,16 @@ function getDataMedicos($medicosID) {
 	return $stmt;
 }
 
+function getDataUsers($usuarioID) {
+	global $db;
+	if ($usuarioID) {
+		$stmt = $db->query("SELECT * FROM users WHERE id='".$usuarioID."'");
+	} else {
+		$stmt = $db->query("SELECT * FROM users");
+	}
+	return $stmt;
+}
+
 function getDataPeople($usuarioID) {
 	global $db;
 	if ($usuarioID) {
@@ -767,6 +791,14 @@ function updateMedico($field1, $field2, $field3, $field4, $field5) {
 function updateUsuario($field1, $field2, $field3, $field4, $field5, $field6, $field7, $field8, $field9, $field10, $field11, $field12, $field13, $field14, $field15, $field16, $field17) {
 	// falta validar Fecha_nacimiento, Sexo, Estado_civil, rol, FolioID, IDUIEM
 	global $db;
+	if ($field3 == "Hombre") {
+		$field3 = "H";
+	} else if ($field3 == "Mujer") {
+		$field3 = "M";
+	}
+	if ($field15 != "Médico" && $field15 != "Administrador" && $field15 != "Paciente") {
+		$field15 = "Sin asignar";
+	}
 	$stmt = $db->prepare("UPDATE People SET Nombre=:field2, Sexo=:field3, Ocupacion=:field4, Domicilio=:field5, Lugar_nacimiento=:field6, Fecha_nacimiento=:field7, Estado_civil=:field8, Escolaridad=:field9, Edad=:field10,
 		Tel_casa=:field11, Celular=:field12, Tel_trabajo=:field13, Email=:field14, rol=:field15, FolioID=:field16, IDUIEM=:field17 WHERE PeopleID=:field1");
 	$stmt->execute(array(':field1' => $field1, ':field2' => $field2, ':field3' => $field3, ':field4' => $field4, ':field5' => $field5, ':field6' => $field6, ':field7' => $field7,

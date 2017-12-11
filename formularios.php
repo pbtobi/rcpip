@@ -16,7 +16,7 @@
 function menuNivel2() {
 	echo '
 			<div id="menu_nivel_2" class="w3-bar-block">
-				<form accept-charset="utf-8" method="post" action="">
+
 				  <a class="w3-bar-item w3-button w3-padding w3-text-teal" onclick="w3_close()" href="#portfolio">
 				    <i class="fa fa-th-large fa-fw w3-margin-right"></i>Datos Generales</a> 
 				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#about">
@@ -27,6 +27,7 @@ function menuNivel2() {
 				    <i class="fa fa-calendar fa-fw w3-margin-right"></i>Recordatorio de 24 hrs</a>
 				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
 				    <i class="fa fa-hand-peace-o fa-fw w3-margin-right"></i>Consentimiento Informado</a>
+				<form accept-charset="utf-8" method="post" action="">
 				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
 				    <i class="fa fa-sign-out fa-fw w3-margin-right"></i>
 				    <input type="hidden" value="logOut" name="action">
@@ -93,9 +94,12 @@ function tarjetaUsuarios() {
 	echo '
 		<div id="page2" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
 			<div id="tarjetaPacientes">	
-			  	<h4>Ingreso de pacientes</h4>
+			  	<h4>Ingreso de usuarios</h4>
 				<div class="w3-container w3-whitegray">
-					<h2>Ingresar usuario</h2>
+					<h2>Registro de usuario nuevo</h2>';
+					showCreateUserForm();
+	echo '
+					<!--
 					<form action="" method="post" accept-charset="utf-8">
 						<div class="w3-third w3-margin-bottom">
 							<label for="Nombre">Nombre del usuario</label>
@@ -104,7 +108,11 @@ function tarjetaUsuarios() {
 						</div>
 						<div class="w3-third w3-margin-bottom"> 
 							<label for="Sexo">Sexo</label>
-							<input type="text" id="Sexo" name="Sexo" placeholder="Sexo">
+							<select type="text" id="Sexo" name="Sexo">
+								<option disabled selected>Elija el sexo</option>
+								<option>Hombre</option>
+								<option>Mujer</option>
+							</select>
 						</div>
 						<div class="w3-third w3-margin-bottom">
 							<label for="Ocupacion">Ocupacion</label>
@@ -120,19 +128,35 @@ function tarjetaUsuarios() {
 						</div>
 						<div class="w3-third w3-margin-bottom">
 							<label for="Fecha_nacimiento">Fecha de nacimiento</label>
-							<input type="text" id="Fecha_nacimiento" name="Fecha_nacimiento" placeholder="Su fecha de nacimiento">
+							<input type="text" id="datepicker" name="Fecha_nacimiento" placeholder="Su fecha de nacimiento">
 						</div>
 						<div class="w3-third w3-margin-bottom">
 							<label for="Estado_civil">Estado civil</label>
-							<input type="text" id="Estado_civil" name="Estado_civil" placeholder="Su estado civil">
+							<select type="text" id="Estado_civil" name="Estado_civil" placeholder="Su estado civil">
+								<option disabled selected>Su estado civil</option>
+								<option>Soltero</option>
+								<option>Unión libre</option>
+								<option>Casado</option>
+								<option>Divorciado</option>
+								<option>Viudo</option>
+							</select>
 						</div>
 						<div class="w3-third w3-margin-bottom">
 							<label for="Escolaridad">Escolaridad</label>
-							<input type="text" id="Escolaridad" name="Escolaridad" placeholder="Nivel terminado">
+							<select type="text" id="Escolaridad" name="Escolaridad">
+								<option disabled selected>Nivel terminado</option>
+								<option>Preprimaria</option>
+								<option>Primaria</option>
+								<option>Secundaria</option>
+								<option>Bachillerato</option>
+								<option>Licenciatura</option>
+								<option>Maestría</option>
+								<option>Doctorado</option>
+							</select>
 						</div>
 						<div class="w3-third w3-margin-bottom">
 							<label for="Edad">Edad</label>
-							<input type="text" id="Edad" name="Edad" placeholder="Su edad en anos">
+							<input type="text" id="Edad" name="Edad" placeholder="Su edad en años">
 						</div>
 						<div class="w3-third w3-margin-bottom">
 							<label for="Tel_casa">Telefono de casa</label>
@@ -154,7 +178,12 @@ function tarjetaUsuarios() {
 						</div>
 						<div class="w3-third w3-margin-bottom">
 							<label for="rol">Tipo de usuario</label>
-							<input type="text" id="rol" name="rol" placeholder="Tipo de usuario">
+							<select type="text" id="rol" name="rol">
+								<option disabled selected>Elejir tipo de usuario</option>
+								<option value="1">Paciente</option>
+								<option value="2">Médico</option>
+								<option value="8193">Superusuario</option>
+							</select>
 						</div>
 						<div class="w3-third w3-margin-bottom">
 							<label for="FolioID">FolioID</label>
@@ -167,10 +196,11 @@ function tarjetaUsuarios() {
 						<input type="hidden" name="action" value="addUsuario" />
 						<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registro nuevo  ">
 					</form>
+					-->
 				</div>
 				<div class="lista">
 				<h4>Usuarios registrados:</h4>	';
-				writePeopleTable();
+				writeUsersTable();
 				echo '
 				</div>				
 				<div class="w3-container w3-whitegray">';
@@ -275,9 +305,19 @@ function medicosUpdateForm() {
 function usuariosUpdateForm() {
 	// hace falta validar Nombre, Fecha_nacimiento, Edad, Celular, Email, rol, FolioID, IDUIEM
 	global $nombreErr, $emailErr, $celularErr, $usuarioID;
-	$datos = getDataPeople($usuarioID);
+	$datosPeople = getDataPeople($usuarioID);
+	$datosUsers = getDataUsers($usuarioID);
+	$email = $username = "";
+	$id = $roles_mask = 0;
+	foreach ($datosUsers as $row) {
+		$id = $row['id'];
+		$email = $row['email'];
+		$username = $row['username'];
+		$roles_mask = $row['roles_mask'];
+	}
+	$role = $roles_mask;
 	$PeopleID = $Nombre = $Sexo = $Ocupacion = $Domicilio = $Lugar_nacimiento = $Fecha_nacimiento = $Estado_civil = $Escolaridad = $Edad = $Tel_casa = $Celular = $Tel_trabajo = $Email = $rol = $FolioID = $IDUIEM = "";
-	foreach($datos as $row) {
+	foreach($datosPeople as $row) {
 		$PeopleID = $row['PeopleID'];
 		$Nombre = $row['Nombre'];
 		$Sexo = $row['Sexo'];
@@ -296,77 +336,169 @@ function usuariosUpdateForm() {
 		$FolioID = $row['FolioID'];
 		$IDUIEM = $row['IDUIEM'];
 	}
+	$escolArray = array("Preprimaria", "Primaria", "Secundaria", "Bachillerato", "Licenciatura", "Maestría", "Doctorado");
+	$edoCivilArray = array("Soltero", "Unión Libre", "Casado", "Divorciado", "Viudo");
+	$sexArray = array("Hombre", "Mujer");
+	if ($Sexo == "H") {
+		$sex = "Hombre";
+	}
+	if ($Sexo == "M") {
+		$sex = "Mujer";
+	}
+	if ($roles_mask == "8193") {
+		$role = "Administrador";
+	}
+	if ($roles_mask == "1024") {
+		$role = "Médico";
+	}
+	if ($roles_mask == "16") {
+		$role = "Paciente";
+	}
+	if ($roles_mask == "0") {
+		$role = "sin asignar";
+	}
+	if (!$username) {
+		$username = "Sin asignar";
+	} else {
+		$username = $username;
+	}
 	if ($usuarioID) {
 			echo '
 		<!--<div class="w3-row-padding" style="margin:8 -16px">-->
+			<h2>'.$email.' '.$id.'</h2>
 			<form id="update_usuarios" action="" method="post" accept-charset="utf-8">
 				<div class="w3-third w3-margin-bottom">
-					<label for="usuarioName">Nombre del usuario</label>
-					<input type="text" id="usuarioName" name="Nombre" placeholder="Su nombre completo.." value="'.$Nombre.'"><span class="error"> * '.$nombreErr.'</span>
+					<label for="Nombre">Nombre del usuario</label>
+					<input type="text" id="uname" name="Nombre" placeholder="Su nombre completo" value="'.$username.'" readonly>
+					<span class="error">'.$nombreErr.'</span>
 				</div>
-				<div class="w3-third w3-margin-bottom">
+				<div class="w3-third w3-margin-bottom"> 
 					<label for="Sexo">Sexo</label>
-					<input type="text" id="sexo" name="Sexo" placeholder="Sexo.." value="'.$Sexo.'">
+					<select type="text" id="Sexo" name="Sexo">';
+					if ($Sexo == "") {
+						echo '
+						<option disabled selected>Elija el sexo</option>
+						<option>Hombre</option>
+						<option>Mujer</option>';
+					} else {
+						foreach ($sexArray as $row) {
+						 	if ($row == $sex) {
+						 		echo '
+						 		<option selected>'.$row.'</option>';
+						 	} else {
+						 		echo '
+						 		<option>'.$row.'</option>';
+						 	}
+						}
+					}
+					echo '
+					</select>
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="Ocupacion">Ocupacion</label>
-					<input type="text" id="Ocupacion" name="Ocupacion" placeholder="Ocupacion.." value="'.$Ocupacion.'">
+					<input type="text" id="Ocupacion" name="Ocupacion" placeholder="Ocupacion" value="'.$Ocupacion.'">
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="Domicilio">Domicilio</label>
-					<input type="text" id="Domicilio" name="Domicilio" placeholder="Domicilio.." value="'.$Domicilio.'">
+					<input type="text" id="Domicilio" name="Domicilio" placeholder="Domicilio completo" value="'.$Domicilio.'">
 				</div>
-				<div class="w3-third w3-margin-bottom">
+				<div class="w3-third w3-margin-bottom">  
 					<label for="Lugar_nacimiento">Lugar de nacimiento</label>
-					<input type="text" id="Lugar_nacimiento" name="Lugar_nacimiento" placeholder="Lugar de nacimiento.." value="'.$Lugar_nacimiento.'">
+					<input type="text" id="Lugar_nacimiento" name="Lugar_nacimiento" placeholder="Estado y localidad" value="'.$Lugar_nacimiento.'">
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="Fecha_nacimiento">Fecha de nacimiento</label>
-					<input type="text" id="Fecha_nacimiento" name="Fecha_nacimiento" placeholder="Fecha de nacimiento.." value="'.$Fecha_nacimiento.'">
+					<input type="text" id="datepicker" name="Fecha_nacimiento" placeholder="Su fecha de nacimiento" value="'.$Fecha_nacimiento.'">
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="Estado_civil">Estado civil</label>
-					<input type="text" id="Estado_civil" name="Estado_civil" placeholder="Estado_civil.." value="'.$Estado_civil.'">
+					<select type="text" id="Estado_civil" name="Estado_civil" placeholder="Su estado civil">';
+					if ($Estado_civil == "") {
+						echo '
+						<option disabled selected>Su estado civil</option>
+						<option>Soltero</option>
+						<option>Unión libre</option>
+						<option>Casado</option>
+						<option>Divorciado</option>
+						<option>Viudo</option>';
+					} else {
+						foreach ($edoCivilArray as $row) {
+							if ($row == $Estado_civil) {
+								echo '
+								<option selected>'.$row.'</option>';
+							} else {
+								echo '
+								<option>'.$row.'</option>';
+							}
+						}
+					}
+					echo '
+					</select>
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="Escolaridad">Escolaridad</label>
-					<input type="text" id="Escolaridad" name="Escolaridad" placeholder="Escolaridad.." value="'.$Escolaridad.'">
+					<select type="text" id="Escolaridad" name="Escolaridad">';
+					if ($Escolaridad == "") {
+						echo '
+						<option disabled selected>Nivel terminado</option>
+						<option>Preprimaria</option>
+						<option>Primaria</option>
+						<option>Secundaria</option>
+						<option>Bachillerato</option>
+						<option>Licenciatura</option>
+						<option>Maestría</option>
+						<option>Doctorado</option>';
+					} else {
+						foreach ($escolArray as $row) {
+							if ($row == $Escolaridad) {
+								echo '
+								<option selected>'.$row.'</option>';
+							} else {
+								echo '
+								<option>'.$row.'</option>';
+							}
+						}					
+					}
+					echo '	
+					</select>
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="Edad">Edad</label>
-					<input type="text" id="Edad" name="Edad" placeholder="Edad.." value="'.$Edad.'">
+					<input type="text" id="Edad" name="Edad" placeholder="Su edad en años" value="'.$Edad.'">
 				</div>
 				<div class="w3-third w3-margin-bottom">
-					<label for="Tel_casa">Teléfono de casa</label>
-					<input type="text" id="Tel_casa" name="Tel_casa" placeholder="Teléfono de casa.." value="'.$Tel_casa.'">
-				</div>
-				<div class="w3-third">
-					<label for="usuarioCel">Celular</label>
-					<input type="text" id="usuarioCel" name="Celular" placeholder="Su teléfono de celular.." value="'.$Celular.'"><span class="error"> * '.$celularErr.'</span>
+					<label for="Tel_casa">Telefono de casa</label>
+					<input type="text" id="Tel_casa" name="Tel_casa" placeholder="Incluyendo lada" value="'.$Tel_casa.'">
 				</div>
 				<div class="w3-third w3-margin-bottom">
-					<label for="Tel_trabajo">Teléfono del trabajo</label>
-					<input type="text" id="Tel_trabajo" name="Tel_trabajo" placeholder="Teléfono del trabajo.." value="'.$Tel_trabajo.'">
-				</div>
-				<div class="w3-third">
-					<label for="usuarioEmail">Correo electrónico</label>
-					<input type="text" id="usuarioEmail" name="Email" placeholder="Su correo electrónico.." value="'.$Email.'"><span class="error"> * '.$emailErr.'</span>
+					<label for="Celular">Celular</label>
+					<input type="text" id="Celular" name="Celular" placeholder="Su telefono de celular" value="'.$Celular.'">
+					<span class="error">'.$celularErr.'</span>
 				</div>
 				<div class="w3-third w3-margin-bottom">
-					<label for="rol">Tipo de usuario</label>
-					<input type="text" id="rol" name="rol" placeholder="Tipo de usuario.." value="'.$rol.'">
+					<label for="Tel_trabajo">Telefono del trabajo</label>
+					<input type="text" id="Tel_trabajo" name="Tel_trabajo" placeholder="Telefono del trabajo (extension)" value="'.$Tel_trabajo.'">
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="Email">Correo electronico</label>
+					<input type="text" id="Email" name="Email" placeholder="Su e-mail" value="'.$email.'">
+					<span class="error">'.$emailErr.'</span>
+				</div>
+				<div class="w3-third w3-margin-bottom">
+					<label for="role">Tipo de usuario</label>
+					<input type="text" id="role" name="role" value="'.$role.'" readonly>
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="FolioID">FolioID</label>
-					<input type="text" id="FolioID" name="FolioID" placeholder="FolioID.." value="'.$FolioID.'">
+					<input type="text" id="FolioID" name="FolioID" placeholder="Folio ID" value="'.$FolioID.'">
 				</div>
-				<div class="w3-third w3-margin-bottom">
+				<div class="w3-third">
 					<label for="IDUIEM">IDUIEM</label>
-					<input type="text" id="IDUIEM" name="IDUIEM" placeholder="IDUIEM.." value="'.$IDUIEM.'">
+					<input type="text" id="IDUIEM" name="IDUIEM" placeholder="IDUIEM" value="'.$IDUIEM.'">
 				</div>
-					<input type="hidden" name="PeopleID" value="'.$PeopleID.'" />
-					<input type="hidden" name="action" value="updateUsuario" />
-					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Aceptar">
+				<input type="hidden" name="PeopleID" value="'.$PeopleID.'" />
+				<input type="hidden" name="action" value="updateUsuario" />
+				<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Aceptar">
 			</form>
 		<!--</div>-->';
 	}
@@ -430,6 +562,37 @@ function writeMedicosTable() {
 				<td>'.$row['Email_medico'].'</td>
 				<td>
 					<input type="hidden" name="medicoID" value="'.$row['MedicosID'].'">
+					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Modificar">
+				</td>
+			</tr>
+		</form>';
+  	}
+	echo '
+		</table>';
+}
+
+/*
+* Tabla HTML de los Usuarios.
+* Genera la lista completa de los usuarios y permite seleccionar sólo un usuario ($usuarioID).
+* @ $usuarioID se define en el main (rcpip-incmnsz.php).
+*/
+function writeUsersTable() {
+	// Escribe la Tabla de Usuario
+	global $usuarioID;
+	$datos = getDataUsers($usuarioID);
+	echo '
+		<table id="users">';
+	foreach($datos as $row) {
+		echo '
+		<form action="" method="post" accept-charset="utf-8">
+			<tr>
+				<td><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
+				<td>'.$row['id'].'</td>
+				<td>'.$row['email'].'</td>
+				<td>'.$row['username'].'</td>
+				<td>'.$row['roles_mask'].'</td>
+				<td>
+					<input type="hidden" name="usuarioID" value="'.$row['id'].'">
 					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Modificar">
 				</td>
 			</tr>
@@ -638,6 +801,28 @@ function writeR24hrsTable() {
 		</table>';
 }*/
 
+
+/*
+* Construye formulario para ingresar nuevo usaurio al sistema.
+* Ingreso de nuevos usuarios.
+*/
+function showCreateUserForm() {
+	echo '<form action="" method="post" accept-charset="utf-8">';
+	echo '<input type="hidden" name="action" value="admin.createUser" />';
+	echo '<input type="text" name="email" placeholder="Correo electrónico" /> ';
+	echo '<input type="text" name="password" placeholder="Contraseña nueva para este sistema" /> ';
+	echo '<input type="text" name="username" placeholder="Nombre del usuario" /> ';
+	/*
+	echo '<select name="require_unique_username" size="1">';
+	echo '<option value="0">Username — Cualquiera</option>';
+	echo '<option value="1">Username — Único</option>';
+	echo '</select> ';
+	*/
+	echo '<input type="hidden" name="require_unique_username" value="1">';
+	echo '<button type="submit">Registrar nuevo usuario</button>';
+	echo '</form>';
+}
+
 ///////////////////   Otras no utilizadas   //////////////////////////////////////////////////////
 function showConfirmEmailForm() {
 	echo '<form action="" method="post" accept-charset="utf-8">';
@@ -664,6 +849,7 @@ function showConfirmEmailForm() {
 	echo '<button type="submit">Re-send confirmation</button>';
 	echo '</form>';
 }
+
 
 function showAdminUserForm() {
 	echo '<h1>Administration</h1>';

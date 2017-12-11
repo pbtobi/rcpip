@@ -86,8 +86,7 @@ if ($auth->check()) {
 
   showSidebarNav();
   showHeader();
-  showViewChanges();
-
+  showViewChanges(); 
   \tarjetaMedicos();
   \tarjetaProtocolos();
   \tarjetaUsuarios();
@@ -105,8 +104,10 @@ else {
 
 if ($auth->hasAnyRole(\Delight\Auth\Role::DEVELOPER, \Delight\Auth\Role::MANAGER)) {
     // the user is either a developer, or a manager, or both
-  //\showDebugData($auth, $result);
-  //\showAdminUserForm($auth);
+
+  \showDebugData($auth, $result);
+  \showAdminUserForm($auth);
+
 }
 
 try {
@@ -142,6 +143,17 @@ try {
         document.getElementById("mySidebar").style.display = "none";
         document.getElementById("myOverlay").style.display = "none";
       }
+
+     
     </script>
+        <!-- jQuery -->
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug 
+    <script src="Hello World"></script>-->
+    <!-- JS Forms -->
+    <script type="text/javascript" src="js/forms.js"></script>
+
   </body>
 </html>

@@ -158,7 +158,7 @@ function showAuthenticatedUserForm(\Delight\Auth\Auth $auth) {
 
 }
 
-function createRolesOptions() {
+function createRolesOptionsOld() {
 	$roleReflection = new ReflectionClass(\Delight\Auth\Role::class);
 
 	$out = '';
@@ -170,6 +170,19 @@ function createRolesOptions() {
 	return $out;
 }
 
+function createRolesOptions() {
+	$roleReflection = new ReflectionClass(\Delight\Auth\Role::class);
+
+	$out = '';
+
+	foreach ($roleReflection->getConstants() as $roleName => $roleValue) {
+		if ($roleName == 'ADMIN' || $roleName == 'PACIENTE' || $roleName == 'DOCTOR') {
+			$out .= '<option value="' . $roleValue . '">' . $roleName . '</option>';
+		}
+	}
+
+	return $out;
+}
 
 /// Funciones para formater la página HTML
 /////////////////////////////////////////////////////////////////////////////
@@ -180,10 +193,15 @@ function showHtmlHead() {
     	<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
 		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" type="text/css" href="css/forms.css">
 	</head>
 	<body id="page" class=" w3-light-grey w3-content">';
 }
@@ -227,7 +245,7 @@ function showHeader() {
 				  <span class="w3-margin-right"></span> 
 				  <button class="w3-button w3-green">Ingresos</button>
 				  <div class="menuDinamico">
-					  <button id="link1" data-page="page1" class="w3-button w3-orange"><i class="fa fa-stethoscope   w3-margin-right"></i>Médicos</button>
+					  <!--<button id="link1" data-page="page1" class="w3-button w3-orange"><i class="fa fa-stethoscope   w3-margin-right"></i>Médicos</button>-->
 					  <button id="link2" data-page="page2" class="w3-button w3-purple w3-hide-small"><i class="fa fa-user-o w3-margin-right"></i>Usuarios</button>
 					  <button id="link3" data-page="page3" class="w3-button w3-blue w3-hide-small"><i class="fa fa-file-text-o w3-margin-right"></i>Protocolos</button>
 				  </div>
@@ -243,7 +261,7 @@ function showHeader() {
  */
 function showViewChanges(){
 	echo '
-		<script>
+	<script>
 			var bodyClasses = document.querySelector("body").className;
 			var myClass = new RegExp("authenticated");
 			var trueOrFalse = myClass.test( bodyClasses );
@@ -264,8 +282,19 @@ function showViewChanges(){
 			        $("#"+curPage).show();
 			    });
 			});
-		</script>';
+
+			// Date Picker
+			$( function() {
+    			$( "#datepicker" ).datepicker({
+    				yearRange: "c-100:c+0",
+    				changeMonth: true,
+					changeYear: true
+				} );
+  			} );
+
+         </script>';
 }
+
 
 
 /// Funciones para el Formateo de los datos y Tablas de la Base de Datos
