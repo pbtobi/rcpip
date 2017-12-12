@@ -9,7 +9,6 @@
  **********************************************************************************************/
 
 
-
 // enable error reporting
 \error_reporting(\E_ALL);
 \ini_set('display_errors', 'stdout');
@@ -623,10 +622,11 @@ function processRequestData(\Delight\Auth\Auth $auth) {
 							$roleUsuario = '8193';
 						}
 						if ($_POST['Sexo'] == 'Hombre' || $_POST['Sexo'] == 'Mujer') {
-							addUsuario($_POST['Nombre'], $_POST['Sexo'],$_POST['Ocupacion'], $_POST['Domicilio'], $_POST['Lugar_nacimiento'],
+							$last_id = addUsuario($_POST['Nombre'], $_POST['Sexo'],$_POST['Ocupacion'], $_POST['Domicilio'], $_POST['Lugar_nacimiento'],
 							$_POST['Fecha_nacimiento'], $_POST['Estado_civil'],$_POST['Escolaridad'], $_POST['Edad'], $_POST['Tel_casa'],
 							$_POST['Celular'], $_POST['Tel_trabajo'],$_POST['Email'], $roleUsuario, $_POST['FolioID'],
-							$_POST['IDUIEM']);	
+							$_POST['IDUIEM']);
+							return $last_id;
 						} else {
 							$nombreErr = "Datos incorrectos";
 						}
@@ -753,12 +753,28 @@ function getDataMedicos($medicosID) {
 	return $stmt;
 }
 
-function getDataUsers($usuarioID) {
+function getDataUsers($usuarioID, $role) {
 	global $db;
+	//$role = 0;
 	if ($usuarioID) {
 		$stmt = $db->query("SELECT * FROM users WHERE id='".$usuarioID."'");
+	} else if ($role == 0) {
+		$stmt = $db->query("SELECT * FROM users WHERE roles_mask='".$role."'");
 	} else {
-		$stmt = $db->query("SELECT * FROM users");
+		$role = 0;
+		$stmt = $db->query("SELECT * FROM users WHERE roles_mask!='".$role."'");
+	}
+	return $stmt;
+}
+
+function getDataUsersRoles($role) {
+	global $db;
+	//$role = 0;
+	if ($role == 0) {
+		$stmt = $db->query("SELECT * FROM users WHERE roles_mask='".$role."'");
+	} else {
+		$stmt = "No hay dato";
+		//$stmt = $db->query("SELECT * FROM users");
 	}
 	return $stmt;
 }
@@ -835,6 +851,8 @@ function addUsuario($field1, $field2, $field3, $field4, $field5, $field6, $field
 			VALUES (:field1,:field2,:field3,:field4,:field5,:field6,:field7,:field8,:field9,:field10,:field11,:field12,:field13,:field14,:field15,:field16)");
 		$stmt->execute(array(':field1' => $field1, ':field2' => $field2, ':field3' => $field3, ':field4' => $field4, ':field5' => $field5, ':field6' => $field6, ':field7' => $field7, ':field8' => $field8,
 			':field9' => $field9, ':field10' => $field10, ':field11' => $field11, ':field12' => $field12, ':field13' => $field13, ':field14' => $field14, ':field15' => $field15, ':field16' => $field16));
+		$LAST_ID = $this->conn->lastInsertId();
+		return $LAST_ID;
 	}
 }
 

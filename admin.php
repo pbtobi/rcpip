@@ -1,3 +1,4 @@
+<html>
 <?php require_once('connections/rcpip.php'); 
 require_once('delight.php');
 
@@ -79,6 +80,11 @@ function test_input($data) {
 }
 
 \showHtmlHead();
+echo '
+  <body id="page" class=" w3-light-grey w3-content">
+';
+
+
 //\showDebugData($auth, $result);
 
 if ($auth->check()) {
@@ -91,7 +97,7 @@ if ($auth->check()) {
   //writePeopleDatos();
   //echo $medicoID;
 
-  //\header("Location: ". "rcpip-incmnsz.php" );
+  //\header("Location: ". "admin.php" );
 }
 else {
   \showGuestUserForm();
@@ -100,7 +106,7 @@ else {
 if ($auth->hasAnyRole(\Delight\Auth\Role::DEVELOPER, \Delight\Auth\Role::MANAGER)) {
     // the user is either a developer, or a manager, or both
   \tarjetaProtocolos();
-  \tarjetaUsuarios();
+  \tarjetaUsuarios($auth);
     echo '
     </div>
       ';

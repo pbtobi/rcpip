@@ -27,7 +27,7 @@ function menuNivel2() {
 				    <i class="fa fa-calendar fa-fw w3-margin-right"></i>Recordatorio de 24 hrs</a>
 				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
 				    <i class="fa fa-hand-peace-o fa-fw w3-margin-right"></i>Consentimiento Informado</a>
-				<form accept-charset="utf-8" method="post" action="">
+				<form accept-charset="utf-8" method="post" action="rcpip-incmnsz.php">
 				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
 				    <i class="fa fa-sign-out fa-fw w3-margin-right"></i>
 				    <input type="hidden" value="logOut" name="action">
@@ -90,123 +90,54 @@ function tarjetaMedicos() {
 * Registra y modifica los Usuarios (Registro, Listado y Actualización).
 */
 function tarjetaUsuarios() {
-	global $emailErr, $nombreErr, $celularErr;
+	global $emailErr, $nombreErr, $celularErr, $usuarioID;
+	global $db;
 	echo '
 		<div id="page2" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
-			<div id="tarjetaPacientes">	
-			  	<h4>Ingreso de usuarios</h4>
-				<div class="w3-container w3-whitegray">
-					<h2>Registro de usuario nuevo</h2>';
-					showCreateUserForm();
-	echo '
-					<!--
-					<form action="" method="post" accept-charset="utf-8">
-						<div class="w3-third w3-margin-bottom">
-							<label for="Nombre">Nombre del usuario</label>
-							<input type="text" id="uname" name="Nombre" placeholder="Su nombre completo">
-							<span class="error">'.$nombreErr.'</span>
+			<div id="tarjetaPacientes">
+
+				<ul class="nav nav-tabs">
+				    <li class="active"><a data-toggle="tab" href="#home">Nuevo usuario</a></li>
+				    <li><a data-toggle="tab" href="#menu1">Tipo de usuario</a></li>
+				    <li><a data-toggle="tab" href="#menu2">Usuarios registrados</a></li>
+				    <!--<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
+				</ul>
+				
+				<div class="tab-content">
+				    <div id="home" class="tab-pane fade in active">
+				      <h4>Registro de nuevos médicos, pacientes o administradores</h4>
+				      <p></p>
+				      	<div class="w3-container w3-whitegray">';
+							showCreateUserForm();
+							echo '
 						</div>
-						<div class="w3-third w3-margin-bottom"> 
-							<label for="Sexo">Sexo</label>
-							<select type="text" id="Sexo" name="Sexo">
-								<option disabled selected>Elija el sexo</option>
-								<option>Hombre</option>
-								<option>Mujer</option>
-							</select>
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="Ocupacion">Ocupacion</label>
-							<input type="text" id="Ocupacion" name="Ocupacion" placeholder="Ocupacion">
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="Domicilio">Domicilio</label>
-							<input type="text" id="Domicilio" name="Domicilio" placeholder="Domicilio completo">
-						</div>
-						<div class="w3-third w3-margin-bottom">  
-							<label for="Lugar_nacimiento">Lugar de nacimiento</label>
-							<input type="text" id="Lugar_nacimiento" name="Lugar_nacimiento" placeholder="Estado y localidad">
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="Fecha_nacimiento">Fecha de nacimiento</label>
-							<input type="text" id="datepicker" name="Fecha_nacimiento" placeholder="Su fecha de nacimiento">
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="Estado_civil">Estado civil</label>
-							<select type="text" id="Estado_civil" name="Estado_civil" placeholder="Su estado civil">
-								<option disabled selected>Su estado civil</option>
-								<option>Soltero</option>
-								<option>Unión libre</option>
-								<option>Casado</option>
-								<option>Divorciado</option>
-								<option>Viudo</option>
-							</select>
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="Escolaridad">Escolaridad</label>
-							<select type="text" id="Escolaridad" name="Escolaridad">
-								<option disabled selected>Nivel terminado</option>
-								<option>Preprimaria</option>
-								<option>Primaria</option>
-								<option>Secundaria</option>
-								<option>Bachillerato</option>
-								<option>Licenciatura</option>
-								<option>Maestría</option>
-								<option>Doctorado</option>
-							</select>
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="Edad">Edad</label>
-							<input type="text" id="Edad" name="Edad" placeholder="Su edad en años">
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="Tel_casa">Telefono de casa</label>
-							<input type="text" id="Tel_casa" name="Tel_casa" placeholder="Incluyendo lada">
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="Celular">Celular</label>
-							<input type="text" id="Celular" name="Celular" placeholder="Su telefono de celular">
-							<span class="error">'.$celularErr.'</span>
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="Tel_trabajo">Telefono del trabajo</label>
-							<input type="text" id="Tel_trabajo" name="Tel_trabajo" placeholder="Telefono del trabajo (extension)">
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="Email">Correo electronico</label>
-							<input type="text" id="Email" name="Email" placeholder="Su e-mail">
-							<span class="error">'.$emailErr.'</span>
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="rol">Tipo de usuario</label>
-							<select type="text" id="rol" name="rol">
-								<option disabled selected>Elejir tipo de usuario</option>
-								<option value="1">Paciente</option>
-								<option value="2">Médico</option>
-								<option value="8193">Superusuario</option>
-							</select>
-						</div>
-						<div class="w3-third w3-margin-bottom">
-							<label for="FolioID">FolioID</label>
-							<input type="text" id="FolioID" name="FolioID" placeholder="Folio ID">
-						</div>
-						<div class="w3-third">
-							<label for="IDUIEM">IDUIEM</label>
-							<input type="text" id="IDUIEM" name="IDUIEM" placeholder="IDUIEM">
-						</div>
-						<input type="hidden" name="action" value="addUsuario" />
-						<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registro nuevo  ">
-					</form>
-					-->
+				    </div>
+				
+				    <div id="menu1" class="tab-pane fade">
+				      <h4>Médico, Paciente o Administrador</h4>
+				      <p></p>
+				      	<div class="w3-container w3-whitegray">';
+				      		$roles_mask = 0;
+							writeUsersTable($roles_mask);
+							showAddRoleForm();
+							echo '
+						</div>				      
+				    </div>
+				    <div id="menu2" class="tab-pane fade">
+				      <h4>Modificar los datos del usuarios</h4>
+				      <p></p>
+				      	<div class="w3-container w3-whitegray">';
+							writeUsersTable();
+							usuariosUpdateForm();
+							echo '
+						</div>      	
+				    </div>
+				    <div id="menu3" class="tab-pane fade">
+				      <h3>Menu 3</h3>
+				      <p></p>
+				    </div>
 				</div>
-				<div class="lista">
-				<h4>Usuarios registrados:</h4>	';
-				writeUsersTable();
-				echo '
-				</div>				
-				<div class="w3-container w3-whitegray">';
-				usuariosUpdateForm();
-				echo '
-				</div>
+
 			</div>	
 		</div>';
 }
@@ -224,7 +155,7 @@ function tarjetaProtocolos() {
 				<div class="w3-container w3-whitegray">
 					<h2>Registro de protocolos</h2>
 					<!--<div class="w3-row-padding" style="margin:8 -16px">-->
-					<form action="" method="post" accept-charset="utf-8">
+					<form action="admin.php" method="post" accept-charset="utf-8">
 						<div class="w3-third" w3-margin-bottom>
 							<label for="protocoloName">Nombre del protocolo</label>
 							<input type="text" id="Protocolo" name="Protocolo" placeholder="Nombre del protocolo..">
@@ -238,13 +169,15 @@ function tarjetaProtocolos() {
 					<!--</div>-->
 				</div>
 				<div class="lista">	
-				<h4>Protocolos registrados:</h4>	';
-				writeProtocoloTable();
-				echo '
+					<h4>Protocolos registrados:</h4>
+					';
+					writeProtocoloTable();
+					echo '
 				</div>
-				<div class="w3-container w3-whitegray">';
-				protocolosUpdateForm();
-				echo '
+				<div class="w3-container w3-whitegray">
+					';
+					protocolosUpdateForm();
+					echo '
 				</div>
 			</div>	
 		</div>';
@@ -302,11 +235,11 @@ function medicosUpdateForm() {
 * Actualiza la información y sólo se construye si es seleccionado un usuario en particular.
 * @ Recibe $usuarioID a partir de writePeopleTable().
 */
-function usuariosUpdateForm() {
+function usuariosUpdateForm($roles = NULL) {
 	// hace falta validar Nombre, Fecha_nacimiento, Edad, Celular, Email, rol, FolioID, IDUIEM
 	global $nombreErr, $emailErr, $celularErr, $usuarioID;
 	$datosPeople = getDataPeople($usuarioID);
-	$datosUsers = getDataUsers($usuarioID);
+	$datosUsers = getDataUsers($usuarioID, $roles);
 	$email = $username = "";
 	$id = $roles_mask = 0;
 	foreach ($datosUsers as $row) {
@@ -365,6 +298,7 @@ function usuariosUpdateForm() {
 	if ($usuarioID) {
 			echo '
 		<!--<div class="w3-row-padding" style="margin:8 -16px">-->
+		<div class="w3-container w3-whitegray">
 			<h2>'.$email.' '.$id.'</h2>
 			<form id="update_usuarios" action="" method="post" accept-charset="utf-8">
 				<div class="w3-third w3-margin-bottom">
@@ -500,6 +434,7 @@ function usuariosUpdateForm() {
 				<input type="hidden" name="action" value="updateUsuario" />
 				<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Aceptar">
 			</form>
+			</div>
 		<!--</div>-->';
 	}
 	else {
@@ -571,35 +506,53 @@ function writeMedicosTable() {
 		</table>';
 }
 
+
 /*
 * Tabla HTML de los Usuarios.
 * Genera la lista completa de los usuarios y permite seleccionar sólo un usuario ($usuarioID).
 * @ $usuarioID se define en el main (rcpip-incmnsz.php).
 */
-function writeUsersTable() {
+function writeUsersTable($roles = 1) {
 	// Escribe la Tabla de Usuario
+	//if ($roles == NULL) {
+		// Significa distinto a '0' (que tiene un tipo de usario asignado)
+	//	$roles = 1;
+	//} else {
+	//	$roles = 0;
+	//}
 	global $usuarioID;
-	$datos = getDataUsers($usuarioID);
+	if ($roles == 1) {
+		$buttonText = "Modificar";
+	} else {
+		$buttonText = "Definir tipo de usuario";
+	}
+	$datos = getDataUsers($usuarioID, $roles);
 	echo '
-		<table id="users">';
+	<ul class="list-group">';
 	foreach($datos as $row) {
 		echo '
-		<form action="" method="post" accept-charset="utf-8">
-			<tr>
-				<td><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
-				<td>'.$row['id'].'</td>
-				<td>'.$row['email'].'</td>
-				<td>'.$row['username'].'</td>
-				<td>'.$row['roles_mask'].'</td>
-				<td>
-					<input type="hidden" name="usuarioID" value="'.$row['id'].'">
-					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Modificar">
-				</td>
-			</tr>
-		</form>';
+		<li class="list-group-item">
+			<!--<table id="users">-->
+			<form action="" method="post" accept-charset="utf-8">
+				
+					<td><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
+					<td>'.$row['id'].'</td>
+					<td>'.$row['email'].'</td>
+					<td>'.$row['username'].'</td>
+					<td>'.$row['roles_mask'].'</td>
+					<td>
+						<input type="hidden" name="usuarioID" value="'.$row['id'].'">
+						<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="'.$buttonText.'">
+					</td>
+				
+			</form>
+			<!--</table>-->
+		</li>
+		';
   	}
 	echo '
-		</table>';
+	</ul>
+		<!--</table>-->';
 }
 
 /*
@@ -655,23 +608,23 @@ function writeProtocoloTable() {
 	global $protocoloID;
 	$datos = getDataProtocolo($protocoloID);
 	echo '
-		<table id="Protocolo">';
+					<table id="Protocolo">';
 	foreach($datos as $row) {
 		echo '
-		<form action="" method="post" accept-charset="utf-8">
-			<tr>
-				<td><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
-				<td>'.$row['ProtocoloID'].'</td>
-				<td>'.$row['Protocolo'].'</td>
-				<td>
-					<input type="hidden" name="protocoloID" value="'.$row['ProtocoloID'].'">
-					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Modificar">
-				</td>
-			</tr>
-		</form>';
+						<form action="" method="post" accept-charset="utf-8">
+							<tr>
+								<td><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
+								<td>'.$row['ProtocoloID'].'</td>
+								<td>'.$row['Protocolo'].'</td>
+								<td>
+									<input type="hidden" name="protocoloID" value="'.$row['ProtocoloID'].'">
+									<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Modificar">
+								</td>
+							</tr>
+						</form>';
   	}
 	echo '
-		</table>';
+					</table>';
 }
 
 /*
@@ -694,7 +647,7 @@ function showGuestUserForm() {
   			<img src="imgs/incmnsz.png">
   		</div>
   			<form class="form-signin" action="" method="post" accept-charset="utf-8">
-  			  <h2 class="form-signin-heading">Bienvenido</h2>
+  			  <!--<h2 class="form-signin-heading">Bienvenido</h2>-->
   				<input type="hidden" name="action" value="login" />
   				<input type="hidden" name="remember" value="0" />
   				<label for="inputEmail" class="sr-only">Correo electrónico</label>
@@ -803,24 +756,50 @@ function writeR24hrsTable() {
 
 
 /*
-* Construye formulario para ingresar nuevo usaurio al sistema.
+* Construye formulario para ingresar nuevo usuario al sistema.
 * Ingreso de nuevos usuarios.
 */
 function showCreateUserForm() {
-	echo '<form action="" method="post" accept-charset="utf-8">';
-	echo '<input type="hidden" name="action" value="admin.createUser" />';
-	echo '<input type="text" name="email" placeholder="Correo electrónico" /> ';
-	echo '<input type="text" name="password" placeholder="Contraseña nueva para este sistema" /> ';
-	echo '<input type="text" name="username" placeholder="Nombre del usuario" /> ';
-	/*
-	echo '<select name="require_unique_username" size="1">';
-	echo '<option value="0">Username — Cualquiera</option>';
-	echo '<option value="1">Username — Único</option>';
-	echo '</select> ';
-	*/
-	echo '<input type="hidden" name="require_unique_username" value="1">';
-	echo '<button type="submit">Registrar nuevo usuario</button>';
-	echo '</form>';
+	global $db;
+	echo '
+			<form action="admin.php" method="post" accept-charset="utf-8">
+
+				<input type="hidden" name="action" value="admin.createUser" />
+				<input type="text" name="email" placeholder="Correo electrónico" />
+				<p>Ingresar correo</p>
+				<input type="text" name="password" placeholder="Contraseña nueva para este sistema" />
+				<p>Ingresar una contraseña</p>
+				<input type="text" name="username" placeholder="Nombre del usuario" />
+				<p>Su nombre completo</p>
+
+				<!-- value=1 := Nombre de Usuario Único-->
+				<input type="hidden" name="require_unique_username" value="1">
+
+	            <button class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit">Registrar nuevo usuario</button>
+			</form>';
+}
+
+/*
+* Construye formulario para asignar el tipo de usuario.
+* Asigna tipo de usuario.
+*/
+function showAddRoleForm() {
+	global $db, $usuarioID;
+	if ($usuarioID) {
+		echo '
+		<div class="w3-container w3-whitegray">
+		<form action="admin.php" method="post" accept-charset="utf-8">
+			<input type="hidden" name="action" value="admin.addRole" />
+			<input type="text" name="id" placeholder="'.$usuarioID.'" value="'.$usuarioID.'" readonly />
+			<select name="role">
+				' . \createRolesOptions() . '
+			</select>
+			<button class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit">Asignar el tipo de usuario</button>
+		</form>
+		</div>';
+	} else {
+		//do nothing;
+	}
 }
 
 ///////////////////   Otras no utilizadas   //////////////////////////////////////////////////////

@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="es-MX" xml:lang="es-MX">
+	<head>
+		<meta charset="utf-8">
+<!-- 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Multi-Step Form</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/forms.css">
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<nav class="navbar">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<!-- Hamburger icon-->
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>                        
+					</button>
+					<a class="navbar-brand" href="#">Registro Clínico</a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+						<li id="ico-r" class="active"><a href="#">Registro</a></li>
+						<li id="ico-f"><a href="#">Actividad Física</a></li>
+						<li id="ico-a"><a href="#">Alimentación</a></li>
+						<li id="ico-v"><a href="#">Calidad de Vida</a></li>
+						<li id="ico-d"><a href="#">DT2</a></li>
+						<li id="ico-c"><a href="#">Conducta</a></li>
+					</ul>
+<!-- 					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					</ul> -->
+				</div>
+			</div>
+		</nav>
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-12">
+	                <form role="form" class="registration-form" action="javascript:void(0);">
+	                    <fieldset id="matutino">
+	                        <div class="form-top">
+	                            <div class="form-top-left">
+	                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Recordatorio de 24 horas</h3>
+	                                <p>En la Mañana</p>
+	                            </div>
+	                        </div>
+	                        <div class="form-bottom">
+	                            <div class="row">
+	                                <div class="form-group col-md-6 col-sm-6">
+	                                    <input type="text" class="form-control" placeholder="Desayuno - Huevos (2)" id="fname">
+	                                </div>
+	                                <div class="form-group col-md-6 col-sm-6">
+	                                    <input type="text" class="form-control" placeholder="Colación - Fruta (1)" id="fname">
+	                                </div>
+	                            </div>
+	                            <div class="form-group" style="margin-bottom:3px;">
+	                                <div class="row">
+	                                    <div class="form-group col-md-6 col-sm-6">
+	                                        <select class="form-control">
+	                                            <option>Lugar</option>
+	                                            <option>Casa</option>
+	                                            <option>Calle</option>
+	                                            <option>Restaurante</option>
+	                                        </select>
+	                                    </div>
+	                                </div>
+	                            </div>
+
+	                            <div class="form-group">
+	                                <select class="form-control">
+	                                    <option>Preparación</option>
+	                                    <option>Frito</option>
+	                                    <option>Dorado</option>
+	                                    <option>Asado</option>
+	                                    <option>Cocido</option>
+	                                    <option>Crudo</option>
+	                                    <option>Guisado</option>
+	                                </select>
+	                            </div>
+	                            
+	                            <button type="button" class="btn btn-next">Siguiente</button>
+	                        </div>
+	                    </fieldset>
+	                    <fieldset id="mediodia">
+	                        <div class="form-top">
+	                            <div class="form-top-left">
+	                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Recordatorio de 24 horas</h3>
+	                                <p>En la Tarde</p>
+	                            </div>
+	                        </div>
+	                        <div class="form-bottom">
+	                            <div class="row">
+	                                <div class="form-group col-md-6 col-sm-6">
+	                                    <input type="text" class="form-control" placeholder="Comida - Pollo con Mole (1)" id="fname">
+	                                </div>
+	                                <div class="form-group col-md-6 col-sm-6">
+	                                    <input type="text" class="form-control" placeholder="Colación - Manzana (1)" id="fname">
+	                                </div>
+	                            </div>
+	                            <div class="form-group" style="margin-bottom:3px;">
+	                                <div class="row">
+	                                    <div class="form-group col-md-6 col-sm-6">
+	                                        <select class="form-control">
+	                                            <option>Lugar</option>
+	                                            <option>Casa</option>
+	                                            <option>Calle</option>
+	                                            <option>Restaurante</option>
+	                                        </select>
+	                                    </div>
+	                                </div>
+	                            </div>
+
+	                            <div class="form-group">
+	                                <select class="form-control">
+	                                    <option>Preparación</option>
+	                                    <option>Frito</option>
+	                                    <option>Dorado</option>
+	                                    <option>Asado</option>
+	                                    <option>Cocido</option>
+	                                    <option>Crudo</option>
+	                                    <option>Guisado</option>
+	                                </select>
+	                            </div>
+	                            <button type="button" class="btn btn-previous">Anterior</button>
+	                            <button type="button" class="btn btn-next">Siguiente</button>
+	                        </div>
+	                    </fieldset>
+	                    <fieldset id="nocturno">
+	                        <div class="form-top">
+	                            <div class="form-top-left">
+	                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Recordatorio de 24 horas</h3>
+	                                <p>En la Noche</p>
+	                            </div>
+	                        </div>
+	                        <div class="form-bottom">
+	                            <div class="row">
+	                                <div class="form-group col-md-6 col-sm-6">
+	                                    <input type="text" class="form-control" placeholder="Cena - Vaso de leche (1)" id="fname">
+	                                </div>
+	                            </div>
+	                            <div class="form-group" style="margin-bottom:3px;">
+	                                <div class="row">
+	                                    <div class="form-group col-md-6 col-sm-6">
+	                                        <select class="form-control">
+	                                            <option>Lugar</option>
+	                                            <option>Casa</option>
+	                                            <option>Calle</option>
+	                                            <option>Restaurante</option>
+	                                        </select>
+	                                    </div>
+	                                </div>
+	                            </div>
+
+	                            <div class="form-group">
+	                                <select class="form-control">
+	                                    <option>Preparación</option>
+	                                    <option>Frito</option>
+	                                    <option>Dorado</option>
+	                                    <option>Asado</option>
+	                                    <option>Cocido</option>
+	                                    <option>Crudo</option>
+	                                    <option>Guisado</option>
+	                                </select>
+	                            </div>
+	                            <button type="button" class="btn btn-previous">Anterior</button>
+	                            <button type="submit" class="btn btn-save">Guardar</button>
+	                        </div>
+	                    </fieldset>
+	                    
+	                </form>
+	                <form>
+	                	<div class="form-check">
+						  <label class="form-check-label">
+						    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+						    Option one is this and that&mdash;be sure to include why it's great
+						  </label>
+						</div>
+						<div class="form-check">
+						  <label class="form-check-label">
+						    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+						    Option two can be something else and selecting it will deselect option one
+						  </label>
+						</div>
+						<div class="form-check disabled">
+						  <label class="form-check-label">
+						    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+						    Option three is disabled
+						  </label>
+						</div>        
+	                </form>
+	                <table class="table table-hover">
+<thead>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+</thead>
+
+<tbody>
+    <tr data-toggle="collapse" data-target="#accordion" class="clickable">
+        <td>Some Stuff</td>
+        <td>Some more stuff</td>
+        <td>And some more</td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <div id="accordion" class="collapse">Hidden by default</div>
+        </td>
+    </tr>
+</tbody>
+</table>
+	            </div>
+	        </div>
+	    </div>
+
+
+
+		<!-- jQuery -->
+		<script src="js/jquery-2.2.4.min.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug 
+ 		<script src="Hello World"></script>-->
+ 		<!-- JS Forms -->
+ 		<script type="text/javascript" src="js/forms.js"></script>
+	</body>
+</html>
