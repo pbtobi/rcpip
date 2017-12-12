@@ -101,7 +101,7 @@ function tarjetaUsuarios() {
 				    <li><a data-toggle="tab" href="#menu1">Tipo de usuario</a></li>
 				    <li><a data-toggle="tab" href="#menu2">Usuarios registrados</a></li>
 				    <!--<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
-				</ul>
+				</ul> usuarioID: '.$usuarioID.'
 				
 				<div class="tab-content">
 				    <div id="home" class="tab-pane fade in active">
@@ -237,7 +237,7 @@ function medicosUpdateForm() {
 */
 function usuariosUpdateForm($roles = NULL) {
 	// hace falta validar Nombre, Fecha_nacimiento, Edad, Celular, Email, rol, FolioID, IDUIEM
-	global $nombreErr, $emailErr, $celularErr, $usuarioID;
+	global $sexoErr, $fechaErr, $edadErr, $roleErr, $nombreErr, $emailErr, $celularErr, $usuarioID;
 	$datosPeople = getDataPeople($usuarioID);
 	$datosUsers = getDataUsers($usuarioID, $roles);
 	$email = $username = "";
@@ -290,6 +290,12 @@ function usuariosUpdateForm($roles = NULL) {
 	if ($roles_mask == "0") {
 		$role = "sin asignar";
 	}
+	if (!$IDUIEM) {
+		$IDUIEM = 0;
+	}
+	if (!$FolioID) {
+		$FolioID = 0;
+	}
 	if (!$username) {
 		$username = "Sin asignar";
 	} else {
@@ -304,7 +310,7 @@ function usuariosUpdateForm($roles = NULL) {
 				<div class="w3-third w3-margin-bottom">
 					<label for="Nombre">Nombre del usuario</label>
 					<input type="text" id="uname" name="Nombre" placeholder="Su nombre completo" value="'.$username.'" readonly>
-					<span class="error">'.$nombreErr.'</span>
+					<span class="error">'.'</span>
 				</div>
 				<div class="w3-third w3-margin-bottom"> 
 					<label for="Sexo">Sexo</label>
@@ -327,9 +333,10 @@ function usuariosUpdateForm($roles = NULL) {
 					}
 					echo '
 					</select>
+					<span class="error">'.$sexoErr.'</span>
 				</div>
 				<div class="w3-third w3-margin-bottom">
-					<label for="Ocupacion">Ocupacion</label>
+					<label for="Ocupacion">Ocupación</label>
 					<input type="text" id="Ocupacion" name="Ocupacion" placeholder="Ocupacion" value="'.$Ocupacion.'">
 				</div>
 				<div class="w3-third w3-margin-bottom">
@@ -343,6 +350,7 @@ function usuariosUpdateForm($roles = NULL) {
 				<div class="w3-third w3-margin-bottom">
 					<label for="Fecha_nacimiento">Fecha de nacimiento</label>
 					<input type="text" id="datepicker" name="Fecha_nacimiento" placeholder="Su fecha de nacimiento" value="'.$Fecha_nacimiento.'">
+					<span class="error">'.$fechaErr.'</span>
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="Estado_civil">Estado civil</label>
@@ -399,9 +407,10 @@ function usuariosUpdateForm($roles = NULL) {
 				<div class="w3-third w3-margin-bottom">
 					<label for="Edad">Edad</label>
 					<input type="text" id="Edad" name="Edad" placeholder="Su edad en años" value="'.$Edad.'">
+					<span class="error">'.$edadErr.'</span>
 				</div>
 				<div class="w3-third w3-margin-bottom">
-					<label for="Tel_casa">Telefono de casa</label>
+					<label for="Tel_casa">Teléfono de casa</label>
 					<input type="text" id="Tel_casa" name="Tel_casa" placeholder="Incluyendo lada" value="'.$Tel_casa.'">
 				</div>
 				<div class="w3-third w3-margin-bottom">
@@ -410,17 +419,18 @@ function usuariosUpdateForm($roles = NULL) {
 					<span class="error">'.$celularErr.'</span>
 				</div>
 				<div class="w3-third w3-margin-bottom">
-					<label for="Tel_trabajo">Telefono del trabajo</label>
+					<label for="Tel_trabajo">Teléfono del trabajo</label>
 					<input type="text" id="Tel_trabajo" name="Tel_trabajo" placeholder="Telefono del trabajo (extension)" value="'.$Tel_trabajo.'">
 				</div>
 				<div class="w3-third w3-margin-bottom">
-					<label for="Email">Correo electronico</label>
+					<label for="Email">Correo electrónico</label>
 					<input type="text" id="Email" name="Email" placeholder="Su e-mail" value="'.$email.'">
 					<span class="error">'.$emailErr.'</span>
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="role">Tipo de usuario</label>
 					<input type="text" id="role" name="role" value="'.$role.'" readonly>
+					<span class="error">'.$roleErr.'</span>
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="FolioID">FolioID</label>
@@ -521,6 +531,8 @@ function writeUsersTable($roles = 1) {
 	//	$roles = 0;
 	//}
 	global $usuarioID;
+	$email = $username = $return = "";
+
 	if ($roles == 1) {
 		$buttonText = "Modificar";
 	} else {
@@ -529,9 +541,19 @@ function writeUsersTable($roles = 1) {
 	$datos = getDataUsers($usuarioID, $roles);
 	echo '
 	<ul class="list-group">';
+	// Actualiza la tabla People con la información de $usuarioID
+	if ($usuarioID) {
+		//$return = addUsuario($usuarioID, $username, $email);
+	}
 	foreach($datos as $row) {
+		if ($usuarioID) {
+			$email = $row["email"];
+			$username = $row["username"];
+			$return = addUsuario($usuarioID, $username, $email);
+		}
 		echo '
 		<li class="list-group-item">
+			'.$return.'
 			<!--<table id="users">-->
 			<form action="" method="post" accept-charset="utf-8">
 				
@@ -785,6 +807,14 @@ function showCreateUserForm() {
 */
 function showAddRoleForm() {
 	global $db, $usuarioID;
+	$email = $username = $roles = "";
+
+	$datos = getDataUsers($usuarioID, $roles);
+	foreach($datos as $row) {
+		$email = $row["email"];
+		$username = $row["username"];
+	}
+
 	if ($usuarioID) {
 		echo '
 		<div class="w3-container w3-whitegray">
@@ -797,6 +827,11 @@ function showAddRoleForm() {
 			<button class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit">Asignar el tipo de usuario</button>
 		</form>
 		</div>';
+		// Actualiza la tabla People con la información de $usuarioID
+		function addPeople ($usuarioID, $email, $username) {
+			$return = addUsuario();
+			return $return;
+		}
 	} else {
 		//do nothing;
 	}

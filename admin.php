@@ -8,26 +8,63 @@ $result = \processRequestData($auth);
 /* define variables and set to empty values
   Formularios (Medicos) para recuperar las variables (globales)
 ***************************************************************/
-$usuarioID = $protocoloID = $medicoID = $nombreErr = $emailErr = $especialErr = $celularErr = "";
-$doctorName = $doctorEmail = $especialidad = $celular = "";
+$usuarioID = $protocoloID = $medicoID = "";
+$nombreErr = $especialErr = $sexoErr = $fechaErr = $edadErr = $celularErr = $emailErr = $roleErr = "";
+$Nombre = $Sexo = $Edad = $Email = $especialidad = $celular = "";
 // Estrategia de prueba para pasar variables de los formularios
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["doctorName"])) {
+  if (empty($_POST["Nombre"])) {
     $nombreErr = "El nombre es obligatorio";
   } else {
-    $doctorName = test_input($_POST["doctorName"]);
+    $Nombre = test_input($_POST["Nombre"]);
     // check if name only contains letters and whitespace
-    if (!preg_match("/^[a-zA-Z ]*$/",$doctorName)) {
+    if (!preg_match("/^[a-zA-Z ]*$/",$Nombre)) {
       $nombreErr = "";
     }
   }
   
-  if (empty($_POST["doctorEmail"])) {
-    $emailErr = "El correo electrónico es obligatorio";
+  if (empty($_POST["Sexo"])) {
+    $sexoErr = "El sexo es obligatorio";
   } else {
-    $doctorEmail = test_input($_POST["doctorEmail"]);
+    $Sexo = test_input($_POST["Sexo"]);
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z ]*$/",$Sexo)) {
+      $sexoErr = "";
+    }
+  }
+
+  if (empty($_POST["Fecha_nacimiento"])) {
+    $fechaErr = "La fecha es obligatoria";
+  } else {
+    $Fecha_nacimiento = test_input($_POST["Fecha_nacimiento"]);
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[0-9 ]*$/",$Fecha_nacimiento)) {
+      $fechaErr = "";
+    }
+  }
+
+  if (empty($_POST["Edad"])) {
+    $edadErr = "La edad es obligatoria";
+  } else {
+    $Edad = test_input($_POST["Edad"]);
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[0-9 ]*$/",$Edad)) {
+      $edadErr = "";
+    }
+  }
+
+  if (empty($_POST["celular"])) {
+    $celularErr = "El celular es obligatorio";
+  } else {
+    $celular = test_input($_POST["celular"]);
+  }
+
+  if (empty($_POST["Email"])) {
+    $emailErr = "El correo para contactarlo";
+  } else {
+    $Email = test_input($_POST["Email"]);
     // check if e-mail address is well-formed
-    if (!filter_var($doctorEmail, FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
       $emailErr = "El correo electrónico no es válido";
     }
   }
@@ -38,11 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $especialidad = test_input($_POST["especialidad"]);
   }
 
-  if (empty($_POST["celular"])) {
-    $celularErr = "El celular es obligatorio";
-  } else {
-    $celular = test_input($_POST["celular"]);
-  }
   // elige un médico en particular
   if (empty($_POST["medicoID"])) {
     // echo 'do nothing';
