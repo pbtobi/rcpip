@@ -677,6 +677,7 @@ function processRequestData(\Delight\Auth\Auth $auth) {
 			}
 			else if ($_POST['action'] === 'updateUsuario') {
 				if (isset($_POST['PeopleID'])) {
+					$campos_correctos = 1;
 					if (empty($_POST['Nombre'])) {
 						$nombreErr = "El nombre es obligatorio";
 					}
@@ -689,7 +690,27 @@ function processRequestData(\Delight\Auth\Auth $auth) {
 						$emailErr = "El correo electrónico es obligatorio";
 					}
 
-					if (!empty($_POST['Nombre']) && !empty($_POST['Celular']) && !empty($_POST['Email'])) {
+					if (empty($_POST['Sexo'])) {
+						$sexoErr = "El sexo es obligatorio";
+					}
+
+					if (empty($_POST['Fecha_nacimiento'])) {
+						$fechaErr = "La fecha es obligatoria";
+					}
+
+					if (empty($_POST['Estado_civil'])) {
+						$ecivilErr = "El estado civil es obligatorio";
+					}
+
+					if (empty($_POST['Escolaridad'])) {
+						$escolarErr = "La escolaridad es obligatoria";
+					}
+
+					if (empty($_POST['Sexo']) || empty($_POST['Fecha_nacimiento']) || empty($_POST['Estado_civil']) || empty($_POST['Escolaridad']) ) {
+						$campos_correctos = 0;
+					}
+
+					if (!empty($_POST['Nombre']) && !empty($_POST['Celular']) && !empty($_POST['Email']) && $campos_correctos == 1) {
 						if (!filter_var($_POST['Email'], FILTER_VALIDATE_EMAIL)) {
 							$emailErr = "El formato del correo es inválido";
 						} 

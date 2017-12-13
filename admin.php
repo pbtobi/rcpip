@@ -9,9 +9,9 @@ $result = \processRequestData($auth);
   Formularios (Medicos) para recuperar las variables (globales)
 ***************************************************************/
 $usuarioID = $protocoloID = $medicoID = "";
-$nombreErr = $especialErr = $sexoErr = $fechaErr = $edadErr = $celularErr = $emailErr = $roleErr = "";
+$nombreErr = $especialErr = $sexoErr = $fechaErr = $ecivilErr = $escolarErr = $edadErr = $celularErr = $emailErr = $roleErr = "";
 $Nombre = $Sexo = $Edad = $Email = $especialidad = $celular = "";
-// Estrategia de prueba para pasar variables de los formularios
+// Estrategia de prueba para pasar variables de los formularios y validar campos no vacíos
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["Nombre"])) {
     $nombreErr = "El nombre es obligatorio";
@@ -43,6 +43,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
+  if (empty($_POST["Estado_civil"])) {
+    $ecivilErr = "El estado civil es obligatorio";
+  } else {
+    $Estado_civil = test_input($_POST["Estado_civil"]);
+    // si existe
+    if ($Estado_civil) {
+      $ecivilErr = "";
+    }
+  }
+
+  if (empty($_POST["Escolaridad"])) {
+    $escolarErr = "La escolaridad es obligatoria";
+  } else {
+    $Escolaridad = test_input($_POST["Escolaridad"]);
+    // si existe
+    if ($Escolaridad) {
+      $escolarErr = "";
+    }
+  }
+
   if (empty($_POST["Edad"])) {
     $edadErr = "La edad es obligatoria";
   } else {
@@ -60,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (empty($_POST["Email"])) {
-    $emailErr = "El correo para contactarlo";
+    $emailErr = "El correo de contacto es obligatorio";
   } else {
     $Email = test_input($_POST["Email"]);
     // check if e-mail address is well-formed
