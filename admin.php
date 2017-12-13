@@ -124,6 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
+
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -131,37 +132,35 @@ function test_input($data) {
   return $data;
 }
 
-\showHtmlHead();
-echo '
-  <body id="page" class=" w3-light-grey w3-content">
-';
-
 
 //\showDebugData($auth, $result);
 
 if ($auth->check()) {
-  //\showAuthenticatedUserForm($auth);
-
+  \showHtmlHead();
   showSidebarNav();
+
   showHeader();
+
   showViewChanges(); 
   //\tarjetaMedicos();
   //writePeopleDatos();
   //echo $medicoID;
 
+  //\showAuthenticatedUserForm($auth);
   //\header("Location: ". "admin.php" );
 }
 else {
+  \showHtmlLoginHead();
   \showGuestUserForm();
 }
 
 if ($auth->hasAnyRole(\Delight\Auth\Role::DEVELOPER, \Delight\Auth\Role::MANAGER)) {
     // the user is either a developer, or a manager, or both
   \tarjetaProtocolos();
-  \tarjetaUsuarios($auth);
-    echo '
+  \tarjetaUsuarios();
+/*    echo '
     </div>
-      ';
+      ';*/
 
   //\showDebugData($auth, $result);
   //\showAdminUserForm($auth);
@@ -183,9 +182,9 @@ try {
 }
 
 ?>
-
+</div>
     <!-- Footer -->
-    <div class="footer w3-black w3-center w3-padding-24">
+    <div class="footer clear w3-black w3-center w3-padding-24">
       Derechos Reservados 2017 &copy; INCMNSZ
       <a href="http://www.innsz.mx/" title="Nutrición" target="_blank" class="w3-hover-opacity"></a>
     </div>
@@ -210,6 +209,7 @@ try {
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug 
     <script src="Hello World"></script>-->
+    <script src="js/jquery-ui.js"></script>
     <!-- JS Forms -->
     <script type="text/javascript" src="js/forms.js"></script>
 

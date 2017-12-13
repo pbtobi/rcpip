@@ -97,14 +97,14 @@ function tarjetaUsuarios() {
 			<div id="tarjetaPacientes">
 
 				<ul class="nav nav-tabs">
-				    <li class="active"><a data-toggle="tab" href="#home">Nuevo usuario</a></li>
-				    <li><a data-toggle="tab" href="#menu1">Tipo de usuario</a></li>
-				    <li><a data-toggle="tab" href="#menu2">Usuarios registrados</a></li>
-				    <!--<li><a data-toggle="tab" href="#menu3">Menu 3</a></li>-->
+				    <li class="active"><a data-toggle="tab" href="#home1">Nuevo usuario</a></li>
+				    <li><a data-toggle="tab" href="#menu12">Tipo de usuario</a></li>
+				    <li><a data-toggle="tab" href="#menu13">Usuarios registrados</a></li>
+				    <!--<li><a data-toggle="tab" href="#menu14">Menu 4</a></li>-->
 				</ul> usuarioID: '.$usuarioID.'
 				
 				<div class="tab-content">
-				    <div id="home" class="tab-pane fade in active">
+				    <div id="home1" class="tab-pane fade in active">
 				      <h4>Registro de nuevos médicos, pacientes o administradores</h4>
 				      <p></p>
 				      	<div class="w3-container w3-whitegray">';
@@ -113,7 +113,7 @@ function tarjetaUsuarios() {
 						</div>
 				    </div>
 				
-				    <div id="menu1" class="tab-pane fade">
+				    <div id="menu12" class="tab-pane fade">
 				      <h4>Médico, Paciente o Administrador</h4>
 				      <p></p>
 				      	<div class="w3-container w3-whitegray">';
@@ -123,7 +123,8 @@ function tarjetaUsuarios() {
 							echo '
 						</div>				      
 				    </div>
-				    <div id="menu2" class="tab-pane fade">
+
+				    <div id="menu13" class="tab-pane fade">
 				      <h4>Modificar los datos del usuarios</h4>
 				      <p></p>
 				      	<div class="w3-container w3-whitegray">';
@@ -132,7 +133,8 @@ function tarjetaUsuarios() {
 							echo '
 						</div>      	
 				    </div>
-				    <div id="menu3" class="tab-pane fade">
+
+				    <div id="menu14" class="tab-pane fade">
 				      <h3>Menu 3</h3>
 				      <p></p>
 				    </div>
@@ -147,38 +149,46 @@ function tarjetaUsuarios() {
 * Registra y modifica los Protocolos (Registro, Listado y Actualización).
 */
 function tarjetaProtocolos() {
-	global $nombreErr;
+	global $nombreErr, $usuarioID;
 	echo '
 		<div id="page3" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
-			<div id="tarjeta_protocolos">
-				<h4>Protocolos de investigacion</h4>
-				<div class="w3-container w3-whitegray">
-					<h2>Registro de protocolos</h2>
-					<!--<div class="w3-row-padding" style="margin:8 -16px">-->
-					<form action="admin.php" method="post" accept-charset="utf-8">
-						<div class="w3-third" w3-margin-bottom>
-							<label for="protocoloName">Nombre del protocolo</label>
-							<input type="text" id="Protocolo" name="Protocolo" placeholder="Nombre del protocolo..">
-							<span class="error">'.$nombreErr.'</span>
+			<div id="tarjetaProtocolos">
+
+				<ul class="nav nav-tabs">
+				    <li class="active"><a data-toggle="tab" href="#home2">Nuevo protocolo</a></li>
+				    <li><a data-toggle="tab" href="#menu22">Protocolos registrados</a></li>
+				</ul> usuarioID: '.$usuarioID.'
+
+				<div class="tab-content">
+				    <div id="home2" class="tab-pane fade in active">
+						<h4>Registro de los protocolos de investigación</h4>
+
+						<div class="w3-container w3-whitegray">
+						<form action="admin.php" method="post" accept-charset="utf-8">
+							<div class="w3-third" w3-margin-bottom>
+								<!--<label for="protocoloName">Nombre del protocolo</label>-->
+								<input type="text" id="Protocolo" name="Protocolo" placeholder="Nombre del protocolo..">
+								<span class="error">'.$nombreErr.'</span>
+							</div>
+							<div class="w3-third">
+								<input type="hidden" name="action" value="addProtocolo" />
+								<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registrar protocolo">
+							</div>
+						</form>
 						</div>
-						<div class="w3-third">
-							<input type="hidden" name="action" value="addProtocolo" />
-							<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registrar protocolo">
+					</div>
+
+					<div id="menu22" class="tab-pane fade">
+						<h4>Protocolos registrados:</h4>
+						<p></p>
+						<div class="w3-container w3-whitegray">';
+							writeProtocoloTable();
+							protocolosUpdateForm();
+							echo '
 						</div>
-					</form>	
-					<!--</div>-->
+					</div>
 				</div>
-				<div class="lista">	
-					<h4>Protocolos registrados:</h4>
-					';
-					writeProtocoloTable();
-					echo '
-				</div>
-				<div class="w3-container w3-whitegray">
-					';
-					protocolosUpdateForm();
-					echo '
-				</div>
+
 			</div>	
 		</div>';
 }
@@ -303,6 +313,16 @@ function usuariosUpdateForm($roles = NULL) {
 	}
 	if ($usuarioID) {
 			echo '
+				<script>
+					// Date Picker
+					$( function() {
+ 						$( "#datepicker" ).datepicker({
+ 							yearRange: "c-100:c+0",
+ 							changeMonth: true,
+							changeYear: true
+						} );
+ 					} );
+				</script>
 		<!--<div class="w3-row-padding" style="margin:8 -16px">-->
 		<div class="w3-container w3-whitegray">
 			<h2>'.$email.' '.$id.'</h2>
@@ -655,20 +675,11 @@ function writeProtocoloTable() {
 */
 function showGuestUserForm() {
     echo '
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
-    <title>Ingreso al sistema RCPIP</title>
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap/bootstrap2.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="bootstrap/signin.css" rel="stylesheet">
-  	</head>
-  	<body id="page" class="w3-light-grey w3-content" style="max-width:1600px">
   		<div class="container">
   		<div id="logo">
   			<img src="imgs/incmnsz.png">
   		</div>
-  			<form class="form-signin" action="" method="post" accept-charset="utf-8">
+  			<form class="form-signin" action="admin.php" method="post" accept-charset="utf-8">
   			  <!--<h2 class="form-signin-heading">Bienvenido</h2>-->
   				<input type="hidden" name="action" value="login" />
   				<input type="hidden" name="remember" value="0" />

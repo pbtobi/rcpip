@@ -1,3 +1,4 @@
+<html>
 <?php require_once('connections/rcpip.php'); 
 require_once('delight.php');
 
@@ -78,14 +79,14 @@ function test_input($data) {
   return $data;
 }
 
-\showHtmlHead();
+
 //\showDebugData($auth, $result);
 
 if ($auth->check()) {
   //\showAuthenticatedUserForm($auth);
-
-  showSidebarNav();
+  \showHtmlHead();
   showHeader();
+  showSidebarNav();
   showViewChanges(); 
   //\tarjetaMedicos();
   //writePeopleDatos();
@@ -94,6 +95,7 @@ if ($auth->check()) {
   //\header("Location: ". "rcpip-incmnsz.php" );
 }
 else {
+  \showHtmlLoginHead();
   \showGuestUserForm();
 }
 
@@ -152,6 +154,7 @@ try {
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug 
     <script src="Hello World"></script>-->
+    <script src="js/jquery-ui.js"></script>
     <!-- JS Forms -->
     <script type="text/javascript" src="js/forms.js"></script>
 
