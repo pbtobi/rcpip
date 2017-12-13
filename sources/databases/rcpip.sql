@@ -2,9 +2,9 @@
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 03-12-2017 a las 03:16:03
--- Versión del servidor: 10.0.31-MariaDB
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 13-12-2017 a las 01:38:56
+-- Versión del servidor: 5.7.19
 -- Versión de PHP: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,10 +25,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `AF`
+-- Estructura de tabla para la tabla `af`
 --
 
-CREATE TABLE `AF` (
+DROP TABLE IF EXISTS `af`;
+CREATE TABLE IF NOT EXISTS `af` (
   `AFID` tinyint(4) NOT NULL,
   `AF_cantidad` tinyint(4) NOT NULL,
   `AF_habitual` tinyint(1) NOT NULL,
@@ -36,16 +37,18 @@ CREATE TABLE `AF` (
   `AF_tiempo` tinyint(4) NOT NULL,
   `AF_mindia` tinyint(4) NOT NULL,
   `AF_hrsSem` tinyint(4) NOT NULL,
-  `AF_tipo` tinyint(4) NOT NULL
+  `AF_tipo` tinyint(4) NOT NULL,
+  PRIMARY KEY (`AFID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `AG`
+-- Estructura de tabla para la tabla `ag`
 --
 
-CREATE TABLE `AG` (
+DROP TABLE IF EXISTS `ag`;
+CREATE TABLE IF NOT EXISTS `ag` (
   `AGID` tinyint(4) NOT NULL,
   `PrimeraMens` tinyint(4) NOT NULL,
   `Embarazos` tinyint(4) NOT NULL,
@@ -53,16 +56,18 @@ CREATE TABLE `AG` (
   `Cesareas` tinyint(4) NOT NULL,
   `Abortos` tinyint(4) NOT NULL,
   `FMensRec` date NOT NULL,
-  `TratamEstrog` tinyint(1) NOT NULL
+  `TratamEstrog` tinyint(1) NOT NULL,
+  PRIMARY KEY (`AGID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ALab`
+-- Estructura de tabla para la tabla `alab`
 --
 
-CREATE TABLE `ALab` (
+DROP TABLE IF EXISTS `alab`;
+CREATE TABLE IF NOT EXISTS `alab` (
   `ALabID` tinyint(4) NOT NULL,
   `Glu` tinyint(4) DEFAULT NULL,
   `Cr` float DEFAULT NULL,
@@ -82,16 +87,18 @@ CREATE TABLE `ALab` (
   `AST` tinyint(4) DEFAULT NULL,
   `ALT` tinyint(4) DEFAULT NULL,
   `GGT` tinyint(4) DEFAULT NULL,
-  `CPK` float DEFAULT NULL
+  `CPK` float DEFAULT NULL,
+  PRIMARY KEY (`ALabID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `APPCardio`
+-- Estructura de tabla para la tabla `appcardio`
 --
 
-CREATE TABLE `APPCardio` (
+DROP TABLE IF EXISTS `appcardio`;
+CREATE TABLE IF NOT EXISTS `appcardio` (
   `APPCardioID` tinyint(4) NOT NULL,
   `CardiOtrasID` tinyint(4) NOT NULL,
   `TrombosisPiernas` tinyint(1) NOT NULL,
@@ -101,16 +108,18 @@ CREATE TABLE `APPCardio` (
   `InfartoCerebral` tinyint(1) NOT NULL,
   `DX_infartoC` date DEFAULT NULL,
   `DolorPiernas` tinyint(1) NOT NULL,
-  `DX_dolorP` date DEFAULT NULL
+  `DX_dolorP` date DEFAULT NULL,
+  PRIMARY KEY (`APPCardioID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `BIA`
+-- Estructura de tabla para la tabla `bia`
 --
 
-CREATE TABLE `BIA` (
+DROP TABLE IF EXISTS `bia`;
+CREATE TABLE IF NOT EXISTS `bia` (
   `BIAID` tinyint(4) NOT NULL,
   `Peso` float DEFAULT NULL,
   `Talla` float DEFAULT NULL,
@@ -136,16 +145,18 @@ CREATE TABLE `BIA` (
   `HYD` float DEFAULT NULL,
   `AF` tinyint(4) DEFAULT NULL,
   `PAF` tinyint(4) DEFAULT NULL,
-  `GV` float DEFAULT NULL
+  `GV` float DEFAULT NULL,
+  PRIMARY KEY (`BIAID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CA`
+-- Estructura de tabla para la tabla `ca`
 --
 
-CREATE TABLE `CA` (
+DROP TABLE IF EXISTS `ca`;
+CREATE TABLE IF NOT EXISTS `ca` (
   `CAID` tinyint(4) NOT NULL,
   `CA_toma` tinyint(4) NOT NULL,
   `CA_cantidad` tinyint(4) NOT NULL,
@@ -153,67 +164,77 @@ CREATE TABLE `CA` (
   `CA_tipo` tinyint(4) NOT NULL,
   `CA_meses` tinyint(4) NOT NULL,
   `CA_years` tinyint(4) NOT NULL,
-  `SupMVit` varchar(40) COLLATE utf8_unicode_ci NOT NULL
+  `SupMVit` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`CAID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CardiOtras`
+-- Estructura de tabla para la tabla `cardiotras`
 --
 
-CREATE TABLE `CardiOtras` (
+DROP TABLE IF EXISTS `cardiotras`;
+CREATE TABLE IF NOT EXISTS `cardiotras` (
   `CardiOtrasID` tinyint(4) NOT NULL,
   `Enfermedad` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `DX_cardiOtra` year(4) NOT NULL,
-  `Tratamiento` varchar(240) COLLATE utf8_unicode_ci NOT NULL
+  `Tratamiento` varchar(240) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`CardiOtrasID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CDM`
+-- Estructura de tabla para la tabla `cdm`
 --
 
-CREATE TABLE `CDM` (
+DROP TABLE IF EXISTS `cdm`;
+CREATE TABLE IF NOT EXISTS `cdm` (
   `CDMID` tinyint(4) NOT NULL,
-  `TipoCDM` tinyint(4) NOT NULL
+  `TipoCDM` tinyint(4) NOT NULL,
+  PRIMARY KEY (`CDMID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CI`
+-- Estructura de tabla para la tabla `ci`
 --
 
-CREATE TABLE `CI` (
+DROP TABLE IF EXISTS `ci`;
+CREATE TABLE IF NOT EXISTS `ci` (
   `CIID` tinyint(4) NOT NULL,
   `Firma` tinyint(1) NOT NULL,
-  `Entrevistador` varchar(120) COLLATE utf8_unicode_ci NOT NULL
+  `Entrevistador` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`CIID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `CT`
+-- Estructura de tabla para la tabla `ct`
 --
 
-CREATE TABLE `CT` (
+DROP TABLE IF EXISTS `ct`;
+CREATE TABLE IF NOT EXISTS `ct` (
   `CTID` tinyint(4) NOT NULL,
   `CT_fuma` tinyint(4) NOT NULL,
   `CT_cantidad` tinyint(4) NOT NULL,
   `CT_frecuencia` tinyint(4) NOT NULL,
   `CT_tiempo` tinyint(4) NOT NULL,
-  `CT_tiempoY` tinyint(4) NOT NULL
+  `CT_tiempoY` tinyint(4) NOT NULL,
+  PRIMARY KEY (`CTID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Dislipidemia`
+-- Estructura de tabla para la tabla `dislipidemia`
 --
 
-CREATE TABLE `Dislipidemia` (
+DROP TABLE IF EXISTS `dislipidemia`;
+CREATE TABLE IF NOT EXISTS `dislipidemia` (
   `DislipidemiaID` tinyint(4) NOT NULL,
   `DX_colesterol` date NOT NULL,
   `DXC_edad` tinyint(4) NOT NULL,
@@ -226,16 +247,18 @@ CREATE TABLE `Dislipidemia` (
   `TipoColTg` tinyint(4) NOT NULL,
   `TiempoSuspColTg` tinyint(4) NOT NULL,
   `FiebreInfec` tinyint(1) NOT NULL,
-  `ModifDieta` tinyint(1) NOT NULL
+  `ModifDieta` tinyint(1) NOT NULL,
+  PRIMARY KEY (`DislipidemiaID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `DM`
+-- Estructura de tabla para la tabla `dm`
 --
 
-CREATE TABLE `DM` (
+DROP TABLE IF EXISTS `dm`;
+CREATE TABLE IF NOT EXISTS `dm` (
   `DMID` tinyint(4) NOT NULL,
   `Diabetes_mellitus` tinyint(1) NOT NULL,
   `DX_diabetesM` date DEFAULT NULL,
@@ -247,16 +270,18 @@ CREATE TABLE `DM` (
   `GAP_last_year` tinyint(4) NOT NULL,
   `HbA1c` tinyint(4) DEFAULT NULL,
   `DX_preDM` tinyint(1) NOT NULL,
-  `CDMID` tinyint(4) DEFAULT NULL
+  `CDMID` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`DMID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Genotipo`
+-- Estructura de tabla para la tabla `genotipo`
 --
 
-CREATE TABLE `Genotipo` (
+DROP TABLE IF EXISTS `genotipo`;
+CREATE TABLE IF NOT EXISTS `genotipo` (
   `GenotipoID` smallint(6) UNSIGNED NOT NULL,
   `HCFamiliarID` tinyint(1) DEFAULT NULL,
   `APPCardioID` tinyint(1) DEFAULT NULL,
@@ -270,30 +295,34 @@ CREATE TABLE `Genotipo` (
   `CAID` tinyint(1) DEFAULT NULL,
   `AFID` tinyint(1) DEFAULT NULL,
   `R24hrsID` tinyint(1) DEFAULT NULL,
-  `CIID` tinyint(1) DEFAULT NULL
+  `CIID` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`GenotipoID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `HAS`
+-- Estructura de tabla para la tabla `has`
 --
 
-CREATE TABLE `HAS` (
+DROP TABLE IF EXISTS `has`;
+CREATE TABLE IF NOT EXISTS `has` (
   `HASID` tinyint(4) NOT NULL,
   `Hipertension` tinyint(1) NOT NULL,
   `DX_HAS` date NOT NULL,
   `DX_edad` tinyint(4) NOT NULL,
-  `HAS_tratamiento` tinyint(4) NOT NULL
+  `HAS_tratamiento` tinyint(4) NOT NULL,
+  PRIMARY KEY (`HASID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `HCFamiliar`
+-- Estructura de tabla para la tabla `hcfamiliar`
 --
 
-CREATE TABLE `HCFamiliar` (
+DROP TABLE IF EXISTS `hcfamiliar`;
+CREATE TABLE IF NOT EXISTS `hcfamiliar` (
   `HCFamiliarID` tinyint(4) NOT NULL,
   `Familiar` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `DMT2` tinyint(1) NOT NULL,
@@ -301,40 +330,45 @@ CREATE TABLE `HCFamiliar` (
   `C_Isquemica` tinyint(1) NOT NULL,
   `Obesidad` tinyint(1) NOT NULL,
   `Alive` tinyint(1) NOT NULL,
-  `Causa_muerte` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL
+  `Causa_muerte` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`HCFamiliarID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Medicos`
+-- Estructura de tabla para la tabla `medicos`
 --
 
-CREATE TABLE `Medicos` (
-  `MedicosID` tinyint(4) NOT NULL,
+DROP TABLE IF EXISTS `medicos`;
+CREATE TABLE IF NOT EXISTS `medicos` (
+  `MedicosID` tinyint(4) NOT NULL AUTO_INCREMENT,
   `Nombre_medico` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `Especialidad` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Cel_medico` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Email_medico` varchar(249) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Email_medico` varchar(249) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`MedicosID`),
+  KEY `Nombre_medico` (`Nombre_medico`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `Medicos`
+-- Volcado de datos para la tabla `medicos`
 --
 
-INSERT INTO `Medicos` (`MedicosID`, `Nombre_medico`, `Especialidad`, `Cel_medico`, `Email_medico`) VALUES
-(1, 'Magdalena del Rocio Sevilla González', '', '5554870900', 'magda.sevilla@gmail.com'),
-(2, 'Laura Evangelina López Guzmán', '', '5556103980', 'lauraelg@hotmail.com'),
-(3, 'Laura Evangelina López Guzmán', 'Pediatría', '5556103980', 'laurae@cdmx.mx'),
-(4, 'Carlos Aguilar Salinas', '', '5556978035', 'caguilar@incmnsz.mx');
+INSERT INTO `medicos` (`MedicosID`, `Nombre_medico`, `Especialidad`, `Cel_medico`, `Email_medico`) VALUES
+(1, 'Magdalena del Rocio Sevilla Gonzalez', NULL, '5554870900', 'magda.sevilla@gmail.com'),
+(2, 'Laura Evangelina López Guzmán', 'Pediatría', '5511323623', 'lauraelg@gmail.com'),
+(3, 'Carlos Aguilar', '', '', 'caguilarsalinas@yahoo.com'),
+(4, 'Javier Torres', '', '', 'jtorres@gmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Obesidad`
+-- Estructura de tabla para la tabla `obesidad`
 --
 
-CREATE TABLE `Obesidad` (
+DROP TABLE IF EXISTS `obesidad`;
+CREATE TABLE IF NOT EXISTS `obesidad` (
   `ObesidadID` tinyint(4) NOT NULL,
   `Edad_inicio` tinyint(4) NOT NULL,
   `Peso_actual` float NOT NULL,
@@ -350,65 +384,75 @@ CREATE TABLE `Obesidad` (
   `Tipo_acciones` tinyint(4) NOT NULL,
   `Intentos` tinyint(4) NOT NULL,
   `TratamFarmaco` tinyint(1) NOT NULL,
-  `Tipo_TFarmaco` varchar(240) COLLATE utf8_unicode_ci NOT NULL
+  `Tipo_TFarmaco` varchar(240) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`ObesidadID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `OyDis`
+-- Estructura de tabla para la tabla `oydis`
 --
 
-CREATE TABLE `OyDis` (
+DROP TABLE IF EXISTS `oydis`;
+CREATE TABLE IF NOT EXISTS `oydis` (
   `OyDisID` tinyint(4) NOT NULL,
   `ObesidadID` tinyint(4) NOT NULL,
   `DislipidemiasID` tinyint(4) NOT NULL,
   `Obesidad` tinyint(1) NOT NULL,
   `Colesterol` tinyint(1) NOT NULL,
-  `Trigliceridos` tinyint(1) NOT NULL
+  `Trigliceridos` tinyint(1) NOT NULL,
+  PRIMARY KEY (`OyDisID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `People`
+-- Estructura de tabla para la tabla `people`
 --
 
-CREATE TABLE `People` (
-  `PeopleID` smallint(6) UNSIGNED NOT NULL,
-  `Nombre` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `people`;
+CREATE TABLE IF NOT EXISTS `people` (
+  `PeopleID` smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Sexo` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Ocupacion` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Domicilio` varchar(240) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Lugar_nacimiento` char(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Fecha_nacimiento` date DEFAULT NULL,
-  `Estado_civil` tinyint(4) DEFAULT NULL,
+  `Estado_civil` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Escolaridad` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `Edad` tinyint(4) DEFAULT NULL,
-  `Tel_casa` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Celular` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
+  `Tel_casa` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Celular` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Tel_trabajo` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rol` int(10) UNSIGNED DEFAULT NULL,
+  `Email` varchar(249) COLLATE utf8_unicode_ci NOT NULL,
+  `rol` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `FolioID` smallint(6) DEFAULT NULL,
-  `IDUIEM` smallint(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `IDUIEM` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`PeopleID`),
+  KEY `PeopleID` (`PeopleID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `People`
+-- Volcado de datos para la tabla `people`
 --
 
-INSERT INTO `People` (`PeopleID`, `Nombre`, `Sexo`, `Ocupacion`, `Domicilio`, `Lugar_nacimiento`, `Fecha_nacimiento`, `Estado_civil`, `Escolaridad`, `Edad`, `Tel_casa`, `Celular`, `Tel_trabajo`, `Email`, `rol`, `FolioID`, `IDUIEM`) VALUES
-(1, 'Tobias Portillo Bobadilla', 'M', 'Academico', 'Cerro Zempoala 14 Col. Hermosillo C.P. 04240 Coyoacan, Ciudad de Mexico, MEXICO', 'Distrito Federal', '1977-01-12', 1, 'Posgrado', 40, '015556978035', '5511323623', NULL, NULL, 0, NULL, NULL);
+INSERT INTO `people` (`PeopleID`, `Nombre`, `Sexo`, `Ocupacion`, `Domicilio`, `Lugar_nacimiento`, `Fecha_nacimiento`, `Estado_civil`, `Escolaridad`, `Edad`, `Tel_casa`, `Celular`, `Tel_trabajo`, `Email`, `rol`, `FolioID`, `IDUIEM`) VALUES
+(1, 'Sin asignar', 'H', 'Académico', 'Cerro Zempoala 14 Col. Hermosillo C.P. 04240 Coyoacan, Ciudad de Mexico, MEXICO', 'Distrito Federal', '1977-01-12', 'Soltero', 'Maestría', 40, '015556978035', '5511323623', '', 'tobias@cic.unam.mx', 'Administrador', 0, 0),
+(2, 'Magdalena del Rocío', 'M', '', '', '', '1977-01-12', 'Unión Libre', 'Maestría', 40, '', '5511323623', '', 'magda.sevilla@gmail.com', 'Sin asignar', 0, 0),
+(3, 'Miguel', 'H', '', '', '', '1977-01-12', NULL, NULL, 43, '', '5511323623', '', 'gemeloportillo@gmail.com', 'Paciente', 0, 0),
+(4, 'Olga Yolanda Bobadilla Hernández', 'M', '', '', '', '1947-06-26', 'Divorciado', 'Secundaria', 73, '', '56978035', '', 'yola@unam.mx', 'Paciente', 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `PeopleStatus`
+-- Estructura de tabla para la tabla `peoplestatus`
 --
 
-CREATE TABLE `PeopleStatus` (
-  `PeopleStatusID` mediumint(8) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `peoplestatus`;
+CREATE TABLE IF NOT EXISTS `peoplestatus` (
+  `PeopleStatusID` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `ProtocoloID` tinyint(3) UNSIGNED NOT NULL,
   `PeopleID` smallint(5) UNSIGNED NOT NULL,
   `DateEntry` date NOT NULL,
@@ -416,44 +460,53 @@ CREATE TABLE `PeopleStatus` (
   `Parentesco` tinyint(4) DEFAULT NULL,
   `Nombre_familiar` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Familiar_ID` tinyint(4) DEFAULT NULL,
-  `Medico_tratante` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `Medico_tratante` tinyint(4) NOT NULL,
+  PRIMARY KEY (`PeopleStatusID`),
+  KEY `PeopleID` (`PeopleID`),
+  KEY `Medico_tratante` (`Medico_tratante`),
+  KEY `ProtocoloID` (`ProtocoloID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `PeopleStatus`
+-- Volcado de datos para la tabla `peoplestatus`
 --
 
-INSERT INTO `PeopleStatus` (`PeopleStatusID`, `ProtocoloID`, `PeopleID`, `DateEntry`, `Familiar_previo`, `Parentesco`, `Nombre_familiar`, `Familiar_ID`, `Medico_tratante`) VALUES
+INSERT INTO `peoplestatus` (`PeopleStatusID`, `ProtocoloID`, `PeopleID`, `DateEntry`, `Familiar_previo`, `Parentesco`, `Nombre_familiar`, `Familiar_ID`, `Medico_tratante`) VALUES
 (1, 1, 1, '2017-11-08', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Protocolo`
+-- Estructura de tabla para la tabla `protocolo`
 --
 
-CREATE TABLE `Protocolo` (
-  `ProtocoloID` tinyint(3) UNSIGNED NOT NULL,
-  `Protocolo` varchar(120) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+DROP TABLE IF EXISTS `protocolo`;
+CREATE TABLE IF NOT EXISTS `protocolo` (
+  `ProtocoloID` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `Protocolo` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`ProtocoloID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `Protocolo`
+-- Volcado de datos para la tabla `protocolo`
 --
 
-INSERT INTO `Protocolo` (`ProtocoloID`, `Protocolo`) VALUES
-(1, 'Control de sobrepeso'),
-(2, 'Salud cardiovascular'),
-(3, 'Ejercicio y triglicéridos');
+INSERT INTO `protocolo` (`ProtocoloID`, `Protocolo`) VALUES
+(1, 'Control de sobrepeso y obesidad'),
+(2, 'Salud cardiovascular y retinopatías'),
+(3, 'Ejercicio y triglicéridos'),
+(4, 'Cardiopatías'),
+(5, 'Lipidemias');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `R24hrs`
+-- Estructura de tabla para la tabla `r24hrs`
 --
 
-CREATE TABLE `R24hrs` (
-  `R24hrsID` mediumint(4) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `r24hrs`;
+CREATE TABLE IF NOT EXISTS `r24hrs` (
+  `R24hrsID` mediumint(4) UNSIGNED NOT NULL AUTO_INCREMENT,
   `PeopleID` smallint(5) UNSIGNED NOT NULL,
   `A1` varchar(130) COLLATE utf8_unicode_ci NOT NULL,
   `A1_lugar` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -469,7 +522,9 @@ CREATE TABLE `R24hrs` (
   `C2_prep` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `A3` varchar(130) COLLATE utf8_unicode_ci NOT NULL,
   `A3_lugar` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `A3_prep` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+  `A3_prep` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`R24hrsID`),
+  KEY `PeopleID` (`PeopleID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -478,8 +533,9 @@ CREATE TABLE `R24hrs` (
 -- Estructura de tabla para la tabla `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` varchar(249) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `username` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -488,16 +544,20 @@ CREATE TABLE `users` (
   `resettable` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
   `roles_mask` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `registered` int(10) UNSIGNED NOT NULL,
-  `last_login` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `last_login` int(10) UNSIGNED DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `username`, `status`, `verified`, `resettable`, `roles_mask`, `registered`, `last_login`) VALUES
-(1, 'tobias@cic.unam.mx', '$2y$10$2BnG4Y7QGCTnffyNiZ64uuO8rgTy2jbKcGgV329kMqasNMnsttgp6', NULL, 0, 1, 1, 8193, 1510932244, 1512270523),
-(2, 'magda.sevilla@gmail.com', '$2y$10$gJZvwTTVrl7QIPFriW49AesUylzkG4E5fSlPOsQTIbdnlaO4t/PTG', 'magda', 0, 1, 1, 0, 1510932377, NULL);
+(1, 'tobias@cic.unam.mx', '$2y$10$2BnG4Y7QGCTnffyNiZ64uuO8rgTy2jbKcGgV329kMqasNMnsttgp6', NULL, 0, 1, 1, 8193, 1510932244, 1513057645),
+(2, 'magda.sevilla@gmail.com', '$2y$10$gJZvwTTVrl7QIPFriW49AesUylzkG4E5fSlPOsQTIbdnlaO4t/PTG', 'Magdalena del Rocío', 0, 1, 1, 0, 1510932377, NULL),
+(3, 'gemeloportillo@gmail.com', '$2y$10$sSOsnCJ9UhLFBSYPefb6lOxVzgG3fai8UgmKdNtyucgfljbvBJWmu', 'Miguel', 0, 1, 1, 16, 1512965872, NULL),
+(4, 'yola@unam.mx', '$2y$10$gRN79yBrBd30lulyjHcU6uni1AHusy91/.c008flBpxXfo7GHjHRy', 'Olga Yolanda Bobadilla Hernández', 0, 1, 1, 16, 1513051427, NULL);
 
 -- --------------------------------------------------------
 
@@ -505,13 +565,18 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `status`, `verified`
 -- Estructura de tabla para la tabla `users_confirmations`
 --
 
-CREATE TABLE `users_confirmations` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `users_confirmations`;
+CREATE TABLE IF NOT EXISTS `users_confirmations` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` int(10) UNSIGNED NOT NULL,
   `email` varchar(249) COLLATE utf8mb4_unicode_ci NOT NULL,
   `selector` varchar(16) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `token` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
-  `expires` int(10) UNSIGNED NOT NULL
+  `expires` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `selector` (`selector`),
+  KEY `email_expires` (`email`,`expires`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -520,21 +585,24 @@ CREATE TABLE `users_confirmations` (
 -- Estructura de tabla para la tabla `users_remembered`
 --
 
-CREATE TABLE `users_remembered` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `users_remembered`;
+CREATE TABLE IF NOT EXISTS `users_remembered` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user` int(10) UNSIGNED NOT NULL,
   `selector` varchar(24) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `token` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
-  `expires` int(10) UNSIGNED NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `expires` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `selector` (`selector`),
+  KEY `user` (`user`)
+) ENGINE=MyISAM AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users_remembered`
 --
 
 INSERT INTO `users_remembered` (`id`, `user`, `selector`, `token`, `expires`) VALUES
-(96, 1, 'snWzKh7aZSUMK7L4epm6SGKl', '$2y$10$EgIFb02pqd8L.rjmWljHn.u1UAvHIQKPH58g2A47IJECtwLooExZS', 1543828123),
-(95, 1, 'DFCcbCMY-MvWkqYQhZpd2NxF', '$2y$10$jKgku2ljWWrXzCqgZafzN.Z8H11VPuJWPH5i1UkihT7GYHIY6U9cu', 1543779375);
+(140, 1, '_SVpbsJGybsqkTjAXSHmL4_2', '$2y$10$/cgGhXrScjmTbTdzN2w0zOFdN.261yK1DTznqj1IigK.e7JYQ3h8i', 1544615245);
 
 -- --------------------------------------------------------
 
@@ -542,12 +610,16 @@ INSERT INTO `users_remembered` (`id`, `user`, `selector`, `token`, `expires`) VA
 -- Estructura de tabla para la tabla `users_resets`
 --
 
-CREATE TABLE `users_resets` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `users_resets`;
+CREATE TABLE IF NOT EXISTS `users_resets` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user` int(10) UNSIGNED NOT NULL,
   `selector` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `token` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
-  `expires` int(10) UNSIGNED NOT NULL
+  `expires` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `selector` (`selector`),
+  KEY `user_expires` (`user`,`expires`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -556,11 +628,14 @@ CREATE TABLE `users_resets` (
 -- Estructura de tabla para la tabla `users_throttling`
 --
 
-CREATE TABLE `users_throttling` (
+DROP TABLE IF EXISTS `users_throttling`;
+CREATE TABLE IF NOT EXISTS `users_throttling` (
   `bucket` varchar(44) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `tokens` float UNSIGNED NOT NULL,
   `replenished_at` int(10) UNSIGNED NOT NULL,
-  `expires_at` int(10) UNSIGNED NOT NULL
+  `expires_at` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`bucket`),
+  KEY `expires_at` (`expires_at`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -573,280 +648,38 @@ INSERT INTO `users_throttling` (`bucket`, `tokens`, `replenished_at`, `expires_a
 ('vOMtIkh1h_2NIzzIoQKEYAZKV55Ti0DrXUy0OMB8JuE', 43.9386, 1511394873, 1511934873),
 ('J3wu2K-X5qVIGD6x2vsADs_Xh6GM3UpmAzWkpHkmNJ0', 74, 1511719748, 1512259748),
 ('qZW1gIcthjuQhAfODkfqJ3_6UyoyhY69rcIw4EZNUbY', 19, 1511572566, 1511608566),
-('54cs9vdZyBcsGFfYzuNyMZlcBQrnuQFkZeWSU1eoODM', 499, 1511906281, 1512079081),
+('54cs9vdZyBcsGFfYzuNyMZlcBQrnuQFkZeWSU1eoODM', 499, 1511821878, 1511994678),
 ('6gI05ZvtcGVIFjY0S5rrWyFtGTW6QcAOqNdUPQru6uQ', 74, 1511467414, 1512007414),
-('nM1LnKE51Ekg66BIiSoBA1uFqryp4vg0aO3OFfyBPPk', 74, 1512054862, 1512594862),
-('9HdQrEFJddMoCzH3ISLvWNXt4xu5WZvyMTesRR1pn6g', 73.0222, 1512164316, 1512704316),
-('dDElgqN5dcp_OJR_XM1lOv10B-FNIvW_BS5C1A_lupY', 19, 1511906281, 1511942281),
-('pJ8Cy8YIuwtB-xLt2WYW2zukZq-ZlEkj8sU3baLdljc', 74, 1512188754, 1512728754),
+('nM1LnKE51Ekg66BIiSoBA1uFqryp4vg0aO3OFfyBPPk', 73.0164, 1511544744, 1512084744),
+('9HdQrEFJddMoCzH3ISLvWNXt4xu5WZvyMTesRR1pn6g', 66.9328, 1511813264, 1512353264),
+('dDElgqN5dcp_OJR_XM1lOv10B-FNIvW_BS5C1A_lupY', 19, 1511806306, 1511842306),
+('pJ8Cy8YIuwtB-xLt2WYW2zukZq-ZlEkj8sU3baLdljc', 73.0061, 1511821900, 1512361900),
 ('bHpBWimWMnui32PCNWIkx2FTL3J0W7ILYLBNl6V3NoA', 19, 1511821878, 1511857878),
-('8rDHKKc88BkPLcfpTR5VcH32tQjVZZn_IlfieSfXo5I', 73.0108, 1511907394, 1512447394),
-('6OrYfEpg2ysFj1estZ1FhpIgg3IbH5kLvvd01l_IFzc', 74, 1512221775, 1512761775),
-('Mf-vKSD4NHK5qJCfc7pVOPLTVYtmlZ0QBcNKnO4t8z0', 73.0794, 1512155332, 1512695332),
-('ztjNu2UCMjlBPYMNoJCuFLBgJcXtK2N7AY1FIxbU-mI', 74, 1512270522, 1512810522);
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `AF`
---
-ALTER TABLE `AF`
-  ADD PRIMARY KEY (`AFID`);
-
---
--- Indices de la tabla `AG`
---
-ALTER TABLE `AG`
-  ADD PRIMARY KEY (`AGID`);
-
---
--- Indices de la tabla `ALab`
---
-ALTER TABLE `ALab`
-  ADD PRIMARY KEY (`ALabID`);
-
---
--- Indices de la tabla `APPCardio`
---
-ALTER TABLE `APPCardio`
-  ADD PRIMARY KEY (`APPCardioID`);
-
---
--- Indices de la tabla `BIA`
---
-ALTER TABLE `BIA`
-  ADD PRIMARY KEY (`BIAID`);
-
---
--- Indices de la tabla `CA`
---
-ALTER TABLE `CA`
-  ADD PRIMARY KEY (`CAID`);
-
---
--- Indices de la tabla `CardiOtras`
---
-ALTER TABLE `CardiOtras`
-  ADD PRIMARY KEY (`CardiOtrasID`);
-
---
--- Indices de la tabla `CDM`
---
-ALTER TABLE `CDM`
-  ADD PRIMARY KEY (`CDMID`);
-
---
--- Indices de la tabla `CI`
---
-ALTER TABLE `CI`
-  ADD PRIMARY KEY (`CIID`);
-
---
--- Indices de la tabla `CT`
---
-ALTER TABLE `CT`
-  ADD PRIMARY KEY (`CTID`);
-
---
--- Indices de la tabla `Dislipidemia`
---
-ALTER TABLE `Dislipidemia`
-  ADD PRIMARY KEY (`DislipidemiaID`);
-
---
--- Indices de la tabla `DM`
---
-ALTER TABLE `DM`
-  ADD PRIMARY KEY (`DMID`);
-
---
--- Indices de la tabla `Genotipo`
---
-ALTER TABLE `Genotipo`
-  ADD PRIMARY KEY (`GenotipoID`);
-
---
--- Indices de la tabla `HAS`
---
-ALTER TABLE `HAS`
-  ADD PRIMARY KEY (`HASID`);
-
---
--- Indices de la tabla `HCFamiliar`
---
-ALTER TABLE `HCFamiliar`
-  ADD PRIMARY KEY (`HCFamiliarID`);
-
---
--- Indices de la tabla `Medicos`
---
-ALTER TABLE `Medicos`
-  ADD PRIMARY KEY (`MedicosID`),
-  ADD KEY `Nombre_medico` (`Nombre_medico`);
-
---
--- Indices de la tabla `Obesidad`
---
-ALTER TABLE `Obesidad`
-  ADD PRIMARY KEY (`ObesidadID`);
-
---
--- Indices de la tabla `OyDis`
---
-ALTER TABLE `OyDis`
-  ADD PRIMARY KEY (`OyDisID`);
-
---
--- Indices de la tabla `People`
---
-ALTER TABLE `People`
-  ADD PRIMARY KEY (`PeopleID`),
-  ADD KEY `PeopleID` (`PeopleID`);
-
---
--- Indices de la tabla `PeopleStatus`
---
-ALTER TABLE `PeopleStatus`
-  ADD PRIMARY KEY (`PeopleStatusID`),
-  ADD KEY `PeopleID` (`PeopleID`),
-  ADD KEY `Medico_tratante` (`Medico_tratante`),
-  ADD KEY `ProtocoloID` (`ProtocoloID`);
-
---
--- Indices de la tabla `Protocolo`
---
-ALTER TABLE `Protocolo`
-  ADD PRIMARY KEY (`ProtocoloID`);
-
---
--- Indices de la tabla `R24hrs`
---
-ALTER TABLE `R24hrs`
-  ADD PRIMARY KEY (`R24hrsID`),
-  ADD KEY `PeopleID` (`PeopleID`);
-
---
--- Indices de la tabla `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- Indices de la tabla `users_confirmations`
---
-ALTER TABLE `users_confirmations`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `selector` (`selector`),
-  ADD KEY `email_expires` (`email`,`expires`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- Indices de la tabla `users_remembered`
---
-ALTER TABLE `users_remembered`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `selector` (`selector`),
-  ADD KEY `user` (`user`);
-
---
--- Indices de la tabla `users_resets`
---
-ALTER TABLE `users_resets`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `selector` (`selector`),
-  ADD KEY `user_expires` (`user`,`expires`);
-
---
--- Indices de la tabla `users_throttling`
---
-ALTER TABLE `users_throttling`
-  ADD PRIMARY KEY (`bucket`),
-  ADD KEY `expires_at` (`expires_at`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `Medicos`
---
-ALTER TABLE `Medicos`
-  MODIFY `MedicosID` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `People`
---
-ALTER TABLE `People`
-  MODIFY `PeopleID` smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `PeopleStatus`
---
-ALTER TABLE `PeopleStatus`
-  MODIFY `PeopleStatusID` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `Protocolo`
---
-ALTER TABLE `Protocolo`
-  MODIFY `ProtocoloID` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `R24hrs`
---
-ALTER TABLE `R24hrs`
-  MODIFY `R24hrsID` mediumint(4) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `users_confirmations`
---
-ALTER TABLE `users_confirmations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `users_remembered`
---
-ALTER TABLE `users_remembered`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
-
---
--- AUTO_INCREMENT de la tabla `users_resets`
---
-ALTER TABLE `users_resets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+('ejWtPDKvxt-q7LZ3mFjzUoIWKJYzu47igC8Jd9mffFk', 63.9883, 1513057645, 1513597645);
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `Genotipo`
+-- Filtros para la tabla `genotipo`
 --
-ALTER TABLE `Genotipo`
-  ADD CONSTRAINT `Genotipo_ibfk_1` FOREIGN KEY (`GenotipoID`) REFERENCES `People` (`PeopleID`);
+ALTER TABLE `genotipo`
+  ADD CONSTRAINT `Genotipo_ibfk_1` FOREIGN KEY (`GenotipoID`) REFERENCES `people` (`PeopleID`);
 
 --
--- Filtros para la tabla `PeopleStatus`
+-- Filtros para la tabla `peoplestatus`
 --
-ALTER TABLE `PeopleStatus`
-  ADD CONSTRAINT `PeopleStatus_ibfk_2` FOREIGN KEY (`Medico_tratante`) REFERENCES `Medicos` (`MedicosID`),
-  ADD CONSTRAINT `PeopleStatus_ibfk_3` FOREIGN KEY (`PeopleID`) REFERENCES `People` (`PeopleID`),
-  ADD CONSTRAINT `PeopleStatus_ibfk_4` FOREIGN KEY (`ProtocoloID`) REFERENCES `Protocolo` (`ProtocoloID`);
+ALTER TABLE `peoplestatus`
+  ADD CONSTRAINT `PeopleStatus_ibfk_2` FOREIGN KEY (`Medico_tratante`) REFERENCES `medicos` (`MedicosID`),
+  ADD CONSTRAINT `PeopleStatus_ibfk_3` FOREIGN KEY (`PeopleID`) REFERENCES `people` (`PeopleID`),
+  ADD CONSTRAINT `PeopleStatus_ibfk_4` FOREIGN KEY (`ProtocoloID`) REFERENCES `protocolo` (`ProtocoloID`);
 
 --
--- Filtros para la tabla `R24hrs`
+-- Filtros para la tabla `r24hrs`
 --
-ALTER TABLE `R24hrs`
-  ADD CONSTRAINT `R24hrs_ibfk_1` FOREIGN KEY (`PeopleID`) REFERENCES `People` (`PeopleID`);
+ALTER TABLE `r24hrs`
+  ADD CONSTRAINT `R24hrs_ibfk_1` FOREIGN KEY (`PeopleID`) REFERENCES `people` (`PeopleID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
