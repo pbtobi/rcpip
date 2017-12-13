@@ -1,7 +1,8 @@
-
-
-
-
+html, body {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
 
 input[type="text"],
 input[type="email"],
@@ -167,11 +168,11 @@ body {
     font-weight: 300;
     color: #888;
     line-height: 30px;
-    text-align: center;
+    /*text-align: center;*/
 }
-/*body {
-    background: rgba(0, 0, 0, 0) url("imgs/fondo.jpg") no-repeat fixed center center / cover ;
-}*/
+body {
+    background: rgba(0, 0, 0, 0) url("../imgs/fondo.jpg") no-repeat fixed center center / cover ;
+}
 
 
 strong {
@@ -273,6 +274,10 @@ h3 {
 
 /***** Top content *****/
 
+form p {
+    color: #26a69a;
+}
+
 .form-box {
     padding-top: 40px;
     font-family: 'Roboto', sans-serif !important;
@@ -280,7 +285,7 @@ h3 {
 
 .form-top {
     overflow: hidden;
-    padding: 0 25px 15px 25px;
+    padding: 0 25px 15px 5px;
     background: #26A69A;
     -moz-border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
@@ -295,12 +300,12 @@ h3 {
 }
 
 .form-bottom {
-    padding: 25px 25px 30px 25px;
+    padding: 25px 25px 25px 25px;
     background: #eee;
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 0 0 4px 4px;
     border-radius: 0 0 4px 4px;
-    text-align: left;
+    text-align: right;
     transition: all .4s ease-in-out;
 }
 
@@ -330,6 +335,8 @@ form.registration-form fieldset {
     background: #fff none repeat scroll 0 0;
     border-radius: 0;
     box-shadow: -2px 1px 3px 1px rgba(0, 0, 0, 0.333);
+    margin-bottom: 0;
+    z-index: 12;
 }
 .navbar-collapse {
     min-width: 820px;
@@ -341,35 +348,100 @@ form.registration-form fieldset {
     padding-bottom: 10px;
     padding-top: 35px;
 }
-
-#ico-r {
-    background: rgba(0, 0, 0, 0) url("imgs/ico-ingreso.png") no-repeat scroll center 5px / 25% auto;
-}
-
-#ico-r {
-    background: rgba(0, 0, 0, 0) url("imgs/ico-ingreso.png") no-repeat scroll center 5px / 25% auto;
-}
-#ico-r a:focus, #ico-r a:hover {
-    background: #26a69a url("imgs/ico-ingreso.png") no-repeat scroll center 5px / 25% auto;
-    color: #fff;
-}
-#ico-r a {
+#myNavbar > ul > li > a {
     transition: background-color .5s;
 }
+#myNavbar > ul > li > a:focus, #myNavbar > ul > li > a:hover, #myNavbar > ul > li.active > a {
+    color: #fff;
+}
+#myNavbar > ul > li > a:focus, #myNavbar > ul > li > a:hover {
+    color: #0e7d73;
+}
+#ico-r {
+    background: rgba(0, 0, 0, 0) url("../imgs/ico-ingreso.png") no-repeat scroll center 5px / 25% auto;
+}
+#ico-r a:focus, #ico-r a:hover {
+    background: #e8eeee url("../imgs/ico-ingreso.png") no-repeat scroll center 5px / 25% auto;
+}
+#ico-r.active a:focus, #ico-r.active a:hover {
+    background: #26a69a url("../imgs/ico-ingreso-b.png") no-repeat scroll center 5px / 25% auto;
+    color: #fff;
+}
+#myNavbar > ul #ico-r.active {
+    background: #26a69a url("../imgs/ico-ingreso-b.png") no-repeat scroll center 5px / 25% auto;
+}
+
 #ico-f {
-    background: rgba(0, 0, 0, 0) url("imgs/ico-actividad.png") no-repeat scroll center 5px / 17% auto;
+    background: rgba(0, 0, 0, 0) url("../imgs/ico-actividad.png") no-repeat scroll center 5px / 17% auto;
 }
+
+#ico-f a:focus, #ico-f a:hover {
+    background: #e8eeee url("../imgs/ico-actividad.png") no-repeat scroll center 5px / 17% auto;
+}
+
 #ico-a {
-    background: rgba(0, 0, 0, 0) url("imgs/ico-alimentacion.png") no-repeat scroll center 5px / 20% auto;
+    background: rgba(0, 0, 0, 0) url("../imgs/ico-alimentacion.png") no-repeat scroll center 5px / 20% auto;
 }
+#ico-a a:focus, #ico-a a:hover {
+    background: #e8eeee url("../imgs/ico-alimentacion.png") no-repeat scroll center 5px / 20% auto;
+}
+
 #ico-v {
-    background: rgba(0, 0, 0, 0) url("imgs/ico-vida.png") no-repeat scroll center 5px / 17% auto;
+    background: rgba(0, 0, 0, 0) url("../imgs/ico-vida.png") no-repeat scroll center 5px / 17% auto;
 }
+#ico-v a:focus, #ico-v a:hover {
+    background: #e8eeee url("../imgs/ico-vida.png") no-repeat scroll center 5px / 17% auto;
+}
+
 #ico-d {
-    background: rgba(0, 0, 0, 0) url("imgs/ico-dt2.png") no-repeat scroll center 5px / 38% auto;
+    background: rgba(0, 0, 0, 0) url("../imgs/ico-dt2.png") no-repeat scroll center 5px / 38% auto;
 }
+#ico-d a:focus, #ico-d a:hover {
+    background: #e8eeee url("../imgs/ico-dt2.png") no-repeat scroll center 5px / 38% auto;
+}
+
 #ico-c {
-    background: rgba(0, 0, 0, 0) url("imgs/ico-conducta.png") no-repeat scroll center 5px / 22% auto;
+    background: rgba(0, 0, 0, 0) url("../imgs/ico-conducta.png") no-repeat scroll center 5px / 22% auto;
+}
+#ico-c a:focus, #ico-c a:hover {
+    background: #e8eeee url("../imgs/ico-conducta.png") no-repeat scroll center 5px / 22% auto;
+}
+.navbar-toggle {
+    background-color: #26a69a;
+}
+.navbar-toggle .icon-bar {
+    background: #fff none repeat scroll 0 0;
+}
+
+
+.menuDinamico {
+    position: absolute;
+    right: 0;
+    top: 67px;
+    z-index: 4;
+}
+
+
+#matutino .form-top {
+    background: #26a69a url("../imgs/icon-matutino.png") no-repeat scroll right 42px /90px;
+}
+#mediodia .form-top {
+    background-color: #26a69a;
+    background-image: url("../imgs/icon-dia.png");
+    background-size: 90px;
+    background-repeat: no-repeat;
+    background-position: right 42px;
+
+}
+#nocturno .form-top {
+    background: #26a69a url("../imgs/icon-noche.png") no-repeat scroll right 42px /90px;
+}
+.form-top-left span {
+    margin-right: 10px;
+}
+
+.btn.btn-save {
+    background: #e97fb0 none repeat scroll 0 0;
 }
 
 
@@ -439,4 +511,17 @@ form.registration-form fieldset {
 }
 .progreso .circle.active .title {
   color: #0c95be;
+}
+
+.tab-content input[type="submit"] {
+    background-color: #4caf50;
+    border: medium none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    float: right;
+    margin: 0;
+    padding: 5px 20px;
+    text-align: center;
+    
 }

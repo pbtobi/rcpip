@@ -95,18 +95,18 @@ function tarjetaUsuarios() {
 	echo '
 		<div id="page2" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
 			<div id="tarjetaPacientes">
-
+				<h4>Registro de nuevos médicos, pacientes o administradores</h4>
 				<ul class="nav nav-tabs">
 				    <li class="active"><a data-toggle="tab" href="#home1">Nuevo usuario</a></li>
 				    <li><a data-toggle="tab" href="#menu12">Tipo de usuario</a></li>
 				    <li><a data-toggle="tab" href="#menu13">Usuarios registrados</a></li>
 				    <!--<li><a data-toggle="tab" href="#menu14">Menu 4</a></li>-->
-				</ul> usuarioID: '.$usuarioID.'
+				    <li class="right"><a>usuarioID: '.$usuarioID.'</a></li>
+				</ul> 
 				
 				<div class="tab-content">
 				    <div id="home1" class="tab-pane fade in active">
-				      <h4>Registro de nuevos médicos, pacientes o administradores</h4>
-				      <p></p>
+				      
 				      	<div class="w3-container w3-whitegray">';
 							showCreateUserForm();
 							echo '
@@ -114,8 +114,8 @@ function tarjetaUsuarios() {
 				    </div>
 				
 				    <div id="menu12" class="tab-pane fade">
-				      <h4>Médico, Paciente o Administrador</h4>
-				      <p></p>
+				      <h5>Médico, Paciente o Administrador</h5>
+				      
 				      	<div class="w3-container w3-whitegray">';
 				      		$roles_mask = 0;
 							writeUsersTable($roles_mask);
@@ -123,20 +123,18 @@ function tarjetaUsuarios() {
 							echo '
 						</div>				      
 				    </div>
-
 				    <div id="menu13" class="tab-pane fade">
-				      <h4>Modificar los datos del usuarios</h4>
-				      <p></p>
+				      <h5>Modificar los datos del usuarios</h5>
+				      
 				      	<div class="w3-container w3-whitegray">';
 							writeUsersTable();
 							usuariosUpdateForm();
 							echo '
 						</div>      	
 				    </div>
-
 				    <div id="menu14" class="tab-pane fade">
 				      <h3>Menu 3</h3>
-				      <p></p>
+				      
 				    </div>
 				</div>
 
@@ -153,42 +151,39 @@ function tarjetaProtocolos() {
 	echo '
 		<div id="page3" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
 			<div id="tarjetaProtocolos">
-
 				<ul class="nav nav-tabs">
-				    <li class="active"><a data-toggle="tab" href="#home2">Nuevo protocolo</a></li>
-				    <li><a data-toggle="tab" href="#menu22">Protocolos registrados</a></li>
-				</ul> usuarioID: '.$usuarioID.'
-
-				<div class="tab-content">
-				    <div id="home2" class="tab-pane fade in active">
-						<h4>Registro de los protocolos de investigación</h4>
-
-						<div class="w3-container w3-whitegray">
-						<form action="admin.php" method="post" accept-charset="utf-8">
-							<div class="w3-third" w3-margin-bottom>
-								<!--<label for="protocoloName">Nombre del protocolo</label>-->
-								<input type="text" id="Protocolo" name="Protocolo" placeholder="Nombre del protocolo..">
-								<span class="error">'.$nombreErr.'</span>
-							</div>
-							<div class="w3-third">
-								<input type="hidden" name="action" value="addProtocolo" />
-								<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registrar protocolo">
-							</div>
-						</form>
+                    <li class="active"><a data-toggle="tab" href="#home2">Nuevo protocolo</a></li>
+                    <li><a data-toggle="tab" href="#menu22">Protocolos registrados</a></li>
+                </ul> usuarioID: '.$usuarioID.'
+ 
+                <div class="tab-content">
+                    <div id="home2" class="tab-pane fade in active">
+                        <h4>Registro de los protocolos de investigación</h4>
+				<div class="w3-container w3-whitegray">
+					
+					<form action="admin.php" method="post" accept-charset="utf-8">
+						<div class="w3-third" w3-margin-bottom>
+							<!--<label for="protocoloName">Nombre del protocolo</label>-->
+							<input type="text" id="Protocolo" name="Protocolo" placeholder="Nombre del protocolo..">
+							<span class="error">'.$nombreErr.'</span>
 						</div>
-					</div>
-
-					<div id="menu22" class="tab-pane fade">
-						<h4>Protocolos registrados:</h4>
-						<p></p>
-						<div class="w3-container w3-whitegray">';
-							writeProtocoloTable();
-							protocolosUpdateForm();
-							echo '
+						<div class="w3-third">
+							<input type="hidden" name="action" value="addProtocolo" />
+							<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registrar protocolo">
 						</div>
+					</form>	
 					</div>
 				</div>
-
+				<div id="menu22" class="tab-pane fade">
+                        <h4>Protocolos registrados:</h4>
+                        <p></p>
+                        <div class="w3-container w3-whitegray">';
+                            writeProtocoloTable();
+                            protocolosUpdateForm();
+                            echo '
+                        </div>
+                    </div>
+				</div>
 			</div>	
 		</div>';
 }
@@ -313,16 +308,16 @@ function usuariosUpdateForm($roles = NULL) {
 	}
 	if ($usuarioID) {
 			echo '
-				<script>
-					// Date Picker
-					$( function() {
- 						$( "#datepicker" ).datepicker({
- 							yearRange: "c-100:c+0",
- 							changeMonth: true,
-							changeYear: true
-						} );
- 					} );
-				</script>
+			<script>
+                    // Date Picker
+                    $( function() {
+                        $( "#datepicker" ).datepicker({
+                            yearRange: "c-100:c+0",
+                            changeMonth: true,
+                            changeYear: true
+                        } );
+                    } );
+                </script>
 		<!--<div class="w3-row-padding" style="margin:8 -16px">-->
 		<div class="w3-container w3-whitegray">
 			<h2>'.$email.' '.$id.'</h2>
@@ -495,7 +490,7 @@ function protocolosUpdateForm() {
 				</div>
 					<input type="hidden" name="ProtocoloID" value="'.$ProtocoloID.'" />
 					<input type="hidden" name="action" value="updateProtocolo" />
-					<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Aceptar">
+					<input class="" type="submit" value="Aceptar">
 			</form>
 		<!--</div>-->';
 	}
@@ -584,7 +579,7 @@ function writeUsersTable($roles = 1) {
 					<td>'.$row['roles_mask'].'</td>
 					<td>
 						<input type="hidden" name="usuarioID" value="'.$row['id'].'">
-						<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="'.$buttonText.'">
+						<input class="" type="submit" value="'.$buttonText.'">
 					</td>
 				
 			</form>
@@ -796,19 +791,41 @@ function showCreateUserForm() {
 	global $db;
 	echo '
 			<form action="admin.php" method="post" accept-charset="utf-8">
+			<div class="row top-buffer"></div>
+			<div class="row top-buffer">
+			   <div class="col-md-1"></div>
+				<div class="col-md-5">
+					<input type="hidden" name="action" value="admin.createUser" />
+					<input type="text" name="email" placeholder="Correo electrónico" />
+					<p>Ingresar correo</p>
+				</div>
+				<div class="col-md-5">
+					<input type="text" name="password" placeholder="Contraseña nueva para este sistema" />
+					<p>Ingresar una contraseña</p>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+			<div class="row">
+			    <div class="col-md-1"></div>
+				<div class="col-md-10">
+					<input type="text" name="username" placeholder="Nombre del usuario" />
+					<p>Su nombre completo</p>
 
-				<input type="hidden" name="action" value="admin.createUser" />
-				<input type="text" name="email" placeholder="Correo electrónico" />
-				<p>Ingresar correo</p>
-				<input type="text" name="password" placeholder="Contraseña nueva para este sistema" />
-				<p>Ingresar una contraseña</p>
-				<input type="text" name="username" placeholder="Nombre del usuario" />
-				<p>Su nombre completo</p>
+					<!-- value=1 := Nombre de Usuario Único-->
+					<input type="hidden" name="require_unique_username" value="1">	
+					<button class="" type="submit">Registrar nuevo usuario</button>				
+				</div>
+				<div class="col-md-1"></div>		
+			</div>
 
-				<!-- value=1 := Nombre de Usuario Único-->
-				<input type="hidden" name="require_unique_username" value="1">
+				
+				
+				
+				
+				
+				
 
-	            <button class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit">Registrar nuevo usuario</button>
+	            
 			</form>';
 }
 
@@ -835,7 +852,7 @@ function showAddRoleForm() {
 			<select name="role">
 				' . \createRolesOptions() . '
 			</select>
-			<button class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit">Asignar el tipo de usuario</button>
+			<button" type="submit">Asignar el tipo de usuario</button>
 		</form>
 		</div>';
 		// Actualiza la tabla People con la información de $usuarioID
