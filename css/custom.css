@@ -9,7 +9,7 @@ input[type=text], select {
   background-color: #f8f8f8;
 }
 input[type=submit] {
-  width: 38%;
+  /*width: 38%;*/
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
@@ -57,7 +57,40 @@ body {
     max-width: 100%;
 }
 
+.w3-main {
+    margin-top: 60px;
+}
+
+#mySidebar {
+    background: rgba(255,255,255, .9) repeat scroll 0 0;
+}
+#mySidebar .cabeza {
+    background: rgba(28, 41, 3, .9) url("") repeat scroll 0 0;
+    padding: 30px 0 0;
+    text-align: center;
+}
+
+#mySidebar .cabeza img {
+    width: 40%;
+}
+#mySidebar .cabeza h4 {
+    color: #ccc;
+    font-size: 16px;
+    padding: 10px 0;
+}
+
 .tarjeta { display:none;}
+.tarjeta > div {
+    background: rgba(255, 255, 255, 0.95) none repeat scroll 0 0;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.tarjeta > div {
+    background: rgba(36, 166, 154, 0.6) none repeat scroll 0 0;
+    border-radius: 5px;
+    padding: 20px 0 0;
+}
 
 .w3-sidebar {
     background-color: #fff;
@@ -65,18 +98,50 @@ body {
     overflow: auto;
     position: fixed !important;
     width: 300px;
-    z-index: 3;
+    z-index: 4;
 }
 .tarjeta > div {
-    background: #fff none repeat scroll 0 0;
+    
 }
 .w3-whitegray {
-	background: #e8eeee;
+    background: #e8eeee none repeat scroll 0 0;
+    height: 60%;
+    overflow-y: scroll;
 }
+
+.tab-content h5 {
+    background: #e8eeee none repeat scroll 0 0;
+    margin: 0;
+    padding: 20px;
+}
+
 .tarjeta > div h4 {
-    color: #aaa;
+    /*color: #aaa;*/
     padding: 14px 0 0 17px;
 }
+.tarjeta > div h4 {
+    color: #fff;
+    margin: 0;
+    padding: 10px 20px 40px;
+    font-size: 22px;
+}
+.top-buffer { margin-top:20px; }
+
+.nav-tabs > li > a {
+    background: rgba(255, 255, 255, 0.9) url("") repeat scroll 0 0;
+}
+.nav-tabs > li > a:focus, .nav-tabs > li > a:hover  {
+    background: rgba(255, 255, 255, 0.7) url("") repeat scroll 0 0;
+}
+.nav-tabs .right {
+    float: right;
+}
+.nav-tabs .right > a, .nav-tabs .right > a:hover, .nav-tabs .right > a:focus {
+    color: #fff;
+    background: none;
+    border: none;
+}
+
 .lista {
     padding: 20px;
 }
