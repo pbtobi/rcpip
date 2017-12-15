@@ -16,23 +16,21 @@
 function menuNivel2() {
 	echo '
 			<div id="menu_nivel_2" class="w3-bar-block">
-
-				  <a class="w3-bar-item w3-button w3-padding w3-text-teal" onclick="w3_close()" href="#portfolio">
-				    <i class="fa fa-th-large fa-fw w3-margin-right"></i>Datos Generales</a> 
-				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#about">
-				    <i class="fa fa-user-md fa-fw w3-margin-right"></i>Antecedentes médicos</a> 
-				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
-				    <i class="fa fa-heart fa-fw w3-margin-right"></i>Hábitos de vida</a>
-				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
-				    <i class="fa fa-calendar fa-fw w3-margin-right"></i>Recordatorio de 24 hrs</a>
-				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
-				    <i class="fa fa-hand-peace-o fa-fw w3-margin-right"></i>Consentimiento Informado</a>
-				<form accept-charset="utf-8" method="post" action="rcpip-incmnsz.php">
-				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
-				    <i class="fa fa-sign-out fa-fw w3-margin-right"></i>
-				    <input type="hidden" value="logOut" name="action">
-				    <button type="submit">Salir</button></a>
-				</form>
+				<div class="menuDinamico">
+					<a class="w3-bar-item w3-button w3-padding w3-text-teal" onclick="w3_close()" href="#portfolio">
+					<i class="fa fa-th-large fa-fw w3-margin-right"></i>Datos Generales</a> 
+					<a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#about">
+					<i class="fa fa-user-md fa-fw w3-margin-right"></i>Antecedentes médicos</a> 
+					<a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
+					<i class="fa fa-heart fa-fw w3-margin-right"></i>Hábitos de vida</a>
+					<button id="link4" data-page="page4" class="w3-button" onclick="w3_close()"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Recordatorio de 24 hrs</button>
+					<a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
+					<i class="fa fa-hand-peace-o fa-fw w3-margin-right"></i>Consentimiento Informado</a>
+					<form accept-charset="utf-8" method="post" action="rcpip-incmnsz.php">
+					<input type="hidden" value="logOut" name="action">
+					<button type="submit" class="w3-button" onclick="w3_close()"><i class="fa fa-sign-out fa-fw w3-margin-right"></i>Salir</button>
+					</form>				
+				</div>
 			</div>';
 }
 
@@ -151,33 +149,43 @@ function tarjetaProtocolos() {
 	echo '
 		<div id="page3" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
 			<div id="tarjetaProtocolos">
+			<h4>Registro de los protocolos de investigación</h4>
 				<ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home2">Nuevo protocolo</a></li>
                     <li><a data-toggle="tab" href="#menu22">Protocolos registrados</a></li>
-                </ul> usuarioID: '.$usuarioID.'
+                    <li  class="right"> usuarioID: '.$usuarioID.'</li>
+                </ul>
  
                 <div class="tab-content">
+
                     <div id="home2" class="tab-pane fade in active">
-                        <h4>Registro de los protocolos de investigación</h4>
+                        
 				<div class="w3-container w3-whitegray">
-					
-					<form action="admin.php" method="post" accept-charset="utf-8">
-						<div class="w3-third" w3-margin-bottom>
+					<div class="row top-buffer"></div>
+					<div class="row top-buffer"></div>
+						<div class="col-md-1"></div>
+						<div  class="col-md-10">
+							<form action="" method="post" accept-charset="utf-8">
+						<div class="w3-margin-bottom">
 							<!--<label for="protocoloName">Nombre del protocolo</label>-->
 							<input type="text" id="Protocolo" name="Protocolo" placeholder="Nombre del protocolo..">
 							<span class="error">'.$nombreErr.'</span>
 						</div>
-						<div class="w3-third">
+						<div class="">
 							<input type="hidden" name="action" value="addProtocolo" />
 							<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registrar protocolo">
 						</div>
-					</form>	
+							</form>							
+						</div>
+						<div  class="col-md-1"></div>
+
 					</div>
 				</div>
 				<div id="menu22" class="tab-pane fade">
-                        <h4>Protocolos registrados:</h4>
-                        <p></p>
-                        <div class="w3-container w3-whitegray">';
+                        
+                       
+                        <div class="w3-container w3-whitegray">
+                        <h5>Protocolos registrados:</h5>';
                             writeProtocoloTable();
                             protocolosUpdateForm();
                             echo '
@@ -185,6 +193,207 @@ function tarjetaProtocolos() {
                     </div>
 				</div>
 			</div>	
+		</div>';
+}
+
+
+
+/*
+* Tarjeta de los Datos Generales de los Protocolos.
+* Registra y modifica los Protocolos (Registro, Listado y Actualización).
+*/
+function tarjetaRecordatorio24h() {
+	echo '
+		<div id="page4" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
+			<div id="tarjetaRecordatorio24h">
+                <div>
+			        <div class="row">
+			            <div class="col-md-12">
+			                <form role="form" class="registration-form" action="javascript:void(0);">
+			                    <fieldset id="matutino">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Recordatorio de 24 horas</h3>
+			                                <p>En la Mañana</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Desayuno - Huevos (2)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Desayuno</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>         
+						                            </div>
+						                            <div class="form-group col-md-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Desayuno</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+													<div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Colación - Fruta (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Colación</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>
+						                            </div>
+						                            <div class="form-group col-md-12 col-sm-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Colación</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            </div>	
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset>
+			                    <fieldset id="mediodia">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Recordatorio de 24 horas</h3>
+			                                <p>En la Tarde</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Comida - Pollo con Mole (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Desayuno</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>         
+						                            </div>
+						                            <div class="form-group col-md-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Desayuno</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+													<div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Colación - Manzana (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Colación</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>
+						                            </div>
+						                            <div class="form-group col-md-12 col-sm-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Colación</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset>
+			                    <fieldset id="nocturno">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Recordatorio de 24 horas</h3>
+			                                <p>En la Noche</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Cena - Vaso con Leche (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Desayuno</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>         
+						                            </div>
+						                            <div class="form-group col-md-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Desayuno</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+													<div class="form-group col-md-12">
+					                                    <label for="Fecha_recordatorio24h">Día en que Consumió sus alimentos</label>
+														<input type="text" id="datepicker" name="" placeholder="Su fecha de Recordatorio">
+					                                </div>				                                			                            		
+			                            		</div>
+			                            	</div>
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="submit" class="btn btn-save">Guardar</button>
+			                        </div>
+			                    </fieldset>   
+			                </form>
+			            </div>	
+			        </div>
+			    </div>
+			</div>
 		</div>';
 }
 
@@ -674,7 +883,7 @@ function showGuestUserForm() {
   		<div id="logo">
   			<img src="imgs/incmnsz.png">
   		</div>
-  			<form class="form-signin" action="admin.php" method="post" accept-charset="utf-8">
+  			<form class="form-signin" action="" method="post" accept-charset="utf-8">
   			  <!--<h2 class="form-signin-heading">Bienvenido</h2>-->
   				<input type="hidden" name="action" value="login" />
   				<input type="hidden" name="remember" value="0" />
@@ -790,7 +999,7 @@ function writeR24hrsTable() {
 function showCreateUserForm() {
 	global $db;
 	echo '
-			<form action="admin.php" method="post" accept-charset="utf-8">
+			<form action="" method="post" accept-charset="utf-8">
 			<div class="row top-buffer"></div>
 			<div class="row top-buffer">
 			   <div class="col-md-1"></div>
@@ -846,7 +1055,7 @@ function showAddRoleForm() {
 	if ($usuarioID) {
 		echo '
 		<div class="w3-container w3-whitegray">
-		<form action="admin.php" method="post" accept-charset="utf-8">
+		<form action="" method="post" accept-charset="utf-8">
 			<input type="hidden" name="action" value="admin.addRole" />
 			<input type="text" name="id" placeholder="'.$usuarioID.'" value="'.$usuarioID.'" readonly />
 			<select name="role">

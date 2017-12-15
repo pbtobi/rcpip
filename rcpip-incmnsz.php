@@ -87,7 +87,8 @@ if ($auth->check()) {
   \showHtmlHead();
   showHeader();
   showSidebarNav();
-  showViewChanges(); 
+  showViewChanges();
+  tarjetaRecordatorio24h();
   //\tarjetaMedicos();
   //writePeopleDatos();
   //echo $medicoID;

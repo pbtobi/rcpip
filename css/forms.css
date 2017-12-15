@@ -275,6 +275,10 @@ h3 {
 /***** Top content *****/
 
 form p {
+    color: #fff;
+}
+
+.tab-content form p {
     color: #26a69a;
 }
 
@@ -324,6 +328,7 @@ form .form-bottom .input-error {
 }
 
 form.registration-form fieldset {
+    border: medium none;
     display: none;
 }
 
@@ -513,7 +518,7 @@ form.registration-form fieldset {
   color: #0c95be;
 }
 
-.tab-content input[type="submit"] {
+.tab-content input[type="submit"], .tab-content button[type="submit"] {
     background-color: #4caf50;
     border: medium none;
     border-radius: 4px;
