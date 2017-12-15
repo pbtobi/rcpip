@@ -105,7 +105,7 @@ function showHeader() {
 	</nav>
 	<nav>
 		<div class="menuDinamico">
-		<!--<button id="link1" data-page="page1" class="w3-button w3-orange"><i class="fa fa-stethoscope   w3-margin-right"></i>Médicos</button>-->
+		<!--<button id="link1" data-page="page1" class="w3-button w3-orange"><i class="fa fa-stethoscope   w3-margin-right"></i>Recordatorio de alimentos 24hrs</button>-->
 			<button id="link2" data-page="page2" class="w3-button w3-purple"><i class="fa fa-user-o w3-margin-right"></i>Ingreso de Usuarios</button>
 			<button id="link3" data-page="page3" class="w3-button w3-blue"><i class="fa fa-file-text-o w3-margin-right"></i>Protocolos</button>
 		</div>
