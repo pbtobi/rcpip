@@ -6,5 +6,38 @@ $dbhost_rcpip = "localhost";
 $dbuser_rcpip = "root";
 $dbname_rcpip = "rcpip";
 $dbpass_rcpip = "";
+$port = 8889;
+/*$dbhost_rcpip = "localhost";
+$dbuser_rcpip = "id4324054_root";
+$dbname_rcpip = "id4324054_rcpip";
+$dbpass_rcpip = "RaizRo0t";*/
 //$xoxo = mysql_pconnect($dbhost_rcpip, $dbuser_rcpip, $dbpass_rcpip) or trigger_error(mysql_error(),E_USER_ERROR); 
+
+/*$dbhost_rcpip = "76.162.254.151";
+$dbuser_rcpip = "BBBn8gv_root";
+$dbname_rcpip = "BBBn8gv_nutricion";
+$dbpass_rcpip = "RaizRo0t";
+$port = 3306;*/
+
+//$xoxo = mysql_pconnect($dbhost_rcpip, $dbuser_rcpip, $dbpass_rcpip) or trigger_error(mysql_error(),E_USER_ERROR); 
+/*
+$link = mysqli_init();
+$success = mysqli_real_connect(
+   $link, 
+   $dbhost_rcpip, 
+   $dbuser_rcpip, 
+   $dbpass_rcpip, 
+   $dbname_rcpip,
+   $port
+);
+*/
+/*$link = mysqli_init();
+$success = mysqli_real_connect(
+   $link, 
+   $dbhost_rcpip, 
+   $dbuser_rcpip, 
+   $dbpass_rcpip, 
+   $dbname_rcpip,
+   $port
+);*/
 ?>

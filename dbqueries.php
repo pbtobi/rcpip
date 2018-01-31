@@ -1,4 +1,5 @@
 <?php require_once('connections/rcpip.php');
+//require_once('connections/rcpip000.php');
 /*
  * dbqueries.php
  *
@@ -20,7 +21,8 @@
 
 \header('Content-type: text/html; charset=utf-8');
 require __DIR__.'/vendor/autoload.php';
-$db = new \PDO('mysql:dbname=rcpip;host=localhost;charset=utf8mb4', $dbuser_rcpip, $dbpass_rcpip);
+$db = new \PDO('mysql:dbname=rcpip;host=localhost;charset=utf8', $dbuser_rcpip, $dbpass_rcpip);
+//$db = new \PDO('mysql:dbname=id4324054_rcpip;host=localhost;charset=utf8', $dbuser_rcpip, $dbpass_rcpip);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
@@ -737,6 +739,21 @@ function processRequestData(\Delight\Auth\Auth $auth) {
 					}
 				}
 			}
+			else if ($_POST['action'] === 'updateConsInfo') {
+				global $ci_acepta;
+				$ci_entrevista = "";
+				if (isset($_POST['consentimiento'])) {
+					if (empty($_POST['consentimiento'])) {
+						# do nothing
+						$ci_acepta = NULL;
+					}
+					else {
+						$mivar = setConsInfo($_POST['PeopleID'], $_POST['PeopleID'], $_POST['consentimiento'], $ci_entrevista);
+						// regresa al estado incial (sin protocolo seleccionado)
+						$ci_acepta = $_POST['consentimiento'];
+					}
+				}
+			}
 			else {
 				throw new Exception('Unexpected action: ' . $_POST['action']);
 			}
@@ -754,12 +771,17 @@ function processRequestData(\Delight\Auth\Auth $auth) {
  */
 /// Peticiones
 //
+function getPeopleID() {
+	global $PeopleID;
+	return $PeopleID;
+}
+
 function getDataProtocolo($protocoloID) {
 	global $db;
 	if ($protocoloID) {
-		$stmt = $db->query("SELECT * FROM Protocolo WHERE ProtocoloID='".$protocoloID."'");
+		$stmt = $db->query("SELECT * FROM protocolo WHERE ProtocoloID='".$protocoloID."'");
 	} else {
-		$stmt = $db->query("SELECT * FROM Protocolo");
+		$stmt = $db->query("SELECT * FROM protocolo");
 	}
 	return $stmt;
 }
@@ -803,16 +825,41 @@ function getDataUsersRoles($role) {
 function getDataPeople($usuarioID) {
 	global $db;
 	if ($usuarioID) {
-		$stmt = $db->query("SELECT * FROM People WHERE PeopleID='".$usuarioID."'");
+		$stmt = $db->query("SELECT * FROM people WHERE PeopleID='".$usuarioID."'");
 	} else {
-		$stmt = $db->query("SELECT * FROM People");
+		$stmt = $db->query("SELECT * FROM people");
 	}
 	return $stmt;
 }
 
-function getDataR24hrs() {
+function getDataCI($PeopleID){
 	global $db;
-	$stmt = $db->query("SELECT * FROM R24hrs");
+	if ($PeopleID) {
+		$stmt = $db->query("SELECT * FROM ci WHERE ci_id='".$PeopleID."'");
+	} else {
+		$stmt = $db->query("SELECT * FROM ci");
+	}
+	return $stmt;
+}
+
+function getDataR24hrs($PeopleID, $FechaR24) {
+	global $db;
+	if ($PeopleID && $FechaR24) {
+		$stmt = $db->query("SELECT * FROM R24hrs WHERE PeopleID='".$PeopleID."' AND FechaR24='".$FechaR24."'");
+	} else {
+		$stmt = $db->query("SELECT * FROM R24hrs");
+	}
+	return $stmt;
+}
+
+function getFechasR24hrs($PeopleID){
+	global $db;
+	if ($PeopleID) {
+		# code...
+		$stmt = $db->query("SELECT `FechaR24`,`R24hrsID` FROM R24hrs WHERE PeopleID='".$PeopleID."'");
+	} else {
+		$stmt = $db->query("SELECT * FROM R24hrs");
+	}
 	return $stmt;
 }
 /// Modificaciones (agrega y actualiza registros)
@@ -847,6 +894,29 @@ function updateProtocolo($field1, $field2) {
 	global $db;
 	$stmt = $db->prepare("UPDATE Protocolo SET Protocolo=:field2 WHERE ProtocoloID=:field1");
 	$stmt->execute(array(':field1' => $field1, ':field2' => $field2));
+}
+
+function setConsInfo($field1, $field2, $field3, $field4){
+	# field1 es PeopleID := CIID
+	global $db, $PeopleID;
+	$return = getDataCI($field1);
+	$data_exists = ($return->fetchColumn() > 0) ? true : false;
+	# Convierte en la base de datos ci_acepta := 0|1
+	if ($field3 == "true") {
+		$field3 = 1;
+	} else {
+		$field3 = 0;
+	}
+	if ($data_exists == false) {
+		#return $data_exists;
+		# Inserta nuevo registro (Insert)
+		$stmt = $db->prepare("INSERT INTO ci(ci_id,ci_peopleID,ci_acepta,ci_entrevista) VALUES (:field1,:field2,:field3,:field4)");
+		$stmt->execute(array(':field1' => $field1, ':field2' => $field2, ':field3' => $field3, ':field4' => $field4));
+	} else {
+		# Modifica (Update)
+		$stmt = $db->prepare("UPDATE ci SET ci_acepta=:field3 WHERE ci_id=:field1");
+		$stmt->execute(array(':field1' => $field1, ':field3' => $field3));
+	}
 }
 
 function addMedico($field1, $field2, $field3, $field4) {

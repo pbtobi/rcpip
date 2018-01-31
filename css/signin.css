@@ -1,13 +1,16 @@
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #eee;
+
+body#loginpage {
+    background: rgba(0, 0, 0, 0) url("../imgs/fondo.jpg") no-repeat fixed center center / cover ;
+    padding-bottom: 40px;
+    padding-top: 40px;
 }
 
 .form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
+    background: rgba(255, 255, 255, 0.2) none repeat scroll 0 0;
+    border-radius: 8px;
+    margin: 30px auto 70px;
+    max-width: 340px;
+    padding: 30px 50px;
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
@@ -17,19 +20,24 @@ body {
   font-weight: 400;
 }
 .form-signin .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
+    background: rgba(255, 255, 255, 0.9) none repeat scroll 0 0;
+    border: 2px solid #bbb;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #444;
+    font-size: 16px;
+    height: auto;
+    margin: 0 0 15px;
+    padding: 10px;
+    position: relative;
 }
 .form-signin .form-control:focus {
   z-index: 2;
 }
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
+/*  margin-bottom: -1px;
   border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;*/
 }
 .form-signin input[type="password"] {
   margin-bottom: 10px;

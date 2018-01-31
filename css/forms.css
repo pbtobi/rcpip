@@ -1,6 +1,8 @@
 html, body {
     height: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+/*    overflow: hidden;*/
     width: 100%;
 }
 
@@ -159,6 +161,24 @@ button.btn.active:focus {
     color: #fff;
 }
 
+.form-bottom button.btn {
+background: #26a69a none repeat scroll 0 0;
+border: 0 none;
+border-radius: 4px;
+box-shadow: none;
+color: #fff;
+font-family: "Roboto",sans-serif;
+font-size: 16px;
+font-weight: 300;
+height: 50px;
+line-height: 50px;
+margin: 0;
+padding: 0 20px;
+text-shadow: none;
+transition: all 0.3s ease 0s;
+vertical-align: middle;
+display: inline-block;
+}
 
 /*style.css**/
 
@@ -275,6 +295,10 @@ h3 {
 /***** Top content *****/
 
 form p {
+    color: #fff;
+}
+
+.tab-content form p {
     color: #26a69a;
 }
 
@@ -309,6 +333,10 @@ form p {
     transition: all .4s ease-in-out;
 }
 
+.form-bottom .row {
+    text-align: left;
+}
+
 .form-bottom:hover {
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -324,6 +352,7 @@ form .form-bottom .input-error {
 }
 
 form.registration-form fieldset {
+    border: medium none;
     display: none;
 }
 
@@ -415,11 +444,38 @@ form.registration-form fieldset {
 
 
 .menuDinamico {
-    position: absolute;
+/*    position: absolute;
     right: 0;
     top: 67px;
-    z-index: 4;
+    z-index: 4;*/
 }
+
+#sidebar #myNavbar button {
+    border: medium none;
+    margin: 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+    /*font-size: 0.9em !important;*/
+    margin-bottom: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+#sidebar #myNavbar #link2 {
+    background: #fff;
+    color: #444;
+}
+#sidebar #myNavbar #link3 {
+    background: #444;
+    color: #fff;
+}
+
+#myNavbar > ul {
+    padding: 0;
+}
+
+
 
 
 #matutino .form-top {
@@ -513,7 +569,7 @@ form.registration-form fieldset {
   color: #0c95be;
 }
 
-.tab-content input[type="submit"] {
+.tab-content input[type="submit"], .tab-content button[type="submit"] {
     background-color: #4caf50;
     border: medium none;
     border-radius: 4px;

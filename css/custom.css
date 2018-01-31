@@ -33,6 +33,27 @@ body {
   	background-size: cover;
 }
 
+body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  background-attachment: scroll;
+  background-position: 50% 50%;
+  background-image: url("../imgs/fondo.jpg");
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  content: "";
+  z-index: -100;
+
+}
+
+.navbar-header {
+    float: left;
+    padding-left: 270px;
+}
+
 .footer {
     position: fixed;
     bottom: 0;
@@ -52,13 +73,17 @@ body {
 /*.authenticated .footer {
     position: relative;
 }*/
+#loginpage button.btn {
+    background: #337ab7 none repeat scroll 0 0;
+    color: #fff;
+}
 .w3-content {
     margin: auto;
     max-width: 100%;
 }
 
 .w3-main {
-    margin-top: 60px;
+    margin-top: 20px;
 }
 
 #mySidebar {
@@ -89,7 +114,8 @@ body {
 .tarjeta > div {
     background: rgba(36, 166, 154, 0.6) none repeat scroll 0 0;
     border-radius: 5px;
-    padding: 20px 0 0;
+    padding: 0;
+    margin-top: 50px;
 }
 
 .w3-sidebar {
@@ -128,10 +154,10 @@ body {
 .top-buffer { margin-top:20px; }
 
 .nav-tabs > li > a {
-    background: rgba(255, 255, 255, 0.9) url("") repeat scroll 0 0;
+    background: rgba(255, 255, 255, 0.9) repeat scroll 0 0;
 }
 .nav-tabs > li > a:focus, .nav-tabs > li > a:hover  {
-    background: rgba(255, 255, 255, 0.7) url("") repeat scroll 0 0;
+    background: rgba(255, 255, 255, 0.7) repeat scroll 0 0;
 }
 .nav-tabs .right {
     float: right;
@@ -164,4 +190,703 @@ header h1 {
     color: #fff;
     margin: 0;
     padding: 5px 23px;
+}
+.float {
+    float: left;
+    width: 50%;
+}
+#menu_nivel_2 .menuDinamico {
+    position: relative;
+    top: 0;
+}
+
+#menu_nivel_2 .menuDinamico button {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    font-size: 1.1em;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+}
+#menu_nivel_2 .menuDinamico button:hover {
+    color: #1d958a;
+    background: #fff;
+}
+
+#menu_nivel_2 {
+    border-bottom: 1px solid #10776d;
+    padding: 20px 0;
+}
+
+table#Protocolo {
+    width: 100%;
+}
+
+table#Protocolo td {
+    padding: 5px;
+}
+
+#page .footer {
+    display: none;
+}
+
+.sidebar-header img {
+    width: 100%;
+}
+
+.sidebar-header > h3 {
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+}
+
+.navbar-header {
+    float: right;
+    left: 15px;
+    padding-left: 26px;
+    position: relative;
+    top: 20px;
+}
+
+button.btn {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 0 none;
+    border-radius: 4px;
+    box-shadow: none;
+    color: #444;
+    font-family: "Roboto",sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    height: 50px;
+    line-height: 50px;
+    margin: 0;
+    padding: 0;
+    text-shadow: none;
+    transition: all 0.3s ease 0s;
+    vertical-align: middle;
+}
+
+.navbar-header > form {
+    float: right;
+    margin-left: 10px;
+}
+
+
+/*
+    DEMO STYLE
+----------------------------------------------------- */
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+* {
+    -moz-osx-font-smoothing: grayscale;
+} 
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+
+.navbar {
+    padding: 0px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+#sidebar {
+    width: 330px;
+    /*position: fixed;*/
+    top: 0;
+    left: -250px;
+    /*height: 100vh;*/
+    z-index: 9999;
+    background: #26a69a;
+    color: #fff;
+    transition: all 0.3s;
+    overflow-y: scroll;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+#sidebar.active {
+    left: 0;
+}
+
+#dismiss {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    background: #1d958a;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+#dismiss:hover {
+    background: #fff;
+    color: #7386D5;
+}
+
+.overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9989;
+    display: none;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #10776d;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #1d958a;
+    background: #fff;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #1d958a;
+}
+
+#sidebar a, #sidebar a:hover, #sidebar a:focus {
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+}
+
+#myNavbar .menuDinamico {
+    padding: 20px;
+}
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+    content: '\e259';
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 0.6em;
+}
+a[aria-expanded="true"]::before {
+    content: '\e260';
+}
+.registration-form {
+    margin: 0;
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #10776d;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+a.download {
+    background: #fff;
+    color: #7386D5;
+}
+a.article, a.article:hover {
+    background: #6d7fcc !important;
+    color: #fff !important;
+}
+
+
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+.wrapper {
+    align-items: stretch;
+    display: flex;
+}
+
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+
+/* ---------------------------------------------------
+    CALENDAR STYLE
+----------------------------------------------------- */
+
+
+.cld-main {
+  font-family: Calibri, sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #333;
+  /*width: 330px;*/
+}
+.cld-main a{
+  color: #333;
+  font-weight: bold;
+}
+.cld-datetime{
+  position: relative;
+  width: 66%;
+  min-width: 100px;
+  max-width: 300px;
+  margin: auto;
+  overflow: hidden;
+}
+.cld-datetime .today{
+position: relative;
+float: left;
+width: calc(100% - 40px);
+margin: auto;
+text-align: center;
+}
+.cld-nav{
+position: relative;
+width: 20px;
+height: 20px;
+margin-top: 2px;
+}
+.cld-nav:hover{
+cursor: pointer;
+}
+.cld-nav:hover svg{
+  fill: #666;
+}
+.cld-rwd{
+float: left;
+}
+.cld-fwd{
+float: right;
+}
+.cld-nav svg:hover{
+
+}
+.cld-labels, .cld-days{
+  padding-left: 0;
+}
+.cld-label, .cld-day{
+display: inline-block;
+width: 14.28%;
+text-align: center;
+}
+.cld-day.today .cld-number{
+display: inline-block;
+height: 30px;
+width: 30px;
+border-radius: 50px;
+background: #e97fb0;
+color: #fff;
+}
+.cld-day.disableDay{
+opacity: 0.5;
+}
+.cld-day.nextMonth, .cld-day.prevMonth{
+opacity: 0.33;
+}
+.cld-number{
+position: relative;
+margin: 5px;
+padding: 5px;
+color: #26a69a;
+}
+/*.cld-title{
+  position: absolute;
+  z-index: 5;
+  display: none;
+  top: 30px;
+  left: 0;
+  padding: 5px 10px;
+  background: #fff;
+  white-space: nowrap;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 12px;
+}*/
+.cld-title {
+    background: #fefefe none repeat scroll 0 0;
+    border: 2px solid #e97fb0;
+    border-radius: 5px;
+    display: none;
+    font-size: 12px;
+    left: -13px;
+    padding: 5px 10px;
+    position: absolute;
+    top: 26px;
+    z-index: 5;
+}
+.cld-title i {
+    color: #e97fb0;
+    font-size: 20px;
+}
+.cld-number:hover .cld-title{
+  display: block;
+}
+.cld-title::before{
+  content: '';
+  position: absolute;
+  top: -7.5px; left: 16.5px;
+  width: 0;
+  height: 0;
+  border-left: 7.5px solid transparent;
+  border-right: 7.5px solid transparent;
+
+  border-bottom: 7.5px solid #e97fb0;
+}
+.cld-number.eventday {
+  color: #e97fb0;
+  border: 2px solid #e97fb0;
+  border-radius: 50px;
+  display: inline-block;
+  height: 30px;
+  line-height: 20px;
+  width: 30px;
+  font-weight: bold;
+}
+.cld-number.eventday:hover{
+  cursor: pointer;
+  background: #eee;
+}
+.today .cld-number.eventday:hover{
+  background: #888;
+}
+
+.navbar-header > form {
+    float: right;
+    margin-left: 10px;
+}
+#sidebarCollapse {
+   /* display: none;*/
+}
+button.btn:hover {
+opacity: 0.6;
+color: #444;
+background: none;
+}
+
+.form-botton button.btn:hover {
+opacity: 0.6;
+color: #fff;
+background: #26a69a;
+}
+
+#ui-datepicker-div {
+    position: absolute !important;
+    z-index: 99 !important;
+}
+
+form .ng-invalid.ng-dirty { background-color: lightpink; }
+form .ng-valid.ng-dirty { background-color: lightgreen; }
+span.summary.ng-invalid { color: red; font-weight: bold; }
+span.summary.ng-valid { color: green; }
+div.error {color: red !important; font-weight: bold;}
+.help-block.error{color: red !important;}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media (max-width: 768px) {
+    #content {
+    position: absolute;
+    padding: 10px 8px;
+    overflow: hidden;
+    }
+    #sidebarCollapse {
+    display: inline-block;
+    }
+    #sidebar {
+        min-width: 100px;
+        max-width: 100px;
+        text-align: center;
+        margin-left: -80px !important ;
+        position: fixed;
+        transition: all 0.3s;
+    }
+    #sidebar {
+    position: fixed !important;
+    height: 100vh;
+    }
+    .form-group {
+    margin-bottom: 5px;
+    }
+    .form-bottom {
+    background: #eee none repeat scroll 0 0;
+    border-radius: 0 0 4px 4px;
+    padding: 10px 5px;
+    text-align: right;
+    transition: all 0.4s ease-in-out 0s;
+    }
+
+    button.btn:hover {
+    opacity: 0.6;
+    color: #fff;
+    background: none;
+    }
+    h3 {
+        line-height: normal;
+        margin: 5px 0 0;
+    }      
+    a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+        top: auto;
+        bottom: 5px;
+        right: 50%;
+        -webkit-transform: translateX(50%);
+        -ms-transform: translateX(50%);
+        transform: translateX(50%);
+    }
+    input[type="text"], select {
+    margin: 0 0 5px;
+    padding: 0px 20px;
+    height: 40px;
+    border: 3px solid #ddd;
+    }
+    input[type="text"], input[type="email"], input[type="date"], select.form-control {
+    height: 40px;
+    margin-bottom: 5px;
+    }
+    input[type="radio"] {
+    margin-bottom: 10px;
+    margin-top: 0;
+    }
+    label {
+    margin-bottom: 0;
+    line-height: 18px;
+    }
+    #folioID, #iduem {
+    width: 50%;
+    }
+    label[for*="fol"], label[htmlfor*="fol"], label[for*="idu"], label[htmlfor*="idu"] {
+    width: 40%;
+    }
+    .inputright {
+      text-align: right;
+    }
+    p {
+    line-height: normal;
+    margin: 0;
+    padding: 5px 0;
+    }
+    .navbar {
+    margin-bottom: 0;
+    min-height: 40px;
+    padding: 0;
+    }
+    button.btn {
+    background: #fff none repeat scroll 0 0;
+    height: 30px;
+    line-height: normal;
+    margin: 5px;
+    padding: 0 10px;
+    color: #26a69a;
+    display: inline-block;
+    }
+    button.btn-info:hover {
+    opacity: 1;
+    color: #fff;
+    background: #26a69a;
+    }
+    button.btn.btn-save {
+    background: #e97fb0 none repeat scroll 0 0;
+    }
+    .registration-form {
+    line-height: 20px;
+    }
+    #sidebar.active {
+        margin-left: 0 !important;
+    }
+
+    #sidebar .sidebar-header {
+    padding: 0;
+    }
+
+    #sidebar .sidebar-header strong {
+/*    padding-top: 35px;*/
+    }
+
+    #sidebar .sidebar-header h3, #sidebar .CTAs {
+        display: none;
+    }
+
+    #sidebar .sidebar-header strong {
+        display: block;
+    }
+
+    #sidebar ul li a {
+        padding: 20px 10px;
+    }
+
+    #sidebar ul li a span {
+        font-size: 0.85em;
+    }
+    #sidebar ul li a i {
+        margin-right:  0;
+        display: block;
+    }
+    .navbar-header > form {
+    display: inline;
+    }
+    #sidebar ul ul a {
+        padding: 10px !important;
+    }
+    button#sidebarSalir i {
+    font-size: 19px;
+    }
+    #menu_nivel_2 {
+    border-bottom: 1px solid #10776d;
+    padding: 10px 0;
+    }
+
+    .menuDinamico > form {
+    margin: 0;
+    }
+
+    #menu_nivel_2 button i {
+    font-size: 2.2em;
+    }
+    #menu_nivel_2 .menuDinamico button {
+    text-align: center;
+    font-size: 0.75em;
+    line-height: 15px;
+    }
+
+    #sidebar #myNavbar button {
+    font-size: 0.8em !important;
+    line-height: 16px;
+    }
+
+    #myNavbar .menuDinamico {
+    line-height: 20px;
+    padding: 7px;
+    }
+
+    #menu_nivel_2 button i {
+        display: block;
+        font-size: 2.5em;
+        padding: 0 0 5px 30%;
+    }
+
+    #sidebar ul li a i {
+        font-size: 1.3em;
+    }
+    #sidebar {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: inline-block;
+    }
+    .tarjeta > div {
+    margin-top: 35px;
+    }
+    .form-top {
+    padding: 0 5px;
+    } 
+    #logo img {
+    max-width: 270px;
+    width: 100%;
+    }
+    .navbar-header > form {
+    float: none;
+    }
+    .navbar-header {
+    float: none;
+    padding-left: 0;
+    top: 0;
+    }
+    #loginpage button.btn {
+    background: #337ab7 none repeat scroll 0 0;
+    color: #fff;
+    display: inline-block;
+    height: 50px;
+    line-height: normal;
+    margin: 0;
+    padding: 10px 16px;
+    }
+    #loginpage button.btn {
+    opacity: 1;
+    } 
+    body#loginpage {
+    padding-top: 10px;
+    }
+    #matutino .form-top {
+    background: #26a69a url("../imgs/icon-matutino.png") no-repeat scroll right 24px / 50px auto;
+    }
+    #mediodia .form-top {
+    background-color: #26a69a;
+    background-image: url("../imgs/icon-dia.png");
+    background-position: right 20px;
+    background-repeat: no-repeat;
+    background-size: 53px auto;
+    }
+    #nocturno .form-top {
+    background: #26a69a url("../imgs/icon-noche.png") no-repeat scroll right 24px / 51px auto;
+    }
 }

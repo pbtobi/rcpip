@@ -16,23 +16,18 @@
 function menuNivel2() {
 	echo '
 			<div id="menu_nivel_2" class="w3-bar-block">
-
-				  <a class="w3-bar-item w3-button w3-padding w3-text-teal" onclick="w3_close()" href="#portfolio">
-				    <i class="fa fa-th-large fa-fw w3-margin-right"></i>Datos Generales</a> 
-				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#about">
-				    <i class="fa fa-user-md fa-fw w3-margin-right"></i>Antecedentes médicos</a> 
-				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
-				    <i class="fa fa-heart fa-fw w3-margin-right"></i>Hábitos de vida</a>
-				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
-				    <i class="fa fa-calendar fa-fw w3-margin-right"></i>Recordatorio de 24 hrs</a>
-				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
-				    <i class="fa fa-hand-peace-o fa-fw w3-margin-right"></i>Consentimiento Informado</a>
-				<form accept-charset="utf-8" method="post" action="rcpip-incmnsz.php">
-				  <a class="w3-bar-item w3-button w3-padding" onclick="w3_close()" href="#contact">
-				    <i class="fa fa-sign-out fa-fw w3-margin-right"></i>
-				    <input type="hidden" value="logOut" name="action">
-				    <button type="submit">Salir</button></a>
-				</form>
+				<div class="menuDinamico">
+					<button class=" active" data-page="page4" id="link4"><i class="fa fa-th-large fa-fw"></i>Datos Generales</button>	
+					<!--<button class="w3-button" data-page="page5" id="link5"><i class="fa fa-user-md fa-fw"></i>Antecedentes médicos</button>-->
+					<button class="w3-button" data-page="page6" id="link6"><i class="fa fa-heart fa-fw"></i>Hábitos de vida</button>
+					<button class="w3-button" data-page="page7" id="link7"><i class="fa fa-cutlery fa-fw"></i>Recordatorio de 24 hrs</button>
+					<button class="w3-button" data-page="page9" id="link9"><i class="fa fa-calendar fa-fw"></i>Calendario</button>
+					<button class="w3-button" data-page="page8" id="link8"><i class="fa fa-hand-peace-o fa-fw"></i>Consentimiento Informado</button>
+					<!--<form accept-charset="utf-8" method="post" action="rcpip-incmnsz.php">
+					<input type="hidden" value="logOut" name="action">
+					<button type="submit" class="w3-button"><i class="fa fa-sign-out fa-fw w3-margin-right"></i>Salir</button>
+					</form>-->				
+				</div>
 			</div>';
 }
 
@@ -151,33 +146,41 @@ function tarjetaProtocolos() {
 	echo '
 		<div id="page3" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
 			<div id="tarjetaProtocolos">
+			<h4>Registro de los protocolos de investigación</h4>
 				<ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home2">Nuevo protocolo</a></li>
                     <li><a data-toggle="tab" href="#menu22">Protocolos registrados</a></li>
-                </ul> usuarioID: '.$usuarioID.'
+                    <li  class="right"> usuarioID: '.$usuarioID.'</li>
+                </ul>
  
                 <div class="tab-content">
+
                     <div id="home2" class="tab-pane fade in active">
-                        <h4>Registro de los protocolos de investigación</h4>
+                        
 				<div class="w3-container w3-whitegray">
-					
-					<form action="admin.php" method="post" accept-charset="utf-8">
-						<div class="w3-third" w3-margin-bottom>
+					<div class="row top-buffer"></div>
+					<div class="row top-buffer"></div>
+						<div class="col-md-1"></div>
+						<div  class="col-md-10">
+							<form action="" method="post" accept-charset="utf-8">
+						<div class="w3-margin-bottom" >
 							<!--<label for="protocoloName">Nombre del protocolo</label>-->
 							<input type="text" id="Protocolo" name="Protocolo" placeholder="Nombre del protocolo..">
 							<span class="error">'.$nombreErr.'</span>
 						</div>
-						<div class="w3-third">
+						<div class="">
 							<input type="hidden" name="action" value="addProtocolo" />
 							<input class="w3-button w3-teal w3-padding-large w3-hover-black" type="submit" value="Registrar protocolo">
 						</div>
-					</form>	
+							</form>							
+						</div>
+						<div  class="col-md-1"></div>
+
 					</div>
 				</div>
-				<div id="menu22" class="tab-pane fade">
-                        <h4>Protocolos registrados:</h4>
-                        <p></p>
-                        <div class="w3-container w3-whitegray">';
+				<div id="menu22" class="tab-pane fade">                      
+                        <div class="w3-container w3-whitegray">
+                        <h5>Protocolos registrados:</h5>';
                             writeProtocoloTable();
                             protocolosUpdateForm();
                             echo '
@@ -185,6 +188,1239 @@ function tarjetaProtocolos() {
                     </div>
 				</div>
 			</div>	
+		</div>';
+}
+
+/*
+* Tarjeta de los Datos Generales.
+* Registra y modifica los Datos Generales del Registro de usuario (Registro, Listado y Actualización).
+*/
+function tarjetaDatosGenerales($PeopleID) {
+	$datosPeople = getDataPeople($PeopleID);
+		foreach($datosPeople as $row) {
+		$PeopleID = $row['PeopleID'];
+		$Nombre = $row['Nombre'];
+		$Sexo = $row['Sexo'];
+		$Ocupacion = $row['Ocupacion'];
+		$Domicilio = $row['Domicilio'];
+		$Lugar_nacimiento = $row['Lugar_nacimiento'];
+		$Fecha_nacimiento = $row['Fecha_nacimiento'];
+		$Estado_civil = $row['Estado_civil'];
+		$Escolaridad = $row['Escolaridad'];
+		$Edad = $row['Edad'];
+		$Tel_casa = $row['Tel_casa'];
+		$Celular = $row['Celular'];
+		$Tel_trabajo = $row['Tel_trabajo'];
+		$Email = $row['Email'];
+		$rol = $row['rol'];
+		$FolioID = $row['FolioID'];
+		$IDUIEM = $row['IDUIEM'];
+	}
+	$selecTrue = $selecFalse = "";
+	if ($Sexo == "H") {
+		# code...
+		$selecTrue = "checked";
+	} else if ($Sexo == "M") {
+		# code...
+		$selecFalse = "checked";
+	} else {
+		# code...
+		$selecTrue = "";
+		$selecFalse = "";
+	}
+	$escolArray = array("Preprimaria", "Primaria", "Secundaria", "Bachillerato", "Licenciatura", "Maestría", "Doctorado");
+	$edoCivilArray = array("Soltero", "Unión Libre", "Casado", "Divorciado", "Viudo");
+	$sexArray = array("Hombre", "Mujer");
+	echo '
+		<div id="page4" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
+			<div id="tarjetaDatosGenerales">
+                <div>
+			        <div class="row">
+			            <div class="col-md-12">
+			                <form role="form" class="registration-form" action="javascript:void(0);">
+			                    <fieldset id="datosgrales">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-th-large fa-fw w3-margin-right"></i></span>Datos Generales</h3>
+			                                <p>Datos Personales</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+	                                        		<!-- Text input-->
+						                            <div class="form-group col-md-12">
+						                            <label class="col-md-3 control-label" for="nombre">Nombre:</label>
+	                                            		<div class="col-md-9">
+	                                              			<input type="text" id="nombre" placeholder="Nombre Completo" name="nombre" class="form-control" value="'
+	                                              			.$Nombre.'">
+	                                            		</div>					                                    
+					                            	</div>
+
+					                            	<!-- Radio input-->
+						                            <div class="form-group col-md-12">
+                                          				<div class="col-md-12">
+                                          				    <label class="control-label" for="genero">Sexo:</label>
+				                                        	<input type="radio" id="" name="genero" value="H" '.$selecTrue.'> Hombre
+  															<input type="radio" id="" name="genero" value="M" '.$selecFalse.'> Mujer
+  															<input type="radio" id="" name="genero" value="otro"> Otro
+                                          				</div>
+						                            </div>
+
+	                                        		<!-- Text input-->
+						                            <div class="form-group col-md-12">
+						                            <label class="col-md-3 control-label" for="Lugar_nacimiento">Lugar de Nacimiento:</label>
+	                                            		<div class="col-md-9">
+	                                              			<input type="text" id="lugar_nacimiento" placeholder="Estado y localidad" name="Lugar_nacimiento" class="form-control" value="'.$Lugar_nacimiento.'">
+	                                            		</div>					                                    
+					                            	</div>
+
+					                              	<!-- Text input-->
+					                              	<div class="form-group col-md-12">
+                                            			<label class="col-md-3 control-label" for="ocupacion">Fecha de nacimiento:</label>
+                                            			<div class="col-md-9">
+					                                    	<input type="text" id="datepicker-fn" class="datepicker" name="Fecha_nacimiento" placeholder="Su fecha de Nacimiento"
+					                                    	value="'.$Fecha_nacimiento.'">
+                                            			</div>
+					                              	</div>
+
+
+                                           			                            		
+			                            		</div>
+			                            	</div>
+
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+ 					                            	
+
+						                            <!-- Text input-->
+					                              	<div class="form-group col-md-12">
+                                            			<label class="col-md-3 control-label" for="Estado_civil">Estado civil:</label>
+                                            			<div class="col-md-9">
+					                                    	<select type="text" id="Estado_civil" name="Estado_civil" placeholder="Su estado civil">';
+															if ($Estado_civil == "") {
+																echo '
+																<option disabled selected>Su estado civil</option>
+																<option>Soltero</option>
+																<option>Unión libre</option>
+																<option>Casado</option>
+																<option>Divorciado</option>
+																<option>Viudo</option>';
+															} else {
+																foreach ($edoCivilArray as $row) {
+																	if ($row == $Estado_civil) {
+																		echo '
+																		<option selected>'.$row.'</option>';
+																	} else {
+																		echo '
+																		<option>'.$row.'</option>';
+																	}
+																}
+															}
+															echo '
+															</select>
+                                            			</div>
+					                              	</div>					                              	
+
+					                              	<!-- Text input-->
+					                              	<div class="form-group col-md-12">
+                                            			<label class="col-md-3 control-label" for="Escolaridad">Escolaridad:</label>
+                                            			<div class="col-md-9">
+					                                    	<select type="text" id="Escolaridad" name="Escolaridad">';
+															if ($Escolaridad == "") {
+																echo '
+																<option disabled selected>Nivel terminado</option>
+																<option>Preprimaria</option>
+																<option>Primaria</option>
+																<option>Secundaria</option>
+																<option>Bachillerato</option>
+																<option>Licenciatura</option>
+																<option>Maestría</option>
+																<option>Doctorado</option>';
+															} else {
+																foreach ($escolArray as $row) {
+																	if ($row == $Escolaridad) {
+																		echo '
+																		<option selected>'.$row.'</option>';
+																	} else {
+																		echo '
+																		<option>'.$row.'</option>';
+																	}
+																}					
+															}
+															echo '	
+															</select>
+                                            			</div>
+					                              	</div> 
+
+						                            <!-- Text input-->
+					                              	<div class="form-group col-md-12">
+                                            			<label class="col-md-3 control-label" for="ocupacion">Ocupación:</label>
+                                            			<div class="col-md-9">
+					                                    	<input type="text" id="ocupacion" placeholder="Ocupación" class="form-control" name="ocupacion" value="'.$Ocupacion.'">
+                                            			</div>
+					                              	</div>
+
+			                            		</div>
+			                            	</div>
+			                            </div>	
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset>
+			                    <fieldset id="datospersonales">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Datos Generales</h3>
+			                                <p>Datos de Contacto</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+
+					                              	<!-- Text input-->
+					                              	<div class="form-group col-md-12">
+                                            			<label class="col-md-3 control-label" for="direccion">Domicilio:</label>
+                                            			<div class="col-md-9">
+					                                    	<input type="text" id="direccion" placeholder="Domicilio Completo" class="form-control" name="direccion" value="'.$Domicilio.'">
+                                            			</div>
+					                              	</div>
+
+					                                <!-- Text input-->
+						                            <div class="form-group col-md-12">
+						                            <label class="col-md-3 control-label" for="telcasa">Teléfono de casa:</label value="'.$Tel_casa.'">
+	                                            		<div class="col-md-9">
+	                                              			<input type="text" id="tel_casa" placeholder="Incluyendo lada" name="telcasa" class="form-control">
+	                                            		</div>					                                    
+					                            	</div>
+
+					                                <!-- Text input-->
+						                            <div class="form-group col-md-12">
+						                            <label class="col-md-3 control-label" for="teltrabajo">Teléfono del trabajo:</label>
+	                                            		<div class="col-md-9">
+	                                              			<input type="text" id="tel_trabajo" placeholder="Teléfono del trabajo (extensión)" name="teltrabajo" class="form-control" value="'.$Tel_trabajo.'">
+	                                            		</div>					                                    
+					                            	</div>
+				                            						                                			
+
+
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+
+					                                <!-- Text input-->
+						                            <div class="form-group col-md-12">
+						                            <label class="col-md-3 control-label" for="celular">Celular:</label>
+	                                            		<div class="col-md-9">
+	                                              			<input type="text" id="celular" placeholder="Su teléfono celular" name="celular" class="form-control" value="'.$Celular.'">
+	                                            		</div>					                                    
+					                            	</div>	
+
+													<!-- Text input-->
+						                            <div class="form-group col-md-12">
+						                            <label class="col-md-3 control-label" for="email">Correo electrónico:</label>
+	                                            		<div class="col-md-9">
+	                                              			<input type="text" id="email" placeholder="Su e-mail" name="email" class="form-control" value="'.$Email.'">
+	                                            		</div>					                                    
+					                            	</div>
+
+
+			                            		</div>
+			                            	</div>
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset>
+			                    <fieldset id="preguntas_de_parentesco">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Datos generales</h3>
+			                                <p>Preguntas de Parentesco</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-12">
+			                            		<div class="row">
+
+					                            	<!-- Radio input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-5 control-label" for="protocolo">¿Algún familiar ha participado en este protocolo?</label>
+                                          				<div class="col-md-7">
+				                                        	<input type="radio" id="" name="protocolo" value="true"> Sí
+  															<input type="radio" id="" name="protocolo" value="false"> No
+                                          				</div>
+						                            </div>
+
+													<!-- Text input-->
+						                            <div class="form-group col-md-12">
+						                            <label class="col-md-5 control-label" for="nombreFamiliar">Nombre de familiar(es):</label>
+	                                            		<div class="col-md-7">
+	                                              			<input type="text" id="nombre_Familiar" placeholder="Nombre de familiar" name="nombreFamiliar" class="form-control">
+	                                            		</div>					                                    
+					                            	</div>							                            
+
+													<!-- Select input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-5 control-label" for="parentesco">Parentesco:</label>
+                                          				<div class="col-md-7">
+				                                        	
+				                                        		<input type="radio" id="" name="parentesco" value="1"> Papa/Mamá
+  																<input type="radio" id="" name="parentesco" value="2"> Hermano(a)
+  																<input type="radio" id="" name="parentesco" value="3"> Primo(a)
+  																<input type="radio" id="" name="parentesco" value="4"> Tio(a)
+  																<input type="radio" id="" name="parentesco" value="5"> Abuel(a)
+				                                        	
+                                          				</div>
+						                            </div>
+
+
+													<!-- Text input-->
+						                            <div class="form-group col-md-12">
+						                            <label class="col-md-5 control-label" for="tipoUsuario">Tipo de usuario:</label>
+	                                            		<div class="col-md-7">
+	                                              			<input type="text" id="tipoUsuario" placeholder="Tipo de usuario" name="tipoUsuario" class="form-control" value="'.$rol.'">
+	                                            		</div>					                                    
+					                            	</div>	
+
+													<!-- Text input-->
+						                            <div class="form-group col-md-12">
+						                            
+	                                            		<div class="col-md-6 inputright">
+	                                            			<label class="col-md-3 control-label" for="folioID">Folio ID:</label>
+	                                              			<input type="text" id="folioID" placeholder="Folio ID" name="folioID" class="form-control" value="'.$FolioID.'">
+	                                            		</div>					                                    
+
+	                                            		<div class="col-md-6 inputright">
+	                                            			<label class="col-md-3 control-label" for="iduem">IDUIEM:</label>
+	                                              			<input type="text" id="iduiem" placeholder="IDUIEM" name="iduiem" class="form-control" value="'.$IDUIEM.'">
+	                                            		</div>					                                    
+					                            	</div>							                            
+
+			                            		</div>
+			                            	</div>
+
+
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="submit" class="btn btn-save">Guardar</button>
+			                        </div>
+			                    </fieldset>   
+			                </form>
+			            </div>	
+			        </div>
+			    </div>
+			</div>
+		</div>';
+}
+
+/*
+* Tarjeta de los Antecedentes Médicos.
+* Registra y modifica los Antecedentes Médicos del usuario (Registro, Listado y Actualización).
+*/
+function tarjetaAntecedentesMedicos() {
+	echo '
+		<div id="page5" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
+			<div id="tarjetaAntecedentesMedicos">
+                <div>
+			        <div class="row">
+			            <div class="col-md-12">
+			                <form role="form" class="registration-form" action="javascript:void(0);">
+			                    <fieldset id="matutino">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-user-md fa-fw w3-margin-right"></i></span>Antecedentes Médicos</h3>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Desayuno - Huevos (2)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Desayuno</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>         
+						                            </div>
+						                            <div class="form-group col-md-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Desayuno</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+													<div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Colación - Fruta (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Colación</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>
+						                            </div>
+						                            <div class="form-group col-md-12 col-sm-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Colación</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            </div>	
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset>
+			                    <fieldset id="mediodia">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Recordatorio de 24 horas</h3>
+			                                <p>En la Tarde</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Comida - Pollo con Mole (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Desayuno</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>         
+						                            </div>
+						                            <div class="form-group col-md-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Desayuno</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+													<div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Colación - Manzana (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Colación</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>
+						                            </div>
+						                            <div class="form-group col-md-12 col-sm-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Colación</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset>
+			                    <fieldset id="nocturno">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Recordatorio de 24 horas</h3>
+			                                <p>En la Noche</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Cena - Vaso con Leche (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Desayuno</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>         
+						                            </div>
+						                            <div class="form-group col-md-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Desayuno</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+													<div class="form-group col-md-12">
+					                                    <label for="Fecha_recordatorio24h">Día en que Consumió sus alimentos</label>
+														<input type="text" id="datepicker-hc" class="datepicker" name="fechaRecordatorio" placeholder="Su fecha de Recordatorio">
+					                                </div>				                                			                            		
+			                            		</div>
+			                            	</div>
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="submit" class="btn btn-save">Guardar</button>
+			                        </div>
+			                    </fieldset>   
+			                </form>
+			            </div>	
+			        </div>
+			    </div>
+			</div>
+		</div>';
+}
+
+/*
+* Tarjeta de los Hábitos de Vida.
+* Registra y modifica los Hábitos de Vida del usuario (Registro, Listado y Actualización).
+*/
+function tarjetaHabitosVida() {
+	echo '
+		<div id="page6" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
+			<div id="tarjetaHabitosVida">
+                <div>
+			        <div class="row">
+			            <div class="col-md-12">
+			                <form role="form" class="registration-form" action="javascript:void(0);">
+			                    <fieldset id="tabaco_fieldset">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-heart fa-fw w3-margin-right"></i></span>Hábitos de Vida</h3>
+			                                <p>Consumo de Tabaco</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+
+					                                <!-- Radio input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-5 control-label" for="fuma">¿Actualmente fuma?</label>
+                                          				<div class="col-md-7">
+				                                        	<input type="radio" id="" name="fuma" value="Sí"> Sí
+  															<input type="radio" id="" name="fuma" value="No"> No
+  															<input type="radio" id="" name="fuma" value="Nunca"> Nunca
+                                          				</div>
+						                            </div>
+
+						                            <!-- Select input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-5 control-label" for="frecuencia">¿Con qué frecuencia fuma/fumaba?</label>
+                                          				<div class="col-md-7">	
+                                          						<select class="form-control" name="frecuencia">
+				                                        			<option>Diario</option>
+  																	<option>Semanal</option>
+  																	<option>Mensual</option>
+  																	<option>Ocasional</option>
+  																</select>
+                                          				</div>
+						                            </div>
+						                        				                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+
+													<!-- Select input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-5 control-label" for="cigarros">¿Cuántos cigarros fuma/fumaba?</label>
+                                          				<div class="col-md-7">	
+				                                        		<input type="text" id="numero_cigarros" placeholder="Cantidad" name="cigarros" class="form-control">
+                                          				</div>
+						                            </div>						                            
+
+					                                <!-- Text input-->
+						                            <div class="form-group col-md-12">
+						                            <label class="col-md-5 control-label" for="tiempo_fuma">¿Durante cuanto tiempo ha fumado regularmente?</label>
+	                                            		<div class="col-md-7">
+	                                              			<select class="form-control" name="tiempo_fuma">
+				                                        			<option>Menos de 1 mes</option>
+  																	<option>Menos de 1 año</option>
+  																	<option>Más de un año</option>
+  																</select>
+  																<input type="text" id="year_cigarros" placeholder="Años fumando" name="year_cigarros" class="form-control">
+	                                            		</div>					                                    
+					                            	</div>
+
+			                            		</div>
+			                            	</div>
+			                            </div>	
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset>
+			                    <fieldset id="alcohol_fieldset">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-heart fa-fw w3-margin-right"></i></span>Hábitos de Vida</h3>
+			                                <p>Consumo de Alcohol</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+
+					                                <!-- Radio input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-5 control-label" for="fuma">¿Actualmente toma alcohol?</label>
+                                          				<div class="col-md-7">
+				                                        	<input type="radio" id="" name="fuma" value="Sí"> Sí
+  															<input type="radio" id="" name="fuma" value="No"> No
+  															<input type="radio" id="" name="fuma" value="Nunca"> Nunca
+                                          				</div>
+						                            </div>
+
+						                            <!-- Select input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-5 control-label" for="frecuencia_alcohol">¿Aproximadamente con qué frecuencia tomaba?</label>
+                                          				<div class="col-md-7">	
+                                          						<select class="form-control" name="frecuencia_alcohol">
+				                                        			<option>Diario</option>
+  																	<option>Semanal</option>
+  																	<option>Mensual</option>
+  																	<option>Ocasional</option>
+  																</select>
+                                          				</div>
+						                            </div>
+						                        				                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+
+													<!-- Select input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-5 control-label" for="copas">¿Cuántas copas toma/tomaba?</label>
+                                          				<div class="col-md-7">	
+				                                        		<input type="text" id="numero_copas" placeholder="Cantidad de copas" name="copas" class="form-control">
+                                          				</div>
+						                            </div>						                            
+
+					                                <!-- Text input-->
+						                            <div class="form-group col-md-12">
+						                            <label class="col-md-5 control-label" for="tipo_copa">¿Durante cuanto tiempo toma/tomaba y que tipo de bebida?</label>
+	                                            		<div class="col-md-7">
+	                                              			<select class="form-control" name="tipo_copa">
+				                                        			<option>Cerveza</option>
+  																	<option>Vino</option>
+  																	<option>Licores</option>
+  																	<option>Destilado</option>
+  																</select>
+  																<input type="text" id="year_copas" placeholder="Años/meses tomando" name="year_copas" class="form-control">
+	                                            		</div>					                                    
+					                            	</div>
+
+			                            		</div>
+			                            	</div>
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset>
+			                    <fieldset id="actividad-1_fieldset">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Hábitos de Vida</h3>
+			                                <p>Actividad Física 1/2</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-12">
+			                            		<div class="row">
+
+					                                <!-- Radio input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-12 control-label" for="ejercicio">¿Qué tipo de actividad física realiza durante el día?</label>
+                                          				<H5>(1) Cocinar, trabajo de oficina, ventas (sentado), mostrador, trabajo general de casa, manejar</H5>
+                                          				<H5>(2) Trabajar de pie llevando cosas, mesero, viajar en camión a pie, cargar pilas ligeras, caminar variando el peso</H5>
+                                          				<H5>(3) Repartidos, lavar pisos o ropa con máquinas, ventas a pie</H5>
+                                          				<H5>(4) Trabajo en el campo, carga de bultos pesados, lavar ropa o pisos a mano, trabajar en construcción</H5>
+                                          				<div class="col-md-12">
+				                                        	<input type="radio" id="" name="ejercicio" value="Sí"> (1) LIGERA O SEDENTARIA
+  															<input type="radio" id="" name="ejercicio" value="No"> (2) MODERADA
+  															<input type="radio" id="" name="ejercicio" value="No"> (3) ACTIVA
+  															<input type="radio" id="" name="ejercicio" value="No"> (4) VIGOROSA
+
+                                          				</div>
+						                            </div>
+
+					                                <!-- Radio input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-12 control-label" for="ejercicio">¿Realiza algún tipo de ejercicio físico habitual?</label>
+                                          				<div class="col-md-12">
+				                                        	<input type="radio" id="" name="ejercicio" value="Sí"> Sí
+  															<input type="radio" id="" name="ejercicio" value="No"> No
+  															<input type="text" id="tiempo_ejercicio" placeholder="Durante cuanto tiempo en minutos" name="tiempo_ejercicio" class="form-control">
+                                          				</div>
+						                            </div>
+
+						                        				                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset> 
+			                    <fieldset id="actividad-2_fieldset">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Hábitos de Vida</h3>
+			                                <p>Actividad Física 2/2</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-12">
+			                            		<div class="row">
+						                            
+
+						                            <!-- Select input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-12 control-label" for="frecuencia_actividad">¿Aproximadamente con qué frecuencia?</label>
+                                          				<div class="col-md-12">	
+                                          						<select class="form-control" name="frecuencia_actividad">
+				                                        			<option>Diario</option>
+  																	<option>1-2 días por semana</option>
+  																	<option>3-4 días por semana</option>
+  																	<option>5-6 días por semana</option>
+  																	<option>Ocasional</option>
+  																</select>
+                                          				</div>
+						                            </div>
+
+					                                <!-- Radio input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-12 control-label" for="ejercicio">¿Qué tipo de ejercicio realiza?</label>
+                                          				<H5>(1) Caminar 4km/hr, Bicicleta (15km/hr), Baile de salón, Ejercicios aeróbicos acuáticos</H5>
+                                          				<H5>(2) Trotar o correr, Natación, Baile aeróbico, Bicicleta (>15km/hr), Brincar la cuerda</H5>
+                                          				
+                                          				<div class="col-md-12">
+  															<input type="radio" id="" name="ejercicio" value="No"> (1) MODERADO
+  															<input type="radio" id="" name="ejercicio" value="No"> (2) VIGOROSA
+
+                                          				</div>
+						                            </div>
+
+			                            		</div>
+			                            	</div>
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="submit" class="btn btn-save">Guardar</button>
+			                        </div>
+			                    </fieldset>   
+			                </form>
+			            </div>	
+			        </div>
+			    </div>
+			</div>
+		</div>';
+}
+
+function writeFechasR24hrs($PeopleID) {
+	$id = $PeopleID;
+	$datos = getFechasR24hrs($id);
+	$leyenda = "";
+	# echo $datos->rowCount();
+	if ($datos) {
+	foreach ($datos as $row) {
+		# code...
+		$leyenda = " | <a fecha-pid='";
+		$leyenda .= $row['R24hrsID'];
+		$leyenda .= "' class='' href='javascript:void(0)'>";
+		$leyenda .= $row['FechaR24'];
+		$leyenda .= "</a> | ";
+	}
+	} else {
+		$leyenda = '| No hay datos |';
+	}
+	echo $leyenda;
+}
+
+/*
+* Tarjeta de los Datos Generales de los Protocolos.
+* Registra y modifica los Protocolos (Registro, Listado y Actualización).
+*/
+function tarjetaRecordatorio24h($PeopleID) {
+	$id = $PeopleID;
+	$leyenda = "";
+	echo '
+		<div id="page7" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
+			<div id="tarjetaRecordatorio24h">
+                <div>
+			        <div class="row">
+			            <div class="col-md-12">
+			                <form role="form" class="registration-form" action="javascript:void(0);">
+			                    <fieldset id="matutino">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-cutlery fa-fw"></i></span>Recordatorio de 24 horas</h3>
+			                                <p>En la Mañana</p>
+			                                <strong>'.$leyenda.'</strong>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Desayuno - Huevos (2)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Desayuno</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>         
+						                            </div>
+						                            <div class="form-group col-md-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Desayuno</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+													<div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Colación - Fruta (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Colación</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>
+						                            </div>
+						                            <div class="form-group col-md-12 col-sm-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Colación</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            </div>	
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset>
+			                    <fieldset id="mediodia">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-cutlery fa-fw"></i></span>Recordatorio de 24 horas</h3>
+			                                <p>En la Tarde</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Comida - Pollo con Mole (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Desayuno</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>         
+						                            </div>
+						                            <div class="form-group col-md-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Desayuno</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+													<div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Colación - Manzana (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Colación</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>
+						                            </div>
+						                            <div class="form-group col-md-12 col-sm-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Colación</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset>
+			                    <fieldset id="nocturno">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-cutlery fa-fw"></i></span>Recordatorio de 24 horas</h3>
+			                                <p>En la Noche</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Cena - Vaso con Leche (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Desayuno</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>         
+						                            </div>
+						                            <div class="form-group col-md-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Desayuno</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+													<div class="form-group col-md-12">
+					                                    <label for="Fecha_recordatorio24h">Día en que Consumió sus alimentos</label>
+														<input type="text" id="datepicker-fa" class="datepicker" name="fechaRecordatorio" placeholder="Su fecha de Recordatorio">
+					                                </div>				                                			                            		
+			                            		</div>
+			                            	</div>
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="submit" class="btn btn-save">Guardar</button>
+			                        </div>
+			                    </fieldset>   
+			                </form>
+			            </div>	
+			        </div>
+			        <div class="row">
+			        	<div class="col-md-12">
+			        	'.$id.'
+			        	</div>
+			        </div>
+			    </div>
+			</div>
+		</div>';
+}
+
+
+/*
+* Tarjeta de los Datos Generales de los Protocolos.
+* Registra y modifica los Protocolos (Registro, Listado y Actualización).
+*/
+function tarjetaCalendario() {
+	echo '
+		<div id="page9" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
+			<div id="tarjetaCalendario">
+                <div>
+			        <div class="row">
+			            <div class="col-md-12">
+			                <form role="form" class="registration-form" action="javascript:void(0);">
+			                    <fieldset id="calendario-mes">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Calendario</h3>
+			                                <p>Mensual</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-12">
+			                            		<div class="row">
+			                            			<div class="col-md-12">
+			                            				<div id="caleandar"></div>
+			                            			</div>
+			                            		</div>	
+			                            	</div>
+			                            </div>	
+			                            <!--<button type="button" class="btn btn-next">Siguiente</button>-->
+			                            <button type="submit" class="btn btn-save">Guardar</button>
+			                        </div>
+			                    </fieldset>
+			                    <!--<fieldset id="calendario_dia">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Calendario</h3>
+			                                <p>Diario</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Comida - Pollo con Mole (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Desayuno</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>         
+						                            </div>
+						                            <div class="form-group col-md-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Desayuno</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+													<div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Colación - Manzana (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Colación</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>
+						                            </div>
+						                            <div class="form-group col-md-12 col-sm-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Colación</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="button" class="btn btn-next">Siguiente</button>
+			                        </div>
+			                    </fieldset>
+			                    <fieldset id="calendario_año">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-calendar-check-o" aria-hidden="true"></i></span>Calendario</h3>
+			                                <p>Anual</p>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                    <input type="text" class="form-control" placeholder="Cena - Vaso con Leche (1)" id="fname">
+					                                </div>
+						                            <div class="form-group col-md-12">
+				                                        <select class="form-control">
+				                                            <option>Lugar Desayuno</option>
+				                                            <option>Casa</option>
+				                                            <option>Calle</option>
+				                                            <option>Restaurante</option>
+				                                        </select>         
+						                            </div>
+						                            <div class="form-group col-md-12">
+						                                <select class="form-control">
+						                                    <option>Preparación Desayuno</option>
+						                                    <option>Frito</option>
+						                                    <option>Dorado</option>
+						                                    <option>Asado</option>
+						                                    <option>Cocido</option>
+						                                    <option>Crudo</option>
+						                                    <option>Guisado</option>
+						                                </select>
+						                            </div>					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	<div class="col-md-6">
+			                            		<div class="row">
+													<div class="form-group col-md-12">
+					                                    <label for="Fecha_recordatorio24h">Día en que Consumió sus alimentos</label>
+														<input type="text" id="datepicker" name="" placeholder="Su fecha de Recordatorio">
+					                                </div>				                                			                            		
+			                            		</div>
+			                            	</div>
+			                            </div>
+			                            <button type="button" class="btn btn-previous">Anterior</button>
+			                            <button type="submit" class="btn btn-save">Guardar</button>
+			                        </div>
+			                    </fieldset> -->  
+			                </form>
+			            </div>	
+			        </div>
+			    </div>
+			</div>
+		</div>';
+}
+
+/*
+* Tarjeta de Consentimiento.
+* Registra Consentimiento del usuario (Registro, Listado y Actualización).
+*/
+function tarjetaConsentimiento($PeopleID, $ci_acepta) {
+	$datos = getDataCI($PeopleID);
+	$selecTrue = $selecFalse = "";
+	foreach ($datos as $row) {
+		# code...
+		if ($row['ci_acepta'] == 1) {
+			# code...
+			$selecTrue = "checked";
+			$selecFalse = "";
+		} else if ($row['ci_acepta'] == 0) {
+			$selecFalse = "checked";
+			$selecTrue = "";
+		} else {
+			$selecFalse = "";
+			$selecTrue = "";
+		}
+	}
+	#global $db, $ci_acepta;
+	#$selecTrue = $selecFalse = NULL;
+	echo '
+		<div id="page8" class="tarjeta w3-container w3-padding-large" style="margin-bottom:32px">
+			<div id="tarjetaConsentimiento">
+                <div>	
+			        <div class="row">
+			            <div class="col-md-12">
+			                <form role="form" class="registration-form" action="" method="post">
+			                    <fieldset id="consentimiento_fieldset">
+			                        <div class="form-top">
+			                            <div class="form-top-left">
+			                                <h3><span><i class="fa fa-hand-peace-o fa-fw w3-margin-right"></i></span>Consentimiento Informado</h3>
+			                                <br>
+			                            </div>
+			                        </div>
+			                        <div class="form-bottom">
+			                            <div class="row">
+			                            	<div class="col-md-12">
+			                            		<div class="row">
+					                                <div class="form-group col-md-12">
+					                                	<div class="col-md-12">
+					                                    <h5>El paciente fue informado sobre los beneficios y los riesgos de su participación dentro de este protocolo y ha aceptado ser parte de éste de manera libre y sin presiones ni estímulos económicos.</h5>
+					                                    </div>
+					                                </div>
+
+
+					                                <!-- Radio input-->
+						                            <div class="form-group col-md-12">
+                                          				<label class="col-md-7 control-label" for="consentimiento">El paciente firmó carta de consentimiento informado:</label>
+                                          				<div class="col-md-5">
+				                                        	<input type="radio" id="" name="consentimiento" value="true" '.$selecTrue.'> Sí
+  															<input type="radio" id="" name="consentimiento" value="false" '.$selecFalse.'> No
+                                          				</div>
+						                            </div>
+						                           					                                			                            		
+			                            		</div>
+			                            	</div>
+			                            	
+			                            </div>
+			                            <input type="hidden" name="PeopleID" value="'.$PeopleID.'" />
+			                            <input type="hidden" name="action" value="updateConsInfo" />
+			                            <button type="submit" class="btn btn-save">Guardar</button>
+			                        </div>
+			                    </fieldset>
+			                   
+			                </form>
+			            </div>	
+			        </div>
+			    </div>
+			</div>
 		</div>';
 }
 
@@ -309,14 +1545,6 @@ function usuariosUpdateForm($roles = NULL) {
 	if ($usuarioID) {
 			echo '
 			<script>
-                    // Date Picker
-                    $( function() {
-                        $( "#datepicker" ).datepicker({
-                            yearRange: "c-100:c+0",
-                            changeMonth: true,
-                            changeYear: true
-                        } );
-                    } );
                 </script>
 		<!--<div class="w3-row-padding" style="margin:8 -16px">-->
 		<div class="w3-container w3-whitegray">
@@ -364,7 +1592,7 @@ function usuariosUpdateForm($roles = NULL) {
 				</div>
 				<div class="w3-third w3-margin-bottom">
 					<label for="Fecha_nacimiento">Fecha de nacimiento</label>
-					<input type="text" id="datepicker" name="Fecha_nacimiento" placeholder="Su fecha de nacimiento" value="'.$Fecha_nacimiento.'">
+					<input type="text" id="datepicker-fnupdate" class="datepicker" name="Fecha_nacimiento" placeholder="Su fecha de nacimiento" value="'.$Fecha_nacimiento.'">
 					<span class="error">'.$fechaErr.'</span>
 				</div>
 				<div class="w3-third w3-margin-bottom">
@@ -498,6 +1726,7 @@ function protocolosUpdateForm() {
 		echo $nombreErr;
 	}
 }
+
 
 /*
 * Tabla HTML de los Medicos.
@@ -674,7 +1903,7 @@ function showGuestUserForm() {
   		<div id="logo">
   			<img src="imgs/incmnsz.png">
   		</div>
-  			<form class="form-signin" action="admin.php" method="post" accept-charset="utf-8">
+  			<form class="form-signin" action="" method="post" accept-charset="utf-8">
   			  <!--<h2 class="form-signin-heading">Bienvenido</h2>-->
   				<input type="hidden" name="action" value="login" />
   				<input type="hidden" name="remember" value="0" />
@@ -687,7 +1916,7 @@ function showGuestUserForm() {
 						<input default:0 checked value="1" name="remember" type="checkbox"> Recordarme
 					</label>
         		</div>
-        		<button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+        		<button class="btn btn-lg btn-primary btn-block" type="submit" >Ingresar</button>
         	</form>
         </div>';
 	/*	echo '<h1>Public</h1>';
@@ -748,13 +1977,18 @@ function showGuestUserForm() {
 	*/
 }
 
-/*
+
 // R24hrs
-function writeR24hrsTable() {
+function writeR24hrsTable($PeopleID) {
 	// Escribe la Tabla de Protocolo
-	$datos = getDataR24hrs();
+	global $db;
+	$id = $PeopleID;
+	$fecha = "2017-12-15";
+	$datos = getDataR24hrs($id, $fecha);
 	echo '
-		<table id="R24hrs">';
+		<table id="R24hrs-'.$id.'">
+			<tr>'.$id.'</tr>';
+
 	foreach($datos as $row) {
 		echo '
 			<tr>
@@ -775,12 +2009,13 @@ function writeR24hrsTable() {
 				<td>'.$row['A3'].'</td>
 				<td>'.$row['A3_lugar'].'</td>
 				<td>'.$row['A3_prep'].'</td>
+				<td>'.$row['FechaR24'].'</td>
 				<td><a href=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a></td>
 			</tr>';
   	}
 	echo '
 		</table>';
-}*/
+}
 
 
 /*
@@ -790,7 +2025,7 @@ function writeR24hrsTable() {
 function showCreateUserForm() {
 	global $db;
 	echo '
-			<form action="admin.php" method="post" accept-charset="utf-8">
+			<form action="" method="post" accept-charset="utf-8">
 			<div class="row top-buffer"></div>
 			<div class="row top-buffer">
 			   <div class="col-md-1"></div>
@@ -846,13 +2081,13 @@ function showAddRoleForm() {
 	if ($usuarioID) {
 		echo '
 		<div class="w3-container w3-whitegray">
-		<form action="admin.php" method="post" accept-charset="utf-8">
+		<form action="" method="post" accept-charset="utf-8">
 			<input type="hidden" name="action" value="admin.addRole" />
 			<input type="text" name="id" placeholder="'.$usuarioID.'" value="'.$usuarioID.'" readonly />
 			<select name="role">
 				' . \createRolesOptions() . '
 			</select>
-			<button" type="submit">Asignar el tipo de usuario</button>
+			<button class="" type="submit">Asignar el tipo de usuario</button>
 		</form>
 		</div>';
 		// Actualiza la tabla People con la información de $usuarioID
