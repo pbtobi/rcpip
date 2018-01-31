@@ -201,6 +201,7 @@ header h1 {
 }
 
 #menu_nivel_2 .menuDinamico button {
+<<<<<<< HEAD
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: medium none;
     font-size: 1.1em;
@@ -217,6 +218,11 @@ header h1 {
     border-bottom: 1px solid #10776d;
     padding: 20px 0;
 }
+=======
+    text-align: left;
+    width: 100%;
+}
+>>>>>>> bf7783abc5fbf8a97b2d4d14965d463833ebf214
 
 table#Protocolo {
     width: 100%;
@@ -225,6 +231,7 @@ table#Protocolo {
 table#Protocolo td {
     padding: 5px;
 }
+<<<<<<< HEAD
 
 #page .footer {
     display: none;
@@ -890,3 +897,5 @@ div.error {color: red !important; font-weight: bold;}
     background: #26a69a url("../imgs/icon-noche.png") no-repeat scroll right 24px / 51px auto;
     }
 }
+=======
+>>>>>>> bf7783abc5fbf8a97b2d4d14965d463833ebf214

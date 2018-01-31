@@ -1,17 +1,15 @@
-<?php 
-require_once('connections/rcpip.php'); 
-//require_once('connections/rcpip000.php'); 
+<html>
+<?php require_once('connections/rcpip.php'); 
 require_once('delight.php');
-require_once('FirePHPCore/fb.php');
-ob_start();
+
 $auth = new \Delight\Auth\Auth($db);
 $result = \processRequestData($auth);
 
 /* define variables and set to empty values
   Formularios (Medicos) para recuperar las variables (globales)
 ***************************************************************/
-$ci_acepta = $PeopleID = $usuarioID = $protocoloID = $medicoID = $nombreErr = $emailErr = $especialErr = $celularErr = "";
-$doctorName = $doctorEmail = $especialidad = $celular = $role = "";
+$usuarioID = $protocoloID = $medicoID = $nombreErr = $emailErr = $especialErr = $celularErr = "";
+$doctorName = $doctorEmail = $especialidad = $celular = "";
 // Estrategia de prueba para pasar variables de los formularios
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["doctorName"])) {
@@ -72,14 +70,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   else {
     $protocoloID = ($_POST["protocoloID"]);
   }
-  if (empty($_POST["consentimiento"])) {
-    // echo 'do nothing';
-    // $protocoloID es vacía cuando no hay formulario que la genere (evita undefined error)
-    $ci_acepta = NULL;
-  }
-  else {
-    $ci_acepta = ($_POST["consentimiento"]);
-  }
 }
 
 function test_input($data) {
@@ -89,39 +79,20 @@ function test_input($data) {
   return $data;
 }
 
-if ($auth->hasRole(\Delight\Auth\Role::ADMIN)) {
-  $role = "ADMIN";
-}
 
 //\showDebugData($auth, $result);
 
 if ($auth->check()) {
-  $PeopleID = $auth->id();
   //\showAuthenticatedUserForm($auth);
   \showHtmlHead();
   showHeader();
-<<<<<<< HEAD
-  showSidebarNav($role);
-  
-  \tarjetaDatosGenerales($PeopleID);
-  //\tarjetaAntecedentesMedicos();
-  \tarjetaHabitosVida();
-  \tarjetaRecordatorio24h($PeopleID);
-  \tarjetaCalendario(); 
-  #writeFechasR24hrs($PeopleID);
-  \tarjetaConsentimiento($PeopleID, $ci_acepta);
-
-=======
   showSidebarNav();
-  showViewChanges();
-  tarjetaRecordatorio24h();
->>>>>>> bf7783abc5fbf8a97b2d4d14965d463833ebf214
+  showViewChanges(); 
   //\tarjetaMedicos();
   //writePeopleDatos();
   //echo $medicoID;
-  showViewChanges(); 
 
-
+  //\header("Location: ". "rcpip-incmnsz.php" );
 }
 else {
   \showHtmlLoginHead();
@@ -133,10 +104,7 @@ if ($auth->hasAnyRole(\Delight\Auth\Role::DEVELOPER, \Delight\Auth\Role::MANAGER
   \tarjetaProtocolos();
   \tarjetaUsuarios();
     echo '
-      </div>
-    <!--end wrapper-->  
     </div>
-    <div class="overlay"></div>
       ';
 
   //\showDebugData($auth, $result);
@@ -159,7 +127,7 @@ try {
 }
 
 ?>
-    </div>
+
     <!-- Footer -->
     <div class="footer w3-black w3-center w3-padding-24">
       Derechos Reservados 2017 &copy; INCMNSZ
@@ -167,7 +135,16 @@ try {
     </div>
     <!-- End page content -->
     <script>
-
+      // Script to open and close sidebar
+      function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+      }
+      
+      function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+      }
 
      
     </script>
@@ -178,18 +155,8 @@ try {
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug 
     <script src="Hello World"></script>-->
     <script src="js/jquery-ui.js"></script>
+    <!-- JS Forms -->
+    <script type="text/javascript" src="js/forms.js"></script>
 
-    <!-- jQuery Custom Scroller CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#sidebar").mCustomScrollbar({
-                theme: "minimal"
-            });
-
-
-        });
-    </script>
   </body>
 </html>

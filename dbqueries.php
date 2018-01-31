@@ -832,6 +832,7 @@ function getDataPeople($usuarioID) {
 	return $stmt;
 }
 
+<<<<<<< HEAD
 function getDataCI($PeopleID){
 	global $db;
 	if ($PeopleID) {
@@ -859,9 +860,20 @@ function getFechasR24hrs($PeopleID){
 		$stmt = $db->query("SELECT `FechaR24`,`R24hrsID` FROM R24hrs WHERE PeopleID='".$PeopleID."'");
 	} else {
 		$stmt = $db->query("SELECT * FROM R24hrs");
+=======
+function getDataR24hrs($usuarioID, $fecha) {
+	global $db;
+	if ($usuarioID) {
+		$stmt = $db->query("SELECT * FROM R24hrs WHERE PeopleID='".$usuarioID."'");
+	} if ($fecha) {
+		$stmt = $db->query("SELECT * FROM R24hrs WHERE PeopleID='".$usuarioID."' AND FechaR24='".$fecha."'");
+	} else {
+	$stmt = $db->query("SELECT * FROM R24hrs");
+>>>>>>> bf7783abc5fbf8a97b2d4d14965d463833ebf214
 	}
 	return $stmt;
 }
+
 /// Modificaciones (agrega y actualiza registros)
 //
 function updateMedico($field1, $field2, $field3, $field4, $field5) {
@@ -896,6 +908,7 @@ function updateProtocolo($field1, $field2) {
 	$stmt->execute(array(':field1' => $field1, ':field2' => $field2));
 }
 
+<<<<<<< HEAD
 function setConsInfo($field1, $field2, $field3, $field4){
 	# field1 es PeopleID := CIID
 	global $db, $PeopleID;
@@ -916,6 +929,32 @@ function setConsInfo($field1, $field2, $field3, $field4){
 		# Modifica (Update)
 		$stmt = $db->prepare("UPDATE ci SET ci_acepta=:field3 WHERE ci_id=:field1");
 		$stmt->execute(array(':field1' => $field1, ':field3' => $field3));
+=======
+function addR24hrs($field1, $field2, $field3, $field4, $field5, $field6, $field7, $field8, $field9, $field10, $field11, $field12, $field13, $field14, $field15, $field16, $field17) {
+	global 	$dateErr, $db;
+	$empty_user = 0;
+	$return = getDataPeople($field1);
+	$data_exists = ($return->fetchColumn() > 0) ? true : false;
+	if ($data_exists == false) {
+		$empty_user = 1;
+	}
+	if (!filter_var($field14, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "El correo electrónico no es válido";
+      return $emailErr;
+    } else if ($empty_user == 1) {
+    	// no existe el usuario (vacío = true = 1)
+    	$field3 = $field4 = $field5 = $field6 = $field7 = $field8 = $field9 = $field10 = $field11 = $field12 = $field13 = $field15 = $field16 = $field17 = NULL;
+		$stmt = $db->prepare("INSERT INTO People(PeopleID,Nombre,Sexo,Ocupacion,Domicilio,Lugar_nacimiento,Fecha_nacimiento,Estado_civil,Escolaridad,Edad,Tel_casa,Celular,Tel_trabajo,Email,rol,FolioID,IDUIEM) 
+			VALUES (:field1,:field2,:field3,:field4,:field5,:field6,:field7,:field8,:field9,:field10,:field11,:field12,:field13,:field14,:field15,:field16,:field17)");
+		$stmt->execute(array(':field1' => $field1, ':field2' => $field2, ':field3' => $field3, ':field4' => $field4, ':field5' => $field5, ':field6' => $field6, ':field7' => $field7, ':field8' => $field8,
+			':field9' => $field9, ':field10' => $field10, ':field11' => $field11, ':field12' => $field12, ':field13' => $field13, ':field14' => $field14, ':field15' => $field15, ':field16' => $field16, ':field17' => $field17));
+		$LAST_ID = $db->lastInsertId();
+		return $LAST_ID;
+	} else {
+		// ya existe el usuario
+		$usuarioID = $field1;
+		return "<p id='registro_usuario'>".$data_exists." <i>Registro ".$usuarioID."</i></p>";
+>>>>>>> bf7783abc5fbf8a97b2d4d14965d463833ebf214
 	}
 }
 

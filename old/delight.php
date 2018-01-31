@@ -19,21 +19,17 @@ function showHtmlLoginHead() {
     <head>
     	<!--<meta http-equiv="content-type" content="text/html">-->
     	<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/custom.css">
 		<link rel="stylesheet" href="css/signin.css">
-		<link rel="stylesheet" href="css/custom.css">	
-        <!-- Scrollbar Custom CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-        <script src="js/jquery-2.2.4.min.js"></script>	
-
 				
 	</head>
-	<body id="loginpage" >
+	<body id="loginpage" class=" w3-light-grey w3-content">
 	';
 }
 
@@ -43,107 +39,72 @@ function showHtmlHead() {
     <head>
     	<!--<meta http-equiv="content-type" content="text/html">-->
     	<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="css/forms.css">
 		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" type="text/css" href="css/forms.css">
 		<script src="js/jquery-2.2.4.min.js"></script>
-		<script src="js/caleandar.js"></script>	
-		<script src="js/fscreen.js"></script>
-		<!-- JS Forms -->
-    	<script type="text/javascript" src="js/forms.js"></script>
-		<!-- Scrollbar Custom CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">	
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
-	<body id="page">
-	<div class="wrapper">
+	<body id="page" class=" w3-light-grey w3-content">
 	';
+}
+
+function showSidebarNav() {
+	echo '
+		<!-- Sidebar/menu -->
+		<nav class="w3-sidebar w3-collapse w3-animate-left" id="mySidebar"><br>
+			<div class="w3-container">
+				<a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+				  <i class="fa fa-remove"></i>
+				</a>
+				<a href="rcpip-incmnsz.html">
+				  <img src="imgs/doctor.png " style="width:45%;" class="w3-round"><br><br>
+				</a>
+				<h4>
+				  <b>Unidad de Investigación</b>
+				</h4>
+				<p class="w3-text-grey">en enfermedades metabólicas</p>
+			</div>';
+			menuNivel2();
+		echo '
+		</nav>
+		<!-- Overlay effect when opening sidebar on small screens -->
+		<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay">
+		</div>
+		<!-- !PAGE CONTENT! -->
+		<div class=" w3-main" style="margin-left:300px">';
 }
 
 function showHeader() {
 	echo '
-
-		';
-}
-
-function showSidebarNav($role) {
-	echo '
-	        <!-- Sidebar Holder -->
-	        <!-- Sidebar/menu -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                	
-					<h3><a href="rcpip-incmnsz.html"><img src="imgs/incmnsz.png"></a><br>
-					Unidad de Investigación en enfermedades metabólicas</h3>
-                    <!--<strong>INCMNSZ</strong>-->
-                </div>';
-			menuNivel2();
-		if ($role == "ADMIN") {
-			# code...
-		echo '
-
-                		<div id="myNavbar">
-								<div class="menuDinamico">
-								<button id="link2" data-page="page2">Ingreso de Usuarios</button>
-								<button id="link3" data-page="page3">Protocolos</button>
-								</div>
-						</div>';
-		}
-		echo '
-            </nav>
-
-		<!-- Page Content Holder -->
-            <div id="content">
-            	<nav class="navbar navbar-default navbar-fixed-top">
-					<div class="container-fluid">
-
-						<div class="navbar-header">
-							<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                                <i class="glyphicon glyphicon-align-left"></i>
-                                <span>Menú</span>
-                            </button>
-                            <form accept-charset="utf-8" method="post" action="rcpip-incmnsz.php">
-								<input type="hidden" value="logOut" name="action">
-								<button type="submit" id="sidebarSalir" class="btn btn-info navbar-btn pull-right">
-									<span>Salir</span>
-	                                <i class="fa fa-sign-out fa-fw"></i>
-	                            </button>   
-	                        </form>                         
-						</div>
-						<div  class="collapse navbar-collapse">
-							<ul class="nav navbar-nav navbar-right">
-								<li class="active" id="ico-r"><a href="#">Registro</a></li>
-								<li id="ico-f"><a href="#">Actividad Física</a></li>
-								<li id="ico-a"><a href="#">Alimentación</a></li>
-								<li id="ico-v"><a href="#">Calidad de Vida</a></li>
-								<li id="ico-d"><a href="#">DT2</a></li>
-								<li id="ico-c"><a href="#">Conducta</a></li>
-							</ul>
-						</div>
-			</div>
-	</nav>
-<<<<<<< HEAD
-';
-}
-=======
-	<nav>
-		<div class="menuDinamico">
-		<!--<button id="link1" data-page="page1" class="w3-button w3-orange"><i class="fa fa-stethoscope   w3-margin-right"></i>Recordatorio de alimentos 24hrs</button>-->
-			<button id="link2" data-page="page2" class="w3-button w3-purple"><i class="fa fa-user-o w3-margin-right"></i>Ingreso de Usuarios</button>
-			<button id="link3" data-page="page3" class="w3-button w3-blue"><i class="fa fa-file-text-o w3-margin-right"></i>Protocolos</button>
-		</div>
-	</nav>
+	
 		<!-- Header -->
 		<header id="portfolio">
 			<span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			<div class="w3-container">
-				<!--<h1 class="titulo"><b>Registro clínico para proyectos de investigación y protocolos</b></h1>-->
->>>>>>> bf7783abc5fbf8a97b2d4d14965d463833ebf214
+				<h1 class="titulo"><b>Registro clínico para proyectos de investigación y protocolos</b></h1>
 
-
+				<div class=" w3-section w3-bottombar w3-padding-16">
+				  <span class="w3-margin-right"></span> 
+				  <!--<button class="w3-button w3-green">Ingresos</button>-->
+				  <div class="menuDinamico">
+					  <!--<button id="link1" data-page="page1" class="w3-button w3-orange"><i class="fa fa-stethoscope   w3-margin-right"></i>Médicos</button>-->
+					  <button id="link2" data-page="page2" class="w3-button w3-purple"><i class="fa fa-user-o w3-margin-right"></i>Ingreso de Usuarios</button>
+					  <button id="link3" data-page="page3" class="w3-button w3-blue"><i class="fa fa-file-text-o w3-margin-right"></i>Protocolos</button>
+				  </div>
+				</div>
+			</div>
+		</header>
+		';
+}
 
 /* 
  * Agrega el estilo (authenticated) al body para manipular la vista cuando esta authenticado
@@ -173,8 +134,13 @@ function showViewChanges(){
 				    });
 
 
-
-
+				// Date Picker
+				$("#datepicker").datepicker({
+	    				yearRange: "c-100:c+0",
+	    				changeMonth: true,
+						changeYear: true,
+						dateFormat: "yy-mm-dd"
+				});
 
 			});
 
